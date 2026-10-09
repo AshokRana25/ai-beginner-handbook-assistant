@@ -1,0 +1,17 @@
+# SYNTHETIC TEST FIXTURE — NOT THE REAL AI BEGINNER HANDBOOK
+
+## Demo request policy
+
+The fictional Lavender team labels every generated demo as synthetic.
+
+## Demo review checklist
+
+- Check that the source link opens.
+- Compare the answer with the original passage.
+- Record unresolved questions in the demo review log.
+
+## Demo contact
+
+The fictional demo contact is the Lavender learning desk.
+
+No real organizational policies, handbook contents, or user information are represented here.

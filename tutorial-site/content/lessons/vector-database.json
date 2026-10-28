@@ -1,0 +1,96 @@
+{
+  "id": "vector-database",
+  "category": "rag",
+  "title": "Vector database implementation",
+  "level": "Intermediate",
+  "description": "Index embeddings with stable IDs, source metadata, and controlled retrieval.",
+  "prerequisites": "RAG foundations and chunking.",
+  "objectives": [
+    "Build an explicit-embedding collection",
+    "Plan updates, filtering, and embedding-version changes"
+  ],
+  "explanation": [
+    "A vector database stores numerical representations with identifiers and metadata, then retrieves nearby vectors. Keep the embedding model and preprocessing compatible between stored records and queries. Matching dimensions is necessary but does not guarantee compatible meaning.",
+    "Give each chunk a stable identifier and preserve its source document, version, and access metadata. Decide how updates replace old chunks and how deletion removes retired content. A metadata filter can help scope retrieval, but application logic must derive that filter from trusted user authorization.",
+    "Start with a small explicit-embedding example to separate database behavior from model downloads. Measure retrieval quality against known relevant passages before optimizing the index. Approximate nearest-neighbor settings trade speed, memory, and retrieval recall; tune them with the actual query workload."
+  ],
+  "terms": [
+    {
+      "term": "Vector index",
+      "definition": "A structure that supports similarity lookup over vectors."
+    },
+    {
+      "term": "Upsert",
+      "definition": "Insert or update a record using its identifier."
+    },
+    {
+      "term": "Metadata filter",
+      "definition": "A condition limiting which stored records may be returned."
+    }
+  ],
+  "example": "The Chroma illustration creates an in-memory collection with invented two-dimensional vectors and a team field. It queries only one team. The vectors demonstrate database mechanics, not semantic embeddings; replace them with one consistent embedding pipeline for real documents.",
+  "mistakes": [
+    "Mixing old and new embedding models in one index.",
+    "Reimporting every chunk under a fresh random ID.",
+    "Accepting a client-supplied team filter as proof of access."
+  ],
+  "exercise": "Run the optional Chroma example after installing the dependency in a separate environment. Add two records, update one stable ID, and confirm the count. Change the filter and inspect which IDs can be returned.",
+  "code": [
+    {
+      "title": "Explicit vectors in a local Chroma collection",
+      "language": "python",
+      "file": "chroma_vectors.py",
+      "note": "Optional integration example: install chromadb in an isolated environment and run this file. No model download is needed. Not included in the dependency-free output checks."
+    }
+  ],
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "questions": [
+    {
+      "id": "vector-database-1",
+      "type": "Conceptual",
+      "question": "Why must query and stored embeddings use compatible representations?",
+      "answer": "Similarity compares coordinates, which have meaning only within a compatible embedding space.",
+      "distractor": "The database converts all models to the same space automatically."
+    },
+    {
+      "id": "vector-database-2",
+      "type": "Practical",
+      "question": "What helps prevent duplicate chunks on repeated ingestion?",
+      "answer": "Stable IDs and a deliberate update or upsert policy.",
+      "distractor": "Generating a new random ID for every import."
+    },
+    {
+      "id": "vector-database-3",
+      "type": "Scenario-based",
+      "question": "A document is deleted but its chunks remain searchable. What failed?",
+      "answer": "The ingestion lifecycle did not propagate retirement or deletion into retrieval eligibility.",
+      "distractor": "Vector search always requires keeping deleted documents."
+    },
+    {
+      "id": "vector-database-4",
+      "type": "Interview",
+      "question": "Does an equal vector dimension prove model compatibility?",
+      "answer": "No. Two models can assign different meanings to the same number of coordinates.",
+      "distractor": "Yes, every vector of the same length is interchangeable."
+    },
+    {
+      "id": "vector-database-5",
+      "type": "Practical",
+      "question": "Where should the allowed tenant or team filter come from?",
+      "answer": "Trusted application identity and authorization, not an unchecked client claim.",
+      "distractor": "The model should invent a tenant based on the question."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Chroma: adding data",
+      "url": "https://docs.trychroma.com/docs/collections/add-data"
+    },
+    {
+      "title": "Chroma: query and get",
+      "url": "https://docs.trychroma.com/docs/querying-collections/query-and-get"
+    }
+  ]
+}

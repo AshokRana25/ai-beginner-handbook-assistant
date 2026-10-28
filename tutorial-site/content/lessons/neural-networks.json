@@ -1,0 +1,89 @@
+{
+  "id": "neural-networks",
+  "category": "deep-learning",
+  "order": 1,
+  "title": "Neural networks, embeddings & transformers",
+  "description": "Build an intuitive map of modern deep learning.",
+  "level": "Intermediate",
+  "minutes": 8,
+  "prerequisites": "Basic vectors and the idea of training.",
+  "objectives": [
+    "Explain learned representations",
+    "Describe attention without assuming understanding"
+  ],
+  "explanation": [
+    "A neural network transforms numeric inputs through layers with learned weights. During training, a loss measures the mismatch between output and target, and an optimizer adjusts weights to reduce that loss. More layers do not automatically make a system more useful; data, objectives, and evaluation matter.",
+    "An embedding represents an item as a vector. Useful embeddings place task-relevant items near one another under a chosen similarity measure. The representation is learned, so nearby vectors reflect training patterns rather than an objective definition of meaning.",
+    "Transformers use attention to mix information across positions. This helps a representation depend on surrounding context. In text, the same word can be represented differently in different sentences. Vision and multimodal systems can also process sequences of image patches or other representations. Architecture alone does not ensure truth, fairness, or reasoning reliability."
+  ],
+  "terms": [
+    {
+      "term": "Weight",
+      "definition": "A learned numeric parameter."
+    },
+    {
+      "term": "Loss",
+      "definition": "A measure of mismatch used for optimization."
+    },
+    {
+      "term": "Embedding",
+      "definition": "A numeric vector representing an item."
+    },
+    {
+      "term": "Attention",
+      "definition": "A mechanism for combining information across positions."
+    }
+  ],
+  "example": "In a document search system, embed a question and candidate paragraphs, compare their vectors, and inspect the nearest results. Try the ambiguous word bank in two full sentences and notice why context matters.",
+  "code": [],
+  "mistakes": [
+    "Treating vector similarity as proof of factual agreement.",
+    "Assuming larger networks always improve a specific task.",
+    "Mixing vectors from incompatible embedding models."
+  ],
+  "exercise": "Sketch a pipeline from text to tokens to vectors to prediction. Annotate what is learned during training and what runs during inference.",
+  "questions": [
+    {
+      "id": "neural-networks-1",
+      "type": "Conceptual",
+      "question": "What does training adjust in a neural network?",
+      "answer": "It adjusts parameters such as weights to reduce a training objective; it does not manually write one rule per example.",
+      "distractor": "It changes only the spelling of labels."
+    },
+    {
+      "id": "neural-networks-2",
+      "type": "Practical",
+      "question": "What is an embedding used for?",
+      "answer": "It gives items numeric representations that can support similarity search and downstream learning.",
+      "distractor": "It is always a compressed copy of the original document."
+    },
+    {
+      "id": "neural-networks-3",
+      "type": "Scenario-based",
+      "question": "Can vectors from unrelated embedding models be compared directly?",
+      "answer": "Usually not meaningfully: their coordinates and dimensions may represent different spaces. Use a compatible model consistently.",
+      "distractor": "Yes, all embedding coordinates have universal meanings."
+    },
+    {
+      "id": "neural-networks-4",
+      "type": "Interview",
+      "question": "What does attention contribute?",
+      "answer": "It allows information from different positions to influence a representation, making outputs sensitive to context.",
+      "distractor": "It certifies every generated statement as true."
+    },
+    {
+      "id": "neural-networks-5",
+      "type": "Practical",
+      "question": "Does high semantic similarity guarantee agreement?",
+      "answer": "No. Opposing claims about the same topic can be similar; check the content before using a retrieved passage as evidence.",
+      "distractor": "Yes, similar vectors always express the same fact."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Hugging Face LLM course",
+      "url": "https://huggingface.co/learn/llm-course/chapter1/1"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

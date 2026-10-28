@@ -1,0 +1,89 @@
+{
+  "id": "bias-assessment",
+  "category": "security-and-governance",
+  "title": "Bias assessment in practice",
+  "level": "Intermediate",
+  "description": "Investigate group differences with meaningful metrics and uncertainty.",
+  "prerequisites": "Responsible AI, statistics, and model evaluation.",
+  "objectives": [
+    "Choose a fairness measure connected to the application harm",
+    "Report group sizes and limits alongside metric differences"
+  ],
+  "explanation": [
+    "Bias assessment starts with people and consequences. Identify who can be helped or harmed, how predictions affect them, and which differences warrant investigation. Check the appropriateness and permission for using sensitive attributes in the assessment; do not infer them from names or appearance.",
+    "Compute task metrics by relevant groups and intersections. Selection rate, false-positive rate, and true-positive rate answer different questions. Demographic parity compares selection rates; equalized odds considers error behavior conditional on outcomes. No single measure captures every concern or removes the need for context.",
+    "Report counts and uncertainty because small groups can produce unstable estimates. Check whether labels, missingness, and sampling differ between groups. Investigate causes and possible remedies, then repeat evaluation. Similar measured rates do not establish that a system is fair in every respect or legally compliant."
+  ],
+  "terms": [
+    {
+      "term": "Selection rate",
+      "definition": "Fraction of examples receiving a selected or positive outcome."
+    },
+    {
+      "term": "Intersectional slice",
+      "definition": "A subgroup defined by a combination of attributes."
+    },
+    {
+      "term": "Disaggregation",
+      "definition": "Breaking a metric into meaningful subgroup results."
+    }
+  ],
+  "example": "In an invented routing system, groups A and B each contain 20 urgent requests. The model correctly prioritizes 18 from A and 12 from B, giving recalls of 90% and 60%. Review labels, language coverage, and errors before choosing a remedy; these small counts do not explain the cause.",
+  "mistakes": [
+    "Declaring fairness from one aggregate accuracy score.",
+    "Treating a metric difference as proof of its cause.",
+    "Collecting sensitive attributes without an appropriate purpose and permissions."
+  ],
+  "exercise": "Create a synthetic confusion matrix for two groups. Calculate recall and false-positive rate, report each denominator, and name one data-quality explanation to investigate. State what evidence would be needed before a real deployment decision.",
+  "order": 2,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "bias-assessment-1",
+      "type": "Conceptual",
+      "question": "Why begin bias assessment with the application context?",
+      "answer": "The relevant harms and decisions determine which differences and metrics matter.",
+      "distractor": "One metric is sufficient for every use case."
+    },
+    {
+      "id": "bias-assessment-2",
+      "type": "Practical",
+      "question": "What should accompany a group error rate?",
+      "answer": "The underlying counts, sampling context, and uncertainty or limitations.",
+      "distractor": "Only a percentage rounded to many decimals."
+    },
+    {
+      "id": "bias-assessment-3",
+      "type": "Scenario-based",
+      "question": "Two groups have equal overall accuracy but different false-negative rates. What next?",
+      "answer": "Inspect the error types and consequences rather than concluding parity from accuracy alone.",
+      "distractor": "Ignore subgroup errors because averages match."
+    },
+    {
+      "id": "bias-assessment-4",
+      "type": "Interview",
+      "question": "Does a fairness metric establish legal compliance?",
+      "answer": "No. Metrics are limited evidence and do not replace applicable contextual requirements.",
+      "distractor": "Yes, any equal percentage is a legal guarantee."
+    },
+    {
+      "id": "bias-assessment-5",
+      "type": "Practical",
+      "question": "Can a small subgroup difference be interpreted without uncertainty?",
+      "answer": "No. Small denominators can make estimates unstable and require cautious investigation.",
+      "distractor": "Yes, every observed difference is a stable population fact."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Fairlearn: common fairness metrics",
+      "url": "https://fairlearn.org/main/user_guide/assessment/common_fairness_metrics.html"
+    },
+    {
+      "title": "NIST: AI risk management playbook",
+      "url": "https://airc.nist.gov/airmf-resources/playbook/"
+    }
+  ]
+}

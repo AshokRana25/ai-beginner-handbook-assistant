@@ -1,0 +1,85 @@
+{
+  "id": "deploy-ai",
+  "category": "deployment-and-operations",
+  "order": 1,
+  "title": "Deploy an AI service with confidence",
+  "description": "Package, release, monitor, and recover a small AI application.",
+  "level": "Intermediate",
+  "minutes": 12,
+  "prerequisites": "API integration and basic terminal usage.",
+  "objectives": [
+    "Separate configuration from application images",
+    "Define health, release, and rollback checks"
+  ],
+  "explanation": [
+    "Deployment turns a local experiment into a service with an owner. A container image packages application files and dependencies; a running container is an instance of that image. Keep secrets and deployment-specific configuration outside the image. A container improves packaging consistency, but it does not by itself provide secure or reliable operations.",
+    "A delivery pipeline should check the application, build an identifiable artifact, and deploy it in a controlled way. Include AI evaluation in release criteria when prompts, models, or retrieval behavior change. Keep a known working version and the configuration needed to restore it.",
+    "Scaling must account for provider limits as well as your own servers. Add bounded queues, request limits, timeouts, and cost budgets. Monitor service health and user-visible outcomes. A process being alive is not the same as the service being able to answer useful requests."
+  ],
+  "terms": [
+    {
+      "term": "Image",
+      "definition": "A packaged template used to create containers."
+    },
+    {
+      "term": "CI/CD",
+      "definition": "Automated integration and delivery steps."
+    },
+    {
+      "term": "Rollback",
+      "definition": "Restoring a known working release."
+    }
+  ],
+  "example": "Release a policy assistant to a small internal group first. Watch error rates, latency, retrieval quality, and cost. If a new prompt increases unsupported answers beyond the agreed threshold, restore the previous prompt and application configuration.",
+  "code": [],
+  "mistakes": [
+    "Baking secrets into image layers.",
+    "Scaling workers beyond provider rate limits.",
+    "Changing prompts without versioning or evaluation."
+  ],
+  "exercise": "Write a deployment checklist with a readiness check, a small initial rollout, three monitored metrics, and a concrete rollback trigger.",
+  "questions": [
+    {
+      "id": "deploy-ai-1",
+      "type": "Conceptual",
+      "question": "How does an image differ from a container?",
+      "answer": "An image is the packaged template; a container is a running instance created from that template.",
+      "distractor": "They are always the same running process."
+    },
+    {
+      "id": "deploy-ai-2",
+      "type": "Practical",
+      "question": "Where should deployment secrets be supplied?",
+      "answer": "At runtime through a controlled secret mechanism or server environment, not baked into the image or source repository.",
+      "distractor": "Inside the public Dockerfile as literal values."
+    },
+    {
+      "id": "deploy-ai-3",
+      "type": "Scenario-based",
+      "question": "More workers trigger provider rate limits. What should you add?",
+      "answer": "Coordinate concurrency with provider limits using bounded queues, throttling, and appropriate retry behavior.",
+      "distractor": "Keep increasing workers without bounds."
+    },
+    {
+      "id": "deploy-ai-4",
+      "type": "Interview",
+      "question": "Why version prompts alongside releases?",
+      "answer": "Prompt changes can alter behavior; versioning makes evaluation, attribution, and rollback possible.",
+      "distractor": "Prompts never affect production behavior."
+    },
+    {
+      "id": "deploy-ai-5",
+      "type": "Practical",
+      "question": "What is a useful rollback trigger?",
+      "answer": "A predefined breach in a user-relevant metric, such as unsupported-answer rate or error rate, with an owner and restore procedure.",
+      "distractor": "Any change in the color of the dashboard."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Docker overview",
+      "url": "https://docs.docker.com/get-started/docker-overview/"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

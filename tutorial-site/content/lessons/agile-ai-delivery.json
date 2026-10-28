@@ -1,0 +1,85 @@
+{
+  "id": "agile-ai-delivery",
+  "category": "ai-product-and-project-management",
+  "title": "Agile delivery for AI teams",
+  "level": "Intermediate",
+  "description": "Plan small increments that include data, evaluation, and user evidence.",
+  "prerequisites": "AI delivery foundations and use-case discovery.",
+  "objectives": [
+    "Turn uncertainty into a bounded learning task",
+    "Include model behavior in a definition of done"
+  ],
+  "explanation": [
+    "AI work includes uncertainty about data, behavior, and user value. Separate delivery items from time-boxed experiments that answer specific questions. An experiment should name a hypothesis, dataset, method, decision threshold, and artifact; “try different models” does not define a useful completion condition.",
+    "Deliver thin slices that connect user input to an evaluated outcome. For a retrieval assistant, one slice might answer a small permitted corpus with citations and abstention before adding more sources. Include test cases, operational visibility, and data handling in the definition of done.",
+    "Inspect results with users and adapt the backlog. A sprint review should show measured behavior, limitations, and decisions, not just generated screenshots. Keep release criteria stable for a comparison and document changes when learning requires a new target. Track dependencies such as data access and review capacity alongside code tasks."
+  ],
+  "terms": [
+    {
+      "term": "Time-box",
+      "definition": "A fixed maximum duration for an activity."
+    },
+    {
+      "term": "Increment",
+      "definition": "A usable addition that meets its agreed quality requirements."
+    },
+    {
+      "term": "Definition of done",
+      "definition": "Shared conditions required for work to count as complete."
+    }
+  ],
+  "example": "A fictional two-week increment answers ten policy questions from five approved documents. Done means retrieval evidence is visible, unanswerable cases abstain, permission tests pass, and a user can report an error. Model selection experiments have a separate two-day budget and decision record.",
+  "mistakes": [
+    "Calling a notebook experiment a production-ready increment.",
+    "Counting story completion without checking behavior.",
+    "Leaving data-access dependencies out of planning."
+  ],
+  "exercise": "Write three backlog items for a practice project: a discovery experiment, a thin user-facing slice, and an operational improvement. Give each acceptance evidence, dependencies, and a definition of done.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "agile-ai-delivery-1",
+      "type": "Conceptual",
+      "question": "What distinguishes a useful AI experiment backlog item?",
+      "answer": "A bounded hypothesis, method, evidence artifact, and decision criterion.",
+      "distractor": "An instruction to try models until something looks good."
+    },
+    {
+      "id": "agile-ai-delivery-2",
+      "type": "Practical",
+      "question": "What belongs in an AI feature definition of done?",
+      "answer": "Behavioral evaluation, data handling, tests, and operational requirements relevant to the slice.",
+      "distractor": "Only whether the code compiles."
+    },
+    {
+      "id": "agile-ai-delivery-3",
+      "type": "Scenario-based",
+      "question": "A demo works but permission tests fail. Is the slice done?",
+      "answer": "No, if permission behavior is part of its agreed completion criteria.",
+      "distractor": "Yes, visual demonstrations override tests."
+    },
+    {
+      "id": "agile-ai-delivery-4",
+      "type": "Interview",
+      "question": "Why use a thin end-to-end slice?",
+      "answer": "It exposes integration and user-value risks early with a manageable scope.",
+      "distractor": "It eliminates all uncertainty before development."
+    },
+    {
+      "id": "agile-ai-delivery-5",
+      "type": "Practical",
+      "question": "What should a review present besides a working interface?",
+      "answer": "Measured outcomes, limitations, user feedback, and resulting decisions.",
+      "distractor": "Only the number of commits."
+    }
+  ],
+  "sources": [
+    {
+      "title": "The Scrum Guide",
+      "url": "https://scrumguides.org/scrum-guide.html"
+    }
+  ]
+}

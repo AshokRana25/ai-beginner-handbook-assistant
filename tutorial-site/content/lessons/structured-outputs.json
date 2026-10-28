@@ -1,0 +1,93 @@
+{
+  "id": "structured-outputs",
+  "category": "prompt-engineering",
+  "order": 2,
+  "title": "Structured outputs & prompt testing",
+  "description": "Turn model responses into data your application can validate.",
+  "level": "Intermediate",
+  "minutes": 16,
+  "prerequisites": "Write prompts that actually work; basic JSON.",
+  "objectives": [
+    "Separate syntax validation from business validation",
+    "Create failure cases for an extraction task"
+  ],
+  "explanation": [
+    "Applications need predictable data boundaries. A structured response might contain a category, a short explanation, and an optional date. Define field names, types, allowed values, and how missing information is represented. Use provider-supported schema constraints when available and still validate at the application boundary.",
+    "Valid JSON does not mean valid business data. A date may be a string yet be impossible or unsupported by the input. A numeric refund amount might be well formed but exceed the order total. Validate both structure and domain rules before performing any action.",
+    "Design a failure path before the happy path. Handle missing fields, refusals, truncated responses, unsupported inputs, and provider errors. A limited repair attempt may help, but never loop indefinitely or silently convert invalid data into a successful transaction."
+  ],
+  "terms": [
+    {
+      "term": "Schema",
+      "definition": "A definition of allowed data structure and types."
+    },
+    {
+      "term": "Enum",
+      "definition": "A finite set of allowed values."
+    },
+    {
+      "term": "Domain validation",
+      "definition": "Checking whether data satisfies business rules."
+    }
+  ],
+  "example": "Extract an invoice into {vendor, amount, currency}. Require a nonnegative numeric amount and a currency from your supported list. Compare extracted values with the source before approving payment. Missing values should trigger review, not invented defaults.",
+  "code": [
+    {
+      "title": "Validate business rules after parsing",
+      "language": "javascript",
+      "file": "validate_invoice.mjs",
+      "run": "node",
+      "expectedOutput": "[ 'amount exceeds the order total' ]"
+    }
+  ],
+  "mistakes": [
+    "Calling JSON.parse and assuming all validation is complete.",
+    "Treating a schema as protection against unauthorized actions.",
+    "Retrying malformed output without a limit."
+  ],
+  "exercise": "Design a schema for a meeting action item. Write invalid examples for a missing owner, unsupported date, and unexpected priority.",
+  "questions": [
+    {
+      "id": "structured-outputs-1",
+      "type": "Conceptual",
+      "question": "Does parseable JSON prove an extraction is correct?",
+      "answer": "No. Parsing checks syntax; you must also validate schema, business rules, and support in the original input.",
+      "distractor": "Yes, JSON syntax certifies factual accuracy."
+    },
+    {
+      "id": "structured-outputs-2",
+      "type": "Practical",
+      "question": "How should an unknown invoice amount be represented?",
+      "answer": "Use an explicit missing value or review state permitted by the schema instead of inventing a numeric amount.",
+      "distractor": "Use a plausible average invoice amount."
+    },
+    {
+      "id": "structured-outputs-3",
+      "type": "Scenario-based",
+      "question": "The output says refund 900 for a 90 order. What next?",
+      "answer": "Reject or route it for review using business validation, even if the JSON and numeric type are valid.",
+      "distractor": "Execute it because the schema accepts numbers."
+    },
+    {
+      "id": "structured-outputs-4",
+      "type": "Interview",
+      "question": "Why limit output repair attempts?",
+      "answer": "A limit bounds latency and cost and ensures persistent failures become visible rather than an infinite loop.",
+      "distractor": "Limits make schema validation unnecessary."
+    },
+    {
+      "id": "structured-outputs-5",
+      "type": "Practical",
+      "question": "What should an enum define?",
+      "answer": "The exact accepted values for a field, such as low, medium, and high, so downstream behavior is unambiguous.",
+      "distractor": "Every possible natural-language synonym."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Google: prompt design strategies",
+      "url": "https://ai.google.dev/gemini-api/docs/prompting-strategies"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

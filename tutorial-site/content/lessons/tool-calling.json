@@ -1,0 +1,85 @@
+{
+  "id": "tool-calling",
+  "category": "ai-application-development",
+  "title": "Tool calling in practice",
+  "level": "Intermediate",
+  "description": "Validate model-proposed calls before executing application operations.",
+  "prerequisites": "API basics and structured outputs.",
+  "objectives": [
+    "Describe a narrow tool contract",
+    "Handle permissions, failures, and repeated calls"
+  ],
+  "explanation": [
+    "A tool definition describes an operation and its input schema. A model can propose a tool name and arguments; your application decides whether to execute it. Tool output can then be returned to the model for a follow-up answer. The provider-specific request format does not replace application validation.",
+    "Use an explicit dispatch table rather than evaluating model-produced code. Validate types, ranges, permitted resources, and the current user identity. Give read and write operations separate contracts. A syntactically valid record ID may still belong to another user.",
+    "Bound the number of calls and represent failures explicitly. Reads may be safe to retry; writes can create duplicate effects unless an idempotency mechanism is used. Bind approvals to exact write arguments, record the result, and avoid giving raw secrets or excessive internal error details back to the model."
+  ],
+  "terms": [
+    {
+      "term": "Tool contract",
+      "definition": "A named operation with defined inputs, outputs, and constraints."
+    },
+    {
+      "term": "Dispatch table",
+      "definition": "An explicit mapping from allowed names to application handlers."
+    },
+    {
+      "term": "Idempotency",
+      "definition": "Making retries of an operation avoid duplicate effects."
+    }
+  ],
+  "example": "A fictional inventory assistant can call lookup_stock for one SKU. A server checks the SKU type and allowed warehouse before reading. Ordering inventory is a separate operation with an explicit user decision and a deduplication key.",
+  "mistakes": [
+    "Executing model-generated code as a tool implementation.",
+    "Confusing schema validity with resource authorization.",
+    "Retrying a payment-like write without checking whether it already succeeded."
+  ],
+  "exercise": "Define lookup_stock and reserve_stock contracts for invented inventory. For each, state validation, identity, permissions, timeout, and retry policy. Test an unknown tool, invalid arguments, and a duplicate reservation request.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "tool-calling-1",
+      "type": "Conceptual",
+      "question": "Who actually executes a model-proposed tool call?",
+      "answer": "Application code, after applying its own validation and authorization.",
+      "distractor": "The JSON schema automatically executes it."
+    },
+    {
+      "id": "tool-calling-2",
+      "type": "Practical",
+      "question": "What is safer than evaluating a model-proposed function name as code?",
+      "answer": "Look it up in a fixed dispatch table of approved handlers.",
+      "distractor": "Concatenate it into a shell command."
+    },
+    {
+      "id": "tool-calling-3",
+      "type": "Scenario-based",
+      "question": "A valid order ID belongs to another user. Should the call proceed?",
+      "answer": "No. Resource ownership or authorization must be checked separately from syntax.",
+      "distractor": "Yes, because the schema accepted the ID."
+    },
+    {
+      "id": "tool-calling-4",
+      "type": "Interview",
+      "question": "Why are retries of writes different from retries of reads?",
+      "answer": "A repeated write may duplicate an effect unless the operation provides safe deduplication.",
+      "distractor": "Writes can never fail after taking effect."
+    },
+    {
+      "id": "tool-calling-5",
+      "type": "Practical",
+      "question": "What should limit a tool loop?",
+      "answer": "Explicit step, time, and resource budgets with a defined stop path.",
+      "distractor": "The hope that the model eventually stops."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Ollama: tool calling",
+      "url": "https://docs.ollama.com/capabilities/tool-calling"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "nlp-introduction",
+  "category": "deep-learning",
+  "title": "Introduction to NLP",
+  "level": "Intermediate",
+  "description": "Turn text into representations and evaluate language tasks carefully.",
+  "prerequisites": "Python data handling and model evaluation.",
+  "objectives": [
+    "Choose a text representation and baseline",
+    "Recognize leakage and language-specific failure cases"
+  ],
+  "explanation": [
+    "Natural language processing covers tasks such as classification, extraction, search, translation, and generation. Define what the output should contain and how correctness will be assessed. A short fixed-label classifier may be easier to validate than an unrestricted generated answer.",
+    "A bag-of-words representation counts terms while discarding most order. TF-IDF weights terms using their frequency within documents and across a corpus. Fit the vocabulary and any corpus statistics on training data. Contextual embeddings can capture richer patterns, but cost more and still need evaluation.",
+    "Preserve information deliberately. Removing punctuation, negation, or accents may change meaning. Evaluate languages, misspellings, long inputs, and ambiguous cases separately. Deduplicate templates and group related messages before splitting so near-identical text does not inflate held-out results."
+  ],
+  "terms": [
+    {
+      "term": "Tokenization",
+      "definition": "Dividing text into units used by a representation."
+    },
+    {
+      "term": "Vocabulary",
+      "definition": "The terms or tokens recognized by an encoding."
+    },
+    {
+      "term": "TF-IDF",
+      "definition": "A text weighting scheme using term frequency and document frequency."
+    }
+  ],
+  "example": "A support team labels messages billing, technical, or unclear. A term-count baseline is cheap to inspect. Include both “payment failed” and “payment did not fail” to reveal whether the representation loses a distinction that matters.",
+  "mistakes": [
+    "Removing negation as an unimportant word.",
+    "Learning vocabulary from the final test set.",
+    "Assuming one language result applies to every language."
+  ],
+  "exercise": "Write twelve invented support messages including ambiguity and negation. Define labels, a template-aware split, and a count-based baseline. Identify three cases where word order or context changes the correct label.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "nlp-introduction-1",
+      "type": "Conceptual",
+      "question": "What information does a basic bag-of-words representation mostly discard?",
+      "answer": "Word order, while retaining term occurrence information.",
+      "distractor": "Every occurrence of every word."
+    },
+    {
+      "id": "nlp-introduction-2",
+      "type": "Practical",
+      "question": "Where should a text vectorizer learn its vocabulary?",
+      "answer": "On the training partition before transforming evaluation data.",
+      "distractor": "On every future test message first."
+    },
+    {
+      "id": "nlp-introduction-3",
+      "type": "Scenario-based",
+      "question": "Why might removing the word “not” damage a sentiment classifier?",
+      "answer": "Negation can reverse the meaning of the phrase being classified.",
+      "distractor": "All short words always increase sentiment accuracy."
+    },
+    {
+      "id": "nlp-introduction-4",
+      "type": "Interview",
+      "question": "Does a contextual embedding eliminate the need for text evaluation?",
+      "answer": "No. It changes the representation but still has task and distribution limitations.",
+      "distractor": "Yes, embeddings guarantee language understanding."
+    },
+    {
+      "id": "nlp-introduction-5",
+      "type": "Practical",
+      "question": "How should repeated support templates be split?",
+      "answer": "Group related or near-duplicate templates to reduce cross-split leakage.",
+      "distractor": "Place identical copies in both training and test sets."
+    }
+  ],
+  "sources": [
+    {
+      "title": "scikit-learn: text feature extraction",
+      "url": "https://scikit-learn.org/stable/modules/feature_extraction.html"
+    }
+  ]
+}

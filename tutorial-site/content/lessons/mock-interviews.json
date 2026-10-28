@@ -1,0 +1,89 @@
+{
+  "id": "mock-interviews",
+  "category": "interview-preparation",
+  "title": "Role-based mock interviews",
+  "level": "Intermediate",
+  "description": "Practice clear reasoning with role-specific scenarios and a feedback rubric.",
+  "prerequisites": "Complete the core lessons in your chosen learning path.",
+  "objectives": [
+    "Structure an answer around assumptions, tradeoffs, and evidence",
+    "Practice a role-specific scenario without inventing experience"
+  ],
+  "explanation": [
+    "A useful technical answer starts by clarifying the task and constraints. State assumptions, propose a simple baseline, explain the design and its tradeoffs, then describe verification and failure handling. Distinguish work you performed from a hypothetical approach you would take.",
+    "Match practice to the role. A beginner can explain training versus inference with an everyday example. A developer can design a server-side tool call with validation. An engineer can diagnose retrieval and serving failures. A product manager can define user value, acceptance criteria, and a go/no-go decision.",
+    "Use a repeatable mock interview: two minutes to clarify, five to explain, and three for challenges and feedback. Score correctness, structure, evidence, and tradeoff awareness from zero to two each. This rubric is a practice tool, not an employer hiring standard. Repeat the same scenario after reviewing weak areas."
+  ],
+  "terms": [
+    {
+      "term": "Clarifying question",
+      "definition": "A question that resolves a constraint affecting the proposed solution."
+    },
+    {
+      "term": "Tradeoff",
+      "definition": "A choice that improves one objective while affecting another."
+    },
+    {
+      "term": "Behavioral evidence",
+      "definition": "Specific observations or experience supporting a claim about action or results."
+    }
+  ],
+  "example": "For “design a policy assistant,” a developer explains identity, retrieval, citations, and denied access. An engineer adds evaluation and latency budgets. A manager asks who benefits, how review works, and which result would stop the pilot. All roles acknowledge absent evidence.",
+  "mistakes": [
+    "Listing tools without connecting them to requirements.",
+    "Claiming hands-on experience with a system you only read about.",
+    "Giving precise performance guarantees without measurement."
+  ],
+  "exercise": "Choose a role and record a ten-minute answer to the policy-assistant scenario. Score the four rubric dimensions, identify one missing assumption and one unsupported claim, review the related lessons, and try again.",
+  "order": 1,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "mock-interviews-1",
+      "type": "Conceptual",
+      "question": "What is a strong first step for an open-ended AI interview scenario?",
+      "answer": "Clarify the user task, constraints, and success criteria before choosing components.",
+      "distractor": "Immediately list every framework you know."
+    },
+    {
+      "id": "mock-interviews-2",
+      "type": "Practical",
+      "question": "How should you describe a design you have not implemented?",
+      "answer": "Label it as a proposed approach and explain how you would validate it.",
+      "distractor": "Present hypothetical results as measured experience."
+    },
+    {
+      "id": "mock-interviews-3",
+      "type": "Scenario-based",
+      "question": "An interviewer asks whether RAG eliminates hallucinations. What is a sound answer?",
+      "answer": "No. Retrieval can improve grounding, but evidence selection and unsupported generation still need evaluation.",
+      "distractor": "Yes, using a vector database guarantees factual answers."
+    },
+    {
+      "id": "mock-interviews-4",
+      "type": "Interview",
+      "question": "What should an engineer discuss when a prototype becomes slow under load?",
+      "answer": "Queueing, first-token and total latency, concurrency, memory, and measured workload tradeoffs.",
+      "distractor": "Only changing the interface animation."
+    },
+    {
+      "id": "mock-interviews-5",
+      "type": "Practical",
+      "question": "What should a product manager include in an AI pilot decision?",
+      "answer": "User outcomes, baseline, review cost, risks, acceptance evidence, and a stop or continue criterion.",
+      "distractor": "Only whether a popular model was used."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Google: machine learning problem framing",
+      "url": "https://developers.google.com/machine-learning/problem-framing"
+    },
+    {
+      "title": "Langfuse: evaluation overview",
+      "url": "https://langfuse.com/docs/evaluation/overview"
+    }
+  ]
+}

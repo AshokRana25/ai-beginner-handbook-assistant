@@ -1,0 +1,89 @@
+{
+  "id": "agent-memory",
+  "category": "ai-agents",
+  "title": "Agent memory and planning",
+  "level": "Advanced",
+  "description": "Use scoped state and bounded plans without turning past text into authority.",
+  "prerequisites": "Agent workflows and secure AI.",
+  "objectives": [
+    "Separate working state from durable memory",
+    "Design a plan with verification and stopping conditions"
+  ],
+  "explanation": [
+    "Working state holds information for the current task: the goal, observations, pending steps, and completed actions. Durable memory carries selected information across tasks. Persisting everything is rarely necessary; store provenance, owner, purpose, and expiry so later retrieval can apply the right scope.",
+    "A plan is a proposed sequence of actions, not evidence that the actions succeeded. Execute a bounded step, inspect the actual result, and update state. Keep authoritative action records outside generated summaries so a compressed conversation cannot turn a proposal into a completed transaction.",
+    "Checkpoint enough state to resume safely after interruption. Before retrying a step, check whether an external effect already occurred. Limit steps, elapsed time, and spending. Ask for missing information or stop with a clear result when progress is impossible; endlessly rewriting a plan is not progress."
+  ],
+  "terms": [
+    {
+      "term": "Working state",
+      "definition": "Information needed for the current task execution."
+    },
+    {
+      "term": "Durable memory",
+      "definition": "Selected information retained across tasks or sessions."
+    },
+    {
+      "term": "Checkpoint",
+      "definition": "Persisted execution state used to resume work."
+    }
+  ],
+  "example": "A support agent remembers a user preference for short replies, but not access tokens. During a refund task it stores the proposed action, approval, and transaction identifier separately. A restart checks the transaction before considering a retry.",
+  "mistakes": [
+    "Treating remembered text as verified policy.",
+    "Sharing memory between users without scoping.",
+    "Marking a step complete because it appears in a plan."
+  ],
+  "exercise": "Design a three-step support workflow. For each state field, choose lifetime, owner, source, and deletion rule. Simulate a restart after the external action succeeds but before the final answer is sent.",
+  "order": 2,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "agent-memory-1",
+      "type": "Conceptual",
+      "question": "What distinguishes a plan from an execution record?",
+      "answer": "A plan proposes actions; a record documents observed actions and results.",
+      "distractor": "A generated plan proves all its steps are complete."
+    },
+    {
+      "id": "agent-memory-2",
+      "type": "Practical",
+      "question": "What metadata helps control durable memory?",
+      "answer": "Owner, source, purpose, timestamps, and retention or expiry rules.",
+      "distractor": "Only the number of characters stored."
+    },
+    {
+      "id": "agent-memory-3",
+      "type": "Scenario-based",
+      "question": "A process restarts after a possible write. What should it do first?",
+      "answer": "Check the authoritative operation result or deduplication record before retrying.",
+      "distractor": "Repeat the write immediately without inspection."
+    },
+    {
+      "id": "agent-memory-4",
+      "type": "Interview",
+      "question": "Why keep tool results separate from conversation summaries?",
+      "answer": "Summaries can omit or distort details needed to determine what actually happened.",
+      "distractor": "Generated summaries are stronger evidence than transaction records."
+    },
+    {
+      "id": "agent-memory-5",
+      "type": "Practical",
+      "question": "What prevents an agent from looping indefinitely?",
+      "answer": "Enforced step, time, and resource limits with explicit stop conditions.",
+      "distractor": "A durable memory database by itself."
+    }
+  ],
+  "sources": [
+    {
+      "title": "LangChain: memory concepts",
+      "url": "https://docs.langchain.com/oss/python/concepts/memory"
+    },
+    {
+      "title": "Ollama: tool calling",
+      "url": "https://docs.ollama.com/capabilities/tool-calling"
+    }
+  ]
+}

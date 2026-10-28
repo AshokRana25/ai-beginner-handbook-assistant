@@ -1,0 +1,85 @@
+{
+  "id": "everyday-ai",
+  "category": "ai-fundamentals",
+  "title": "AI in everyday decisions",
+  "level": "Beginner",
+  "description": "Separate a useful prediction from the decision it helps a person make.",
+  "prerequisites": "What is AI?",
+  "objectives": [
+    "Identify predictions inside familiar products",
+    "Choose a useful baseline and a human review point"
+  ],
+  "explanation": [
+    "An email filter predicts whether a message resembles spam. A recommendation system ranks items you may prefer. In both cases, a prediction is only one part of a product: someone also chooses the action, the error tolerance, and the way users can correct mistakes.",
+    "Start with the decision. Who uses the output, what information is available at that moment, and what happens when the system is wrong? Compare the AI approach with a simple rule or the existing manual process. A model that scores well but creates more review work may not improve the task.",
+    "Match oversight to consequences. Sorting a playlist is easy to undo; blocking an important message needs a visible recovery route. Test realistic exceptions, record corrections, and revisit performance when users or inputs change. A fluent explanation does not establish that a prediction is correct."
+  ],
+  "terms": [
+    {
+      "term": "Prediction",
+      "definition": "An estimate made from available inputs."
+    },
+    {
+      "term": "Baseline",
+      "definition": "A reference approach used to judge an improvement."
+    },
+    {
+      "term": "Automation bias",
+      "definition": "Accepting a system output too readily because it appears authoritative."
+    }
+  ],
+  "example": "A fictional team receives 200 emails per day. Its filter catches 30 unwanted messages but hides two customer requests. Compare time saved with time spent reviewing the spam folder. Offer restore and report-error controls before increasing automation.",
+  "mistakes": [
+    "Measuring prediction accuracy without considering the resulting action.",
+    "Calling every rule-based feature machine learning.",
+    "Removing a correction route because a demo looked convincing."
+  ],
+  "exercise": "Choose a recommendation, search, or spam feature. Write its input, prediction, action, baseline, one costly mistake, and one way a user can recover. Decide which metric would show a useful improvement.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "everyday-ai-1",
+      "type": "Conceptual",
+      "question": "Is a spam prediction the same as deleting a message?",
+      "answer": "No. Prediction estimates a label; deletion is an application decision with separate consequences.",
+      "distractor": "Yes, classification always requires deletion."
+    },
+    {
+      "id": "everyday-ai-2",
+      "type": "Practical",
+      "question": "What baseline fits a new email-priority model?",
+      "answer": "Compare it with the current manual process or a simple sender rule on the same messages.",
+      "distractor": "Compare it only with an unrelated image model."
+    },
+    {
+      "id": "everyday-ai-3",
+      "type": "Scenario-based",
+      "question": "A filter saves time but hides urgent requests. What should change?",
+      "answer": "Measure missed urgent messages and improve review or recovery before expanding automation.",
+      "distractor": "Remove the review folder to make the process faster."
+    },
+    {
+      "id": "everyday-ai-4",
+      "type": "Interview",
+      "question": "How would you explain an AI feature without jargon?",
+      "answer": "Name the input, the estimate it produces, who uses it, and how mistakes are corrected.",
+      "distractor": "List model names without describing the user task."
+    },
+    {
+      "id": "everyday-ai-5",
+      "type": "Practical",
+      "question": "What evidence supports keeping a recommendation feature?",
+      "answer": "A measured improvement in the intended user outcome, with acceptable errors and effort.",
+      "distractor": "The presence of an AI label on the interface."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Google: machine learning problem framing",
+      "url": "https://developers.google.com/machine-learning/problem-framing"
+    }
+  ]
+}

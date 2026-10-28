@@ -1,0 +1,92 @@
+{
+  "id": "first-mcp-server",
+  "category": "model-context-protocol",
+  "title": "Build your first MCP server",
+  "level": "Intermediate",
+  "description": "Expose one local, read-only tool with a clear schema and error behavior.",
+  "prerequisites": "MCP introduction, Python, and tool calling.",
+  "objectives": [
+    "Implement a small SDK-based stdio server",
+    "Verify tool discovery, valid inputs, and missing records"
+  ],
+  "explanation": [
+    "Start with one deterministic read-only capability over invented data. Give the tool a specific name, a short description, typed inputs, and documented output behavior. The SDK handles protocol framing; your handler remains responsible for validation and application permissions.",
+    "The supplied example follows the official Python MCPServer API documented for the 2026-07-28 protocol generation. Create an isolated environment, install a compatible mcp release, and save its exact installed version with the exercise. Launch the file through an MCP client using the environment Python executable and the absolute script path.",
+    "Use stdio for this local exercise. Standard output carries protocol messages, so send diagnostic logs to standard error. In a compatible inspector or host, list tools, invoke lookup_stock with SKU-1, then test an unknown SKU and invalid input. Record expected and observed outcomes before adding a second capability."
+  ],
+  "terms": [
+    {
+      "term": "Tool discovery",
+      "definition": "Reading the operations and schemas a server exposes."
+    },
+    {
+      "term": "stdio transport",
+      "definition": "Protocol communication through a launched process standard streams."
+    },
+    {
+      "term": "SDK",
+      "definition": "A library that implements protocol machinery for an application."
+    }
+  ],
+  "example": "mcp_inventory.py exposes stock counts for two invented SKUs. SKU-1 returns five units; an unknown SKU produces a clear tool error. The server has no filesystem search, network access, or inventory-write operation in its handler.",
+  "mistakes": [
+    "Printing debugging messages to protocol stdout.",
+    "Assuming a server command uses the same Python environment as a terminal.",
+    "Copying an SDK import from a different major version."
+  ],
+  "exercise": "Create a separate virtual environment, install the compatible MCP SDK, and connect the sample through an MCP inspector. Verify discovery, SKU-1, an unknown SKU, and a non-string argument. Capture results without logging credentials.",
+  "code": [
+    {
+      "title": "A small read-only inventory server",
+      "language": "python",
+      "file": "mcp_inventory.py",
+      "note": "Optional integration example using the documented MCPServer API. Requires a compatible mcp SDK and MCP client. The network-free output checks do not verify a live protocol session."
+    }
+  ],
+  "order": 2,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "questions": [
+    {
+      "id": "first-mcp-server-1",
+      "type": "Conceptual",
+      "question": "Why start an MCP server with one read-only tool?",
+      "answer": "A narrow deterministic capability is easier to validate before expanding scope.",
+      "distractor": "Read-only tools do not need input validation."
+    },
+    {
+      "id": "first-mcp-server-2",
+      "type": "Practical",
+      "question": "Where should a stdio server write diagnostic logs?",
+      "answer": "To standard error so protocol messages on standard output remain intact.",
+      "distractor": "Into arbitrary lines on standard output."
+    },
+    {
+      "id": "first-mcp-server-3",
+      "type": "Scenario-based",
+      "question": "The host reports an import error but the script works in a terminal. What should you compare?",
+      "answer": "The exact Python executable, installed SDK version, and absolute script path.",
+      "distractor": "Only the host window color."
+    },
+    {
+      "id": "first-mcp-server-4",
+      "type": "Interview",
+      "question": "What should be tested besides a successful tool call?",
+      "answer": "Discovery, schema validation, missing records, and defined error behavior.",
+      "distractor": "Nothing; one successful call proves all behavior."
+    },
+    {
+      "id": "first-mcp-server-5",
+      "type": "Practical",
+      "question": "Does the SDK decide which user may access a real inventory record?",
+      "answer": "No. Application identity and resource authorization remain your responsibility.",
+      "distractor": "Yes, a tool decorator grants correct access automatically."
+    }
+  ],
+  "sources": [
+    {
+      "title": "MCP: build a server",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/develop/build-server"
+    }
+  ]
+}

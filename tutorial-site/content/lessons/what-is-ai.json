@@ -1,0 +1,85 @@
+{
+  "id": "what-is-ai",
+  "category": "ai-fundamentals",
+  "order": 1,
+  "title": "What is AI? A practical introduction",
+  "description": "A clear starting point for understanding AI, machine learning, and deep learning.",
+  "level": "Beginner",
+  "minutes": 8,
+  "prerequisites": "No prior experience needed.",
+  "objectives": [
+    "Distinguish AI, ML, and deep learning",
+    "Choose a sensible first AI use case"
+  ],
+  "explanation": [
+    "Artificial intelligence is an umbrella term for systems that perform tasks such as recognizing patterns, making predictions, or generating language. A system can use hand-written rules or learn from examples. Calling a product AI does not tell you whether it learns or whether its answers are reliable.",
+    "Machine learning fits a model to examples instead of requiring a developer to specify every rule. Deep learning is a family of machine-learning methods built from layered neural networks. These are nested ideas: deep learning belongs to ML, and ML belongs to AI.",
+    "Start with the task, not the technology. A fixed tax calculation is better expressed as deterministic rules. Sorting thousands of support requests may benefit from a learned classifier. In either case, decide how a person will detect and correct a bad result."
+  ],
+  "terms": [
+    {
+      "term": "Model",
+      "definition": "A representation used to produce predictions or outputs."
+    },
+    {
+      "term": "Training",
+      "definition": "Adjusting a model using examples."
+    },
+    {
+      "term": "Inference",
+      "definition": "Using a trained model on new input."
+    }
+  ],
+  "example": "A help desk receives messages about billing and technical problems. Begin with 100 human-labeled examples, define the two labels, and compare a simple keyword rule against a model on unseen messages. Keep ambiguous requests in a human review queue.",
+  "code": [],
+  "mistakes": [
+    "Confusing fluent language with factual understanding.",
+    "Choosing AI before checking whether a simple rule solves the problem.",
+    "Assuming performance on examples guarantees future performance."
+  ],
+  "exercise": "List three tasks from your work. For each, choose rules, ML, or human judgment and explain the cost of one wrong decision.",
+  "questions": [
+    {
+      "id": "what-is-ai-1",
+      "type": "Conceptual",
+      "question": "Is all AI machine learning?",
+      "answer": "No. Rule-based systems can be AI without learning from data. ML is one approach inside the broader field.",
+      "distractor": "Yes. Every AI system must train a neural network."
+    },
+    {
+      "id": "what-is-ai-2",
+      "type": "Practical",
+      "question": "What is inference in the help-desk example?",
+      "answer": "Assigning a category to a new message using an already trained model; it does not require retraining.",
+      "distractor": "Editing the labeled training dataset."
+    },
+    {
+      "id": "what-is-ai-3",
+      "type": "Scenario-based",
+      "question": "Would you use a language model to calculate a fixed fee?",
+      "answer": "Use a deterministic calculation for the fee; a language model can explain it, but should not be the authority for arithmetic.",
+      "distractor": "Let the model guess the fee from similar invoices."
+    },
+    {
+      "id": "what-is-ai-4",
+      "type": "Interview",
+      "question": "How does deep learning relate to ML?",
+      "answer": "Deep learning uses layered neural networks and is a subset of machine learning, not a synonym for all AI.",
+      "distractor": "Deep learning is separate from machine learning."
+    },
+    {
+      "id": "what-is-ai-5",
+      "type": "Practical",
+      "question": "Why compare against a keyword rule?",
+      "answer": "It establishes a cheap baseline. A more complex system should earn its extra cost through better measured outcomes.",
+      "distractor": "Rules are always more accurate than trained models."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Google Machine Learning Crash Course",
+      "url": "https://developers.google.com/machine-learning/crash-course"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

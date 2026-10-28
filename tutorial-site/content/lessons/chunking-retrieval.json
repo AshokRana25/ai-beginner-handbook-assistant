@@ -1,0 +1,94 @@
+{
+  "id": "chunking-retrieval",
+  "category": "rag",
+  "order": 2,
+  "title": "Chunking, retrieval & reranking",
+  "description": "Make evidence easier to find without losing its meaning.",
+  "level": "Intermediate",
+  "minutes": 12,
+  "prerequisites": "RAG foundations.",
+  "objectives": [
+    "Choose boundaries based on document structure",
+    "Compare lexical, vector, and hybrid search"
+  ],
+  "explanation": [
+    "Chunking balances specificity and context. Very small chunks may lose a definition or qualifying condition; very large chunks may dilute relevant information and consume too much context. Start with natural boundaries such as headings and paragraphs, then evaluate against real questions instead of copying a universal chunk size.",
+    "Lexical search is useful for exact identifiers and rare terms. Vector search can find semantically related wording. Hybrid retrieval combines signals, while a reranker can inspect a smaller candidate set more closely. These stages add latency and cost, so measure their contribution rather than assuming more stages are always better.",
+    "Build a retrieval test set with known supporting passages. Check whether evidence appears in the top candidates and whether the final supplied context retains needed qualifications. Include versioned policies, exact codes, and questions that have no answer in the corpus."
+  ],
+  "terms": [
+    {
+      "term": "Lexical search",
+      "definition": "Matching terms or tokens in text."
+    },
+    {
+      "term": "Hybrid search",
+      "definition": "Combining lexical and semantic retrieval signals."
+    },
+    {
+      "term": "Recall at k",
+      "definition": "The fraction of relevant evidence found among k retrieved candidates under a defined evaluation."
+    }
+  ],
+  "example": "A warranty clause says coverage lasts two years, followed by a paragraph excluding water damage. If those paragraphs are separated without context, a retrieved answer may omit the exclusion. Preserve their relationship or retrieve neighboring context.",
+  "code": [
+    {
+      "title": "Paragraph chunks with a keyword baseline",
+      "language": "python",
+      "file": "chunk_and_search.py",
+      "run": "python",
+      "expectedOutput": "warranty-v2 1 Water damage is excluded from coverage.",
+      "note": "The query word \"covered\" does not match \"coverage\" lexically, so the paragraph about the two-year period is not retrieved. Semantic or hybrid retrieval addresses that kind of mismatch."
+    }
+  ],
+  "mistakes": [
+    "Choosing chunk size without a question set.",
+    "Ignoring exact product codes in a vector-only system.",
+    "Adding reranking without measuring added latency."
+  ],
+  "exercise": "Split a policy into paragraphs and then into sections. Compare which strategy finds complete evidence for five questions, including an exception.",
+  "questions": [
+    {
+      "id": "chunking-retrieval-1",
+      "type": "Conceptual",
+      "question": "Why can tiny chunks hurt answers?",
+      "answer": "They can separate a claim from its qualifiers or definitions, leaving retrieved evidence incomplete.",
+      "distractor": "They always exceed the context window."
+    },
+    {
+      "id": "chunking-retrieval-2",
+      "type": "Practical",
+      "question": "Which retrieval signal helps exact product codes?",
+      "answer": "Lexical matching can preserve exact identifiers that semantic similarity alone may miss.",
+      "distractor": "Random ordering is best for exact codes."
+    },
+    {
+      "id": "chunking-retrieval-3",
+      "type": "Scenario-based",
+      "question": "A warranty answer omits an exclusion. What should you inspect?",
+      "answer": "Check chunk boundaries and whether neighboring qualifying text reaches the generator, not just whether the main clause was found.",
+      "distractor": "Delete the exclusion from the source."
+    },
+    {
+      "id": "chunking-retrieval-4",
+      "type": "Interview",
+      "question": "What does a reranker do?",
+      "answer": "It reorders a candidate set using a relevance assessment; it cannot recover evidence that was never in that candidate set.",
+      "distractor": "It retrains the base language model."
+    },
+    {
+      "id": "chunking-retrieval-5",
+      "type": "Practical",
+      "question": "How should two chunking strategies be compared?",
+      "answer": "Use the same question set with known evidence and measure retrieval quality, context completeness, and operational cost.",
+      "distractor": "Choose whichever creates the most chunks."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Microsoft: retrieval-augmented generation",
+      "url": "https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

@@ -1,0 +1,93 @@
+{
+  "id": "statistics-probability",
+  "category": "prerequisites",
+  "title": "Statistics and probability for AI",
+  "level": "Beginner",
+  "description": "Use summaries, denominators, and base rates to interpret results.",
+  "prerequisites": "Basic arithmetic and Python lists.",
+  "objectives": [
+    "Compare mean and median",
+    "Use a base rate when interpreting a positive prediction"
+  ],
+  "explanation": [
+    "A mean sums values and divides by their count. A median describes the middle of sorted observations. Both summarize data, but a few extreme values can move the mean substantially. Always report the population, units, sample size, and missing-value treatment with a summary.",
+    "Probability describes uncertainty under stated assumptions. Conditional probability restricts attention to cases satisfying a condition. The chance a flagged item is truly positive depends on how common positives were before the test, as well as on the test errors. Sensitivity alone cannot answer that question.",
+    "Suppose 10 of 1,000 invented items are faulty. A detector catches 9 faulty items and falsely flags 99 good ones. Only 9 of 108 flags are real faults, about 8.3%. Check such counts before deciding whether a system can act automatically. A tiny evaluation sample also leaves substantial uncertainty about future performance."
+  ],
+  "terms": [
+    {
+      "term": "Mean",
+      "definition": "Sum of observed values divided by their count."
+    },
+    {
+      "term": "Median",
+      "definition": "The middle value, or average of the two middle values, after sorting."
+    },
+    {
+      "term": "Base rate",
+      "definition": "How common an outcome is in the relevant population."
+    }
+  ],
+  "example": "Four response times are 1, 1, 2, and 20 seconds. Their mean is 6 seconds and median is 1.5 seconds. Neither alone describes the slowest user experience, so also inspect the distribution and slow cases.",
+  "mistakes": [
+    "Reporting a percentage without its denominator.",
+    "Assuming a small sample represents all users.",
+    "Confusing the chance of a flag given a fault with the chance of a fault given a flag."
+  ],
+  "exercise": "Run summary_statistics.py. Replace the 20-second outlier with 2 seconds and predict the new mean and median. For the detector example, halve false positives and recompute the fraction of valid alerts.",
+  "code": [
+    {
+      "title": "Mean and median of response times",
+      "language": "python",
+      "file": "summary_statistics.py",
+      "run": "python",
+      "expectedOutput": "mean=6.0, median=1.5\nprecision=8.3%"
+    }
+  ],
+  "order": 4,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "questions": [
+    {
+      "id": "statistics-probability-1",
+      "type": "Conceptual",
+      "question": "Why can latency mean and median differ greatly?",
+      "answer": "A small number of slow responses can raise the mean while most responses remain fast.",
+      "distractor": "The median always includes only failed requests."
+    },
+    {
+      "id": "statistics-probability-2",
+      "type": "Practical",
+      "question": "What denominator gives precision for the detector example?",
+      "answer": "All flagged items: 9 true positives plus 99 false positives.",
+      "distractor": "All 1,000 items regardless of prediction."
+    },
+    {
+      "id": "statistics-probability-3",
+      "type": "Scenario-based",
+      "question": "Nine of 108 flags are real faults. What is the approximate precision?",
+      "answer": "8.3%; most flags are false positives in this example.",
+      "distractor": "90%, because nine of ten faults were detected."
+    },
+    {
+      "id": "statistics-probability-4",
+      "type": "Interview",
+      "question": "Why mention sample size with an accuracy estimate?",
+      "answer": "An estimate from few cases may be unstable and may miss important subgroups.",
+      "distractor": "Sample size makes every dataset representative."
+    },
+    {
+      "id": "statistics-probability-5",
+      "type": "Practical",
+      "question": "Should an unknown measurement automatically become zero?",
+      "answer": "No. Define and report a missing-data policy appropriate to what was measured.",
+      "distractor": "Yes, zero is always statistically neutral."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Python: statistics",
+      "url": "https://docs.python.org/3/library/statistics.html"
+    }
+  ]
+}

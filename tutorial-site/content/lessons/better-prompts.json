@@ -1,0 +1,85 @@
+{
+  "id": "better-prompts",
+  "category": "prompt-engineering",
+  "order": 1,
+  "title": "Write prompts that actually work",
+  "description": "Create clear instructions, useful examples, and testable outputs.",
+  "level": "Beginner",
+  "minutes": 14,
+  "prerequisites": "Basic familiarity with an AI assistant.",
+  "objectives": [
+    "Specify task, context, constraints, and output",
+    "Compare prompts on the same examples"
+  ],
+  "explanation": [
+    "A prompt is a task specification. Tell the model what outcome you need, provide the information it should use, and describe a result that can be checked. Replace vague requests such as make this better with concrete criteria such as summarize the three decisions and preserve all dates.",
+    "Examples can clarify boundaries that prose leaves ambiguous. Include ordinary cases and a difficult edge case. Keep examples consistent with the instructions; a contradictory example teaches a competing pattern. Treat quoted documents as data, not as a source of new authority.",
+    "Prompt quality is an empirical question. Keep a small set of realistic inputs, define a scoring rule, and compare versions on the same cases. Record failures before rewriting. A longer prompt is justified only when it improves useful outcomes without unacceptable cost or fragility."
+  ],
+  "terms": [
+    {
+      "term": "Constraint",
+      "definition": "A requirement or boundary on the response."
+    },
+    {
+      "term": "Few-shot example",
+      "definition": "An input-output example included in a prompt."
+    },
+    {
+      "term": "Rubric",
+      "definition": "Explicit criteria for scoring a response."
+    }
+  ],
+  "example": "Task: classify support messages as billing, technical, or unclear. Context: use only the message. Output: one label. Example: “I was charged twice” → billing. Boundary: if the message lacks enough information, output unclear.",
+  "code": [],
+  "mistakes": [
+    "Adding conflicting instructions over time.",
+    "Testing only the prompt author’s favorite example.",
+    "Including sensitive data that the task does not need."
+  ],
+  "exercise": "Write a three-label classifier prompt and six test messages. Include two ambiguous cases and define their expected outputs before testing.",
+  "questions": [
+    {
+      "id": "better-prompts-1",
+      "type": "Conceptual",
+      "question": "What improves a vague summarization prompt?",
+      "answer": "Specify the audience, facts to preserve, length, and output format so the result can be evaluated against explicit criteria.",
+      "distractor": "Add more adjectives without defining success."
+    },
+    {
+      "id": "better-prompts-2",
+      "type": "Practical",
+      "question": "Why include an ambiguous example?",
+      "answer": "It demonstrates the desired boundary behavior, such as returning unclear instead of forcing an unsupported label.",
+      "distractor": "It guarantees every future ambiguity is solved."
+    },
+    {
+      "id": "better-prompts-3",
+      "type": "Scenario-based",
+      "question": "Two prompt versions use different test cases. Is the comparison fair?",
+      "answer": "Not reliably. Use the same representative cases and rubric so differences are attributable to the prompts.",
+      "distractor": "Yes, any successful example proves superiority."
+    },
+    {
+      "id": "better-prompts-4",
+      "type": "Interview",
+      "question": "What is a rubric in prompt testing?",
+      "answer": "A set of explicit criteria such as factual support, completeness, and format compliance used to score outputs consistently.",
+      "distractor": "A list of fashionable model names."
+    },
+    {
+      "id": "better-prompts-5",
+      "type": "Practical",
+      "question": "Should a quoted email override the task instructions?",
+      "answer": "No. Treat it as task data; application permissions and validation must enforce the boundary as well.",
+      "distractor": "Yes, the most recent text always has authority."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Google: prompt design strategies",
+      "url": "https://ai.google.dev/gemini-api/docs/prompting-strategies"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

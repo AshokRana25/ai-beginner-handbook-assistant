@@ -1,0 +1,98 @@
+{
+  "id": "api-basics",
+  "category": "ai-application-development",
+  "order": 1,
+  "title": "Build a reliable model API integration",
+  "description": "Understand request boundaries, authentication, errors, and costs.",
+  "level": "Intermediate",
+  "minutes": 8,
+  "prerequisites": "Basic JavaScript and HTTP.",
+  "objectives": [
+    "Keep credentials on the server",
+    "Handle HTTP errors and cancellation"
+  ],
+  "explanation": [
+    "A model integration is an application boundary. The browser sends a user request to your server; the server authenticates the user, validates the input, and calls the provider with a server-side credential. Return only the information the user is permitted to receive. Never put provider secrets in browser bundles or public environment variables.",
+    "HTTP success and application success are different. Check response status, validate the returned data, and distinguish authentication failures from temporary capacity problems. Use timeouts and cancellation so abandoned requests do not occupy resources indefinitely. Retry only suitable transient failures with a bounded backoff policy.",
+    "Streaming can improve perceived responsiveness by showing partial output, but incomplete text is not a completed result. Tool calls also need a boundary: validate proposed arguments and permissions before executing a function. Track usage and set budgets per user or job instead of relying on unlimited retries."
+  ],
+  "terms": [
+    {
+      "term": "Authentication",
+      "definition": "Establishing who is making a request."
+    },
+    {
+      "term": "Authorization",
+      "definition": "Deciding which actions that identity may perform."
+    },
+    {
+      "term": "Backoff",
+      "definition": "Waiting progressively between retry attempts."
+    }
+  ],
+  "example": "The browser snippet calls a hypothetical same-origin /api/answer endpoint. It demonstrates status checks and cancellation, not a complete provider integration. You must implement that endpoint on a server and keep its provider key in a server-side environment variable.",
+  "code": [
+    {
+      "title": "Browser: call your own endpoint",
+      "language": "javascript",
+      "file": "browser_ask.js",
+      "note": "Syntax-checked with Node.js. Status checks and AbortSignal.timeout() follow the MDN Fetch API guide."
+    },
+    {
+      "title": "Server: keep the key in the environment",
+      "language": "javascript",
+      "file": "answer_server.mjs",
+      "note": "A sketch without a provider call. Its 400, 404, and 501 responses were checked locally with a dummy MODEL_API_KEY. Add authentication and your provider's official SDK before real use."
+    }
+  ],
+  "mistakes": [
+    "Exposing a key through frontend environment variables.",
+    "Retrying invalid credentials as if they were temporary failures.",
+    "Treating streamed partial JSON as a completed tool command."
+  ],
+  "exercise": "Draw browser, application server, and provider boundaries. Specify the response shown for timeout, unauthorized access, and exhausted quota.",
+  "questions": [
+    {
+      "id": "api-basics-1",
+      "type": "Conceptual",
+      "question": "Where should a provider API key live?",
+      "answer": "On the server in an environment variable or secret store, never in a browser bundle or client-visible configuration.",
+      "distractor": "In frontend JavaScript so requests are faster."
+    },
+    {
+      "id": "api-basics-2",
+      "type": "Practical",
+      "question": "Does fetch reject on every HTTP error status?",
+      "answer": "No. Check response.ok or status explicitly; a received HTTP error response can still fulfill the fetch promise.",
+      "distractor": "Yes, all 4xx responses automatically reject."
+    },
+    {
+      "id": "api-basics-3",
+      "type": "Scenario-based",
+      "question": "Should an invalid-key response be retried repeatedly?",
+      "answer": "No. Fix authentication or configuration; repeated identical requests will not resolve invalid credentials.",
+      "distractor": "Yes, retry without a limit until accepted."
+    },
+    {
+      "id": "api-basics-4",
+      "type": "Interview",
+      "question": "What must happen before executing a model-proposed tool call?",
+      "answer": "Validate the tool, arguments, caller permissions, and any required approval in application code.",
+      "distractor": "Execute it because the model chose the function."
+    },
+    {
+      "id": "api-basics-5",
+      "type": "Practical",
+      "question": "Why track usage per user or job?",
+      "answer": "It enables budgets and investigation of runaway workflows, rather than discovering excessive usage only on a final bill.",
+      "distractor": "It eliminates the need for authentication."
+    }
+  ],
+  "sources": [
+    {
+      "title": "MDN: Using the Fetch API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

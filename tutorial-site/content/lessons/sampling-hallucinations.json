@@ -1,0 +1,85 @@
+{
+  "id": "sampling-hallucinations",
+  "category": "generative-ai",
+  "order": 2,
+  "title": "Sampling, hallucinations & grounded answers",
+  "description": "Understand output variation and build a better evidence loop.",
+  "level": "Beginner",
+  "minutes": 12,
+  "prerequisites": "How large language models work.",
+  "objectives": [
+    "Separate variability from accuracy",
+    "Define an answerable and unanswerable test set"
+  ],
+  "explanation": [
+    "Generation can select tokens using different sampling settings. Temperature often changes how concentrated the token distribution is, while top-p limits candidates by cumulative probability. Support and interactions vary by model, so check its documentation before changing these settings.",
+    "Lower variability is useful for repeatable tasks, but it does not create knowledge. A model can consistently produce the same wrong answer. Reliability comes from a combination of relevant evidence, clear task boundaries, validation, and evaluation on realistic inputs.",
+    "For a grounded assistant, ask for claims supported by supplied documents and a clear response when evidence is missing. Verify that cited passages actually support each claim. Multimodal inputs add another layer: a blurry chart or ambiguous image may make a confident interpretation unsafe."
+  ],
+  "terms": [
+    {
+      "term": "Sampling",
+      "definition": "Selecting an output from a probability distribution."
+    },
+    {
+      "term": "Grounding",
+      "definition": "Connecting an answer to supplied evidence."
+    },
+    {
+      "term": "Abstention",
+      "definition": "Declining to answer when support is insufficient."
+    }
+  ],
+  "example": "Give an assistant a two-paragraph return policy. Ask one covered question and one about an absent international policy. A useful system answers the first with a supporting passage and explicitly says the second is not covered.",
+  "code": [],
+  "mistakes": [
+    "Using temperature zero as a truth guarantee.",
+    "Accepting a citation without checking its supporting text.",
+    "Forcing an answer to every question."
+  ],
+  "exercise": "Write three answerable and three unanswerable questions for one document. Define what a good abstention should say.",
+  "questions": [
+    {
+      "id": "sampling-hallucinations-1",
+      "type": "Conceptual",
+      "question": "Does low temperature guarantee truth?",
+      "answer": "No. It can reduce variation in supported models, but a stable answer can still be factually wrong.",
+      "distractor": "Yes, deterministic output is always factual."
+    },
+    {
+      "id": "sampling-hallucinations-2",
+      "type": "Practical",
+      "question": "What makes a citation useful?",
+      "answer": "The cited passage must be accessible, relevant, and actually support the specific claim being made.",
+      "distractor": "The citation only needs to look like a document title."
+    },
+    {
+      "id": "sampling-hallucinations-3",
+      "type": "Scenario-based",
+      "question": "A policy omits international returns. How should the assistant respond?",
+      "answer": "State that the supplied policy does not answer that question and offer an appropriate escalation route.",
+      "distractor": "Invent a likely international rule."
+    },
+    {
+      "id": "sampling-hallucinations-4",
+      "type": "Interview",
+      "question": "Why test unanswerable questions?",
+      "answer": "They reveal whether the system respects evidence boundaries and abstains instead of filling gaps with plausible text.",
+      "distractor": "They are useful only for measuring typing speed."
+    },
+    {
+      "id": "sampling-hallucinations-5",
+      "type": "Practical",
+      "question": "How should blurry image evidence be handled?",
+      "answer": "Acknowledge uncertainty and request a clearer source or human review when the interpretation affects the result.",
+      "distractor": "Treat visual guesses as verified measurements."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Hugging Face LLM course",
+      "url": "https://huggingface.co/learn/llm-course/chapter1/1"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

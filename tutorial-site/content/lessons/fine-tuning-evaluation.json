@@ -1,0 +1,89 @@
+{
+  "id": "fine-tuning-evaluation",
+  "category": "model-customization",
+  "title": "Evaluating a fine-tuned model",
+  "level": "Advanced",
+  "description": "Compare adaptation with the base model on held-out behavior and operating cost.",
+  "prerequisites": "Model customization, evaluation, and training-data preparation.",
+  "objectives": [
+    "Design a fair base-versus-tuned comparison",
+    "Detect regressions and leakage beyond the target task"
+  ],
+  "explanation": [
+    "A fine-tuned model needs a comparison with the base model and a strong prompt baseline. Use the same evaluation examples and comparable decoding settings. Separate the dataset used to choose training settings from a final held-out test set.",
+    "Measure target quality, output-format validity, unsupported answers, and important capability regressions. Lower training loss can coexist with worse real-world performance. Review errors on rare labels, long inputs, ambiguous requests, and cases outside the training distribution.",
+    "Account for training cost, inference cost, latency, and maintenance. Save the base model version, tokenizer, data version, training configuration, and resulting artifact identifier. Decide release thresholds before looking at the final test results, and keep a rollback path to a known baseline."
+  ],
+  "terms": [
+    {
+      "term": "Overfitting",
+      "definition": "Learning details that improve training results but generalize poorly."
+    },
+    {
+      "term": "Regression",
+      "definition": "A behavior or metric that worsens after a change."
+    },
+    {
+      "term": "Held-out test",
+      "definition": "Examples reserved for a final evaluation rather than model selection."
+    }
+  ],
+  "example": "A tuned support classifier improves common-label accuracy from an invented 88% to 92%, but halves recall on urgent cases. The release decision must consider that failure slice instead of promoting the new model based on the overall average.",
+  "mistakes": [
+    "Comparing tuned and base models on different cases.",
+    "Selecting hyperparameters using the final test set repeatedly.",
+    "Ignoring useful capabilities lost during adaptation."
+  ],
+  "exercise": "Build a comparison table for base, prompted-base, and tuned variants. Define five metrics and three failure slices, choose release gates in advance, and explain when you would keep the baseline despite a higher average score.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "fine-tuning-evaluation-1",
+      "type": "Conceptual",
+      "question": "Is a lower training loss enough to release a tuned model?",
+      "answer": "No. Held-out task performance and regressions determine whether the adaptation is useful.",
+      "distractor": "Yes, training loss measures every real-world behavior."
+    },
+    {
+      "id": "fine-tuning-evaluation-2",
+      "type": "Practical",
+      "question": "What makes a base-versus-tuned comparison fair?",
+      "answer": "The same cases, defined metrics, and comparable inference settings.",
+      "distractor": "Giving the tuned model only its training examples."
+    },
+    {
+      "id": "fine-tuning-evaluation-3",
+      "type": "Scenario-based",
+      "question": "Average accuracy rises but urgent-case recall falls sharply. What should happen?",
+      "answer": "Review the critical slice against release criteria before approving deployment.",
+      "distractor": "Ignore the slice because the average improved."
+    },
+    {
+      "id": "fine-tuning-evaluation-4",
+      "type": "Interview",
+      "question": "Why keep a strong prompt-only baseline?",
+      "answer": "It shows whether training adds value beyond a simpler adaptation.",
+      "distractor": "It prevents the tuned model from producing any errors."
+    },
+    {
+      "id": "fine-tuning-evaluation-5",
+      "type": "Practical",
+      "question": "What should identify a reproducible tuning run?",
+      "answer": "Base model and tokenizer versions, data version, training settings, and the saved artifact.",
+      "distractor": "Only the date the experiment was announced."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Hugging Face: fine-tuning",
+      "url": "https://huggingface.co/docs/transformers/training"
+    },
+    {
+      "title": "scikit-learn: common pitfalls",
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html"
+    }
+  ]
+}

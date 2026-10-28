@@ -1,0 +1,93 @@
+{
+  "id": "python-data",
+  "category": "prerequisites",
+  "order": 1,
+  "title": "Python essentials for working with data",
+  "description": "Use lists, dictionaries, and simple validation to prepare useful examples.",
+  "level": "Beginner",
+  "minutes": 12,
+  "prerequisites": "Basic familiarity with files and a terminal.",
+  "objectives": [
+    "Transform records with Python",
+    "Handle missing values deliberately"
+  ],
+  "explanation": [
+    "A data pipeline is a sequence of small transformations. In Python, a list keeps an ordered collection and a dictionary maps keys to values. A list of dictionaries is a convenient starting point for small datasets, because each record can hold named fields.",
+    "Before computing anything, inspect the shape and meaning of the data. Is a missing score unknown, zero, or invalid? Those meanings are different. Avoid silently turning unknown values into zeros, because that changes the statistics and can teach a model the wrong pattern.",
+    "Keep cleaning rules explicit and preserve the original input. Use small examples to check edge cases before processing a whole dataset. As volume grows, a database or dataframe may be more appropriate, but validation and traceability still matter."
+  ],
+  "terms": [
+    {
+      "term": "Record",
+      "definition": "A collection of fields describing one example."
+    },
+    {
+      "term": "Missing value",
+      "definition": "An absent or unknown measurement."
+    },
+    {
+      "term": "Comprehension",
+      "definition": "A compact expression for constructing a collection."
+    }
+  ],
+  "example": "The Python 3 snippet filters unknown scores before calculating an average. With scores 2 and 4, the result is 3.0. An empty valid list produces None instead of division by zero.",
+  "code": [
+    {
+      "title": "Average only the known scores",
+      "language": "python",
+      "file": "average_scores.py",
+      "run": "python",
+      "expectedOutput": "3.0"
+    }
+  ],
+  "mistakes": [
+    "Using zero for every missing value.",
+    "Mutating the only copy of raw data.",
+    "Dividing by the length of the unfiltered dataset."
+  ],
+  "exercise": "Add a record with score 0 and one with score None. Predict the average, run the snippet locally, and explain why zero must remain.",
+  "questions": [
+    {
+      "id": "python-data-1",
+      "type": "Conceptual",
+      "question": "Why use a dictionary for a record?",
+      "answer": "Named keys make fields explicit, so code can access a score without depending on a fragile numeric position.",
+      "distractor": "A dictionary automatically validates every field."
+    },
+    {
+      "id": "python-data-2",
+      "type": "Practical",
+      "question": "Should a valid zero score be filtered out?",
+      "answer": "No. Zero is a measured value; filter specifically for None when None represents missingness.",
+      "distractor": "Yes, because zero always means missing."
+    },
+    {
+      "id": "python-data-3",
+      "type": "Scenario-based",
+      "question": "What should the average of no valid scores be?",
+      "answer": "Return an explicit missing result or raise a documented error; dividing by zero or inventing an average hides the problem.",
+      "distractor": "Always return the last record."
+    },
+    {
+      "id": "python-data-4",
+      "type": "Interview",
+      "question": "Why preserve raw input data?",
+      "answer": "It lets you reproduce results, audit cleaning decisions, and rerun a corrected transformation without losing information.",
+      "distractor": "It makes every algorithm unbiased."
+    },
+    {
+      "id": "python-data-5",
+      "type": "Practical",
+      "question": "When might lists become insufficient?",
+      "answer": "Large datasets, joins, and concurrent access often call for databases or dataframe tools; use the workload to choose.",
+      "distractor": "Lists cannot hold more than ten records."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Python documentation: data structures",
+      "url": "https://docs.python.org/3/tutorial/datastructures.html"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

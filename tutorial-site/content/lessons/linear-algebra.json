@@ -1,0 +1,93 @@
+{
+  "id": "linear-algebra",
+  "category": "prerequisites",
+  "title": "Linear algebra intuition",
+  "level": "Beginner",
+  "description": "Read vectors, dot products, and matrix shapes in an AI pipeline.",
+  "prerequisites": "Basic arithmetic and Python lists.",
+  "objectives": [
+    "Calculate a small dot product",
+    "Check dimensions before combining arrays"
+  ],
+  "explanation": [
+    "A vector is an ordered collection of numbers. It can represent measurements such as price and quantity, or a learned embedding with many dimensions. A matrix arranges numbers into rows and columns. State what each axis means before performing an operation.",
+    "The dot product multiplies corresponding vector entries and adds the results. For features [2, 3] and weights [4, 5], the result is 23. A linear prediction can add a bias afterward. For a batch with shape n by d and weights of length d, matrix multiplication produces n scores.",
+    "Magnitude and direction describe different properties. Cosine similarity divides a dot product by the product of vector lengths, comparing direction. It is undefined for a zero-length vector. Numerical closeness only becomes meaningful when vectors use a compatible representation; dimensions matching does not prove two embedding models share a coordinate system."
+  ],
+  "terms": [
+    {
+      "term": "Dimension",
+      "definition": "The number of coordinates in a vector or size of an array axis."
+    },
+    {
+      "term": "Dot product",
+      "definition": "Sum of products of corresponding coordinates."
+    },
+    {
+      "term": "Norm",
+      "definition": "A measure of vector magnitude."
+    }
+  ],
+  "example": "A toy score weights two inputs using [4, 5]. The first record [2, 3] scores 23; a second [1, 0] scores 4. These invented weights illustrate shape and arithmetic, not a trained or validated prediction model.",
+  "mistakes": [
+    "Multiplying incompatible shapes.",
+    "Comparing embeddings from unrelated models.",
+    "Computing cosine similarity without handling zero vectors."
+  ],
+  "exercise": "Run dot_product.py. Change the features and calculate the score by hand. Add a third feature without changing the weights and observe the validation error. Explain which axis a batch would add.",
+  "code": [
+    {
+      "title": "A validated dot product",
+      "language": "python",
+      "file": "dot_product.py",
+      "run": "python",
+      "expectedOutput": "score=23"
+    }
+  ],
+  "order": 5,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "questions": [
+    {
+      "id": "linear-algebra-1",
+      "type": "Conceptual",
+      "question": "What does a vector dimension count?",
+      "answer": "The number of coordinates in the representation.",
+      "distractor": "The number of models trained on the data."
+    },
+    {
+      "id": "linear-algebra-2",
+      "type": "Practical",
+      "question": "What is the dot product of [2, 3] and [4, 5]?",
+      "answer": "23, from 2 × 4 plus 3 × 5.",
+      "distractor": "14, from adding all four numbers."
+    },
+    {
+      "id": "linear-algebra-3",
+      "type": "Scenario-based",
+      "question": "Can equal-length embeddings from different models be mixed safely?",
+      "answer": "Not automatically; their coordinates can represent different learned spaces.",
+      "distractor": "Yes, equal dimensions guarantee identical meaning."
+    },
+    {
+      "id": "linear-algebra-4",
+      "type": "Interview",
+      "question": "How does cosine similarity differ from a raw dot product?",
+      "answer": "It normalizes by vector magnitudes to compare direction.",
+      "distractor": "It ignores all coordinates except the largest."
+    },
+    {
+      "id": "linear-algebra-5",
+      "type": "Practical",
+      "question": "What should happen when cosine similarity receives a zero vector?",
+      "answer": "Handle it explicitly because division by a zero norm is undefined.",
+      "distractor": "Return perfect similarity to every vector."
+    }
+  ],
+  "sources": [
+    {
+      "title": "NumPy: dot product",
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.dot.html"
+    }
+  ]
+}

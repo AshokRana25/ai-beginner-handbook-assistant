@@ -1,0 +1,89 @@
+{
+  "id": "inference-serving",
+  "category": "generative-ai",
+  "title": "Inference: latency, batching and serving",
+  "level": "Intermediate",
+  "description": "Balance response time, throughput, and memory in a serving system.",
+  "prerequisites": "LLM basics and API basics.",
+  "objectives": [
+    "Separate first-token and total latency",
+    "Explain the tradeoff between batching and interactive response time"
+  ],
+  "explanation": [
+    "Inference includes more than generating tokens. A request can wait in a queue, load model weights, process the input, and then generate output. Time to first token measures the initial wait; total latency measures completion. Throughput counts completed work per unit time.",
+    "Batching combines work to use hardware efficiently, but waiting to assemble a batch can delay individual requests. Longer contexts, more generated tokens, and concurrent requests also consume memory. A warm model avoids loading overhead at the cost of keeping resources occupied.",
+    "Measure under the expected workload instead of extrapolating from one short prompt. Include bursts, cancellations, timeouts, and long requests. Bound queues, apply backpressure, and separate interactive requests from offline jobs where useful. Record quality alongside speed when comparing quantization or smaller models."
+  ],
+  "terms": [
+    {
+      "term": "Throughput",
+      "definition": "Work completed per unit time."
+    },
+    {
+      "term": "Time to first token",
+      "definition": "Time from starting a request until the first generated token arrives."
+    },
+    {
+      "term": "Backpressure",
+      "definition": "Limiting incoming work when processing capacity is occupied."
+    }
+  ],
+  "example": "An invented service finishes ten queued requests per second but makes a user wait eight seconds before seeing text. Adding workers might help, but first split queue time from generation time and check whether the workload fits memory.",
+  "mistakes": [
+    "Reporting only tokens per second.",
+    "Increasing concurrency without measuring memory.",
+    "Treating a warm local benchmark as a cold-start production result."
+  ],
+  "exercise": "Design a load-test table with concurrency 1, 4, and 8; short and long prompts; first-token latency; total latency; failure rate; and memory. State a queue limit and what users see when capacity is exhausted.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "inference-serving-1",
+      "type": "Conceptual",
+      "question": "Can high throughput coexist with poor interactive latency?",
+      "answer": "Yes. A system can finish much work while each request waits in a queue.",
+      "distractor": "No, throughput and latency are the same metric."
+    },
+    {
+      "id": "inference-serving-2",
+      "type": "Practical",
+      "question": "What does a cold-start benchmark include?",
+      "answer": "Initialization or model-loading work that an already warm process may avoid.",
+      "distractor": "Only the final token generation step."
+    },
+    {
+      "id": "inference-serving-3",
+      "type": "Scenario-based",
+      "question": "A concurrency increase causes out-of-memory errors. What should you inspect?",
+      "answer": "Memory per request, context lengths, model residency, and queue limits.",
+      "distractor": "Only the font size of the response."
+    },
+    {
+      "id": "inference-serving-4",
+      "type": "Interview",
+      "question": "Why separate offline batches from interactive requests?",
+      "answer": "Their latency goals differ, and long batch work can delay interactive users.",
+      "distractor": "Batch work always uses no computing resources."
+    },
+    {
+      "id": "inference-serving-5",
+      "type": "Practical",
+      "question": "What should accompany a faster-model benchmark?",
+      "answer": "Task quality and failure measurements under the same workload.",
+      "distractor": "Only the new model name."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Ollama: serving and configuration",
+      "url": "https://docs.ollama.com/faq"
+    },
+    {
+      "title": "Ollama: chat API",
+      "url": "https://docs.ollama.com/api/chat"
+    }
+  ]
+}

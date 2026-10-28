@@ -1,0 +1,73 @@
+name: Tutorial site
+
+on:
+  push:
+    branches: [main]
+    paths: ['tutorial-site/**', '.github/workflows/tutorial-site.yml']
+  pull_request:
+    paths: ['tutorial-site/**', '.github/workflows/tutorial-site.yml']
+  workflow_dispatch:
+    inputs:
+      deploy_pages:
+        description: Deploy the tested tutorial site to configured GitHub Pages
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: tutorial-site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: tutorial-site/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: npm ci
+      - run: npm run content
+      - run: git diff --exit-code -- public/content/curriculum.json
+      - run: npm run check:examples
+      - run: npx playwright install --with-deps chromium
+      - run: npm test -- --workers=2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tutorial-site-build
+          path: tutorial-site/dist
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: tutorial-site-test-results
+          path: tutorial-site/test-results
+          retention-days: 7
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy_pages && github.ref == 'refs/heads/main'
+        with:
+          path: tutorial-site/dist
+
+  deploy:
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy_pages && github.ref == 'refs/heads/main'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: tutorial-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

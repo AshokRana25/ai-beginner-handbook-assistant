@@ -1,0 +1,85 @@
+{
+  "id": "llm-basics",
+  "category": "generative-ai",
+  "order": 1,
+  "title": "How large language models work",
+  "description": "Make sense of tokens, context windows, and next-token prediction.",
+  "level": "Beginner",
+  "minutes": 10,
+  "prerequisites": "What is AI?",
+  "objectives": [
+    "Explain tokens and context budgets",
+    "Distinguish training from generation"
+  ],
+  "explanation": [
+    "A language model estimates likely continuations of a sequence. Text is converted into tokens, which can be words, pieces of words, or other units. During generation, the system repeatedly selects a next token based on the current context. This produces useful language, but likely text is not necessarily true text.",
+    "The context window limits how much tokenized information a model can handle in a request. Instructions, conversation history, retrieved documents, and output allowances all compete for a budget under provider-specific rules. Longer context also creates practical cost and relevance trade-offs.",
+    "Training changes model parameters. Supplying a document in a prompt typically changes the information available for that request, not the model weights. This is why an assistant can discuss a newly supplied document without being retrained, and why you still need a retrieval or storage strategy for future requests."
+  ],
+  "terms": [
+    {
+      "term": "Token",
+      "definition": "A unit of encoded input or output."
+    },
+    {
+      "term": "Context window",
+      "definition": "The supported token capacity for a request under model-specific rules."
+    },
+    {
+      "term": "Parameters",
+      "definition": "Numeric values learned during training."
+    }
+  ],
+  "example": "Imagine a request budget of 8,000 tokens for a hypothetical model. Reserve 1,000 for output and 1,000 for instructions and history, leaving at most 6,000 for documents. Use the actual provider rules for a real model; this number is an exercise, not a product specification.",
+  "code": [],
+  "mistakes": [
+    "Assuming one token equals one word.",
+    "Assuming a long conversation is remembered forever.",
+    "Treating prompt context as permanent training."
+  ],
+  "exercise": "Design a context budget for a document assistant. Include instructions, history, passages, output, and a margin for tokenizer variation.",
+  "questions": [
+    {
+      "id": "llm-basics-1",
+      "type": "Conceptual",
+      "question": "Is one token always one word?",
+      "answer": "No. Token boundaries depend on the tokenizer, language, and content; a word can span several tokens.",
+      "distractor": "Yes, token counts equal word counts."
+    },
+    {
+      "id": "llm-basics-2",
+      "type": "Practical",
+      "question": "Does adding a PDF to a prompt retrain the model?",
+      "answer": "Usually no. It supplies request context; updating model weights is a different process.",
+      "distractor": "Yes, each prompt permanently changes the weights."
+    },
+    {
+      "id": "llm-basics-3",
+      "type": "Scenario-based",
+      "question": "A request exceeds its context limit. What should you do?",
+      "answer": "Reduce or select the relevant input, summarize history carefully, and reserve output capacity according to model rules.",
+      "distractor": "Keep adding documents until the model remembers them."
+    },
+    {
+      "id": "llm-basics-4",
+      "type": "Interview",
+      "question": "Why can next-token prediction produce false statements?",
+      "answer": "A plausible continuation can lack factual support. The generation objective alone does not verify external truth.",
+      "distractor": "The model intentionally lies whenever it is uncertain."
+    },
+    {
+      "id": "llm-basics-5",
+      "type": "Practical",
+      "question": "What should a context budget include?",
+      "answer": "Instructions, relevant history, retrieved material, and output allowance, with the exact accounting checked for the selected model.",
+      "distractor": "Only the user’s latest sentence."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Hugging Face LLM course",
+      "url": "https://huggingface.co/learn/llm-course/chapter1/1"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

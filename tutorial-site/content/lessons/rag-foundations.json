@@ -1,0 +1,85 @@
+{
+  "id": "rag-foundations",
+  "category": "rag",
+  "order": 1,
+  "title": "RAG: give your AI the right context",
+  "description": "Connect a language model to knowledge it can actually reference.",
+  "level": "Intermediate",
+  "minutes": 10,
+  "prerequisites": "LLM basics and embeddings.",
+  "objectives": [
+    "Explain ingestion, retrieval, and generation",
+    "Diagnose retrieval separately from answer quality"
+  ],
+  "explanation": [
+    "Retrieval-augmented generation supplies relevant source material to a model at request time. An ingestion pipeline extracts text, separates it into searchable pieces, and stores those pieces with metadata. At query time, a retriever selects candidates and the application supplies useful evidence to the generator.",
+    "Retrieval quality sets a ceiling on grounded answers. If the correct passage is missing, a carefully written prompt cannot recover it from your private documents. Evaluate whether retrieval finds the required evidence before evaluating whether the generated answer uses it correctly.",
+    "Preserve source titles, locations, dates, and access rules through the pipeline. An answer needs a traceable citation, and retrieval must not expose documents the user cannot access. RAG helps with changing knowledge, but it does not make every answer correct or every document trustworthy."
+  ],
+  "terms": [
+    {
+      "term": "Chunk",
+      "definition": "A searchable portion of a source document."
+    },
+    {
+      "term": "Retriever",
+      "definition": "A component that selects candidate evidence."
+    },
+    {
+      "term": "Reranker",
+      "definition": "A component that reorders retrieved candidates for relevance."
+    }
+  ],
+  "example": "For a benefits assistant, ingest approved policy sections with title, date, and department permissions. Retrieve passages for a question, check access, and ask the model to answer using those passages with citations. If support is absent, return a clear knowledge gap.",
+  "code": [],
+  "mistakes": [
+    "Dropping permissions when indexing documents.",
+    "Scoring only the final answer and ignoring missing evidence.",
+    "Assuming every retrieved passage is authoritative."
+  ],
+  "exercise": "Create a five-document mini knowledge base. Write ten questions and identify the exact supporting paragraph for each before testing retrieval.",
+  "questions": [
+    {
+      "id": "rag-foundations-1",
+      "type": "Conceptual",
+      "question": "Does RAG usually update model weights?",
+      "answer": "No. It normally retrieves external information into request context; changing weights is a separate training process.",
+      "distractor": "Yes, retrieval trains the model on every document."
+    },
+    {
+      "id": "rag-foundations-2",
+      "type": "Practical",
+      "question": "What metadata should survive ingestion?",
+      "answer": "Source identity, location, freshness, and access controls should remain available for citations, updates, and authorization.",
+      "distractor": "Only the raw text; metadata has no use."
+    },
+    {
+      "id": "rag-foundations-3",
+      "type": "Scenario-based",
+      "question": "The answer is wrong because the right paragraph was not retrieved. What should you fix first?",
+      "answer": "Inspect ingestion, query handling, and retrieval recall before changing the generation prompt.",
+      "distractor": "Only increase the output length."
+    },
+    {
+      "id": "rag-foundations-4",
+      "type": "Interview",
+      "question": "Why evaluate retrieval separately?",
+      "answer": "It distinguishes evidence-selection failures from generation failures, making improvements more targeted and measurable.",
+      "distractor": "It proves generation evaluation is unnecessary."
+    },
+    {
+      "id": "rag-foundations-5",
+      "type": "Practical",
+      "question": "Can a user retrieve a restricted policy just because it is indexed?",
+      "answer": "No. Enforce document access using the user’s identity before restricted content reaches the model or response.",
+      "distractor": "Yes, indexing makes all documents public."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Microsoft: retrieval-augmented generation",
+      "url": "https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

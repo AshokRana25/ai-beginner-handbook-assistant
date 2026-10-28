@@ -1,0 +1,85 @@
+{
+  "id": "ai-glossary",
+  "category": "ai-fundamentals",
+  "title": "A glossary of AI terminology",
+  "level": "Beginner",
+  "description": "Connect the vocabulary of data, models, training, and inference.",
+  "prerequisites": "What is AI?",
+  "objectives": [
+    "Distinguish data, parameters, and prompts",
+    "Explain training and inference with one example"
+  ],
+  "explanation": [
+    "A dataset contains examples. A feature describes an input; a label records the target in supervised learning. A model uses learned parameters to map inputs to outputs. Training adjusts those parameters, while inference applies the trained model to new inputs.",
+    "Generative applications add another vocabulary layer. A token is a unit processed by a model, and a prompt is input supplied for a particular request. An embedding represents an item as numbers useful for comparison. A context window limits how much information a request can contain.",
+    "Keep quality terms precise. A benchmark is a defined test collection; an evaluation is the process of measuring behavior. A hallucination is unsupported generated content, not simply any disliked answer. Retrieval supplies external information at request time; it does not itself update model weights."
+  ],
+  "terms": [
+    {
+      "term": "Parameter",
+      "definition": "A value adjusted during model training."
+    },
+    {
+      "term": "Inference",
+      "definition": "Applying a trained model to an input."
+    },
+    {
+      "term": "Embedding",
+      "definition": "A numerical representation used for tasks such as similarity search."
+    }
+  ],
+  "example": "For a fictional support classifier, message text is input and billing is a label. Training learns from labeled messages. Classifying a new message is inference. Adding an instruction to return JSON changes the prompt, not automatically the learned parameters.",
+  "mistakes": [
+    "Using token and word as exact synonyms.",
+    "Calling every prompt edit fine-tuning.",
+    "Treating a benchmark score as a guarantee for a different task."
+  ],
+  "exercise": "Draw a five-box diagram from raw examples to training, saved model, new request, and output. Label where parameters change and where retrieved context could be added. Explain the diagram to someone unfamiliar with AI.",
+  "order": 4,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "ai-glossary-1",
+      "type": "Conceptual",
+      "question": "Does editing a prompt necessarily retrain a model?",
+      "answer": "No. A prompt changes request context; training changes learned parameters.",
+      "distractor": "Yes, every request permanently updates the weights."
+    },
+    {
+      "id": "ai-glossary-2",
+      "type": "Practical",
+      "question": "Which item is a label in a spam dataset?",
+      "answer": "The expected spam or not-spam category associated with a message.",
+      "distractor": "The font used to display the message."
+    },
+    {
+      "id": "ai-glossary-3",
+      "type": "Scenario-based",
+      "question": "A chatbot retrieves a policy. Has it fine-tuned itself?",
+      "answer": "No. Retrieval adds context for the request without itself changing model weights.",
+      "distractor": "Yes, retrieving any document is weight training."
+    },
+    {
+      "id": "ai-glossary-4",
+      "type": "Interview",
+      "question": "How do training and inference differ?",
+      "answer": "Training adjusts parameters using examples; inference uses parameters to produce an output.",
+      "distractor": "Inference always requires labeled examples and changes every weight."
+    },
+    {
+      "id": "ai-glossary-5",
+      "type": "Practical",
+      "question": "Can a token count be replaced with a word count?",
+      "answer": "No. Tokenization varies, so use the chosen model tokenizer or reported usage.",
+      "distractor": "Yes, every language has exactly one token per word."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Google: machine learning glossary",
+      "url": "https://developers.google.com/machine-learning/glossary"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "stakeholder-communication",
+  "category": "ai-product-and-project-management",
+  "title": "Stakeholder communication workshop",
+  "level": "Beginner",
+  "description": "Explain evidence, uncertainty, and the decision needed from each audience.",
+  "prerequisites": "Use-case discovery and AI delivery foundations.",
+  "objectives": [
+    "Distinguish observed results from forecasts",
+    "Write a clear decision request supported by evidence"
+  ],
+  "explanation": [
+    "Start with the stakeholder decision. An executive may need to choose whether to fund a pilot; an operator needs a failure and recovery procedure; a user needs to know when an answer can be trusted. Keep the factual evidence consistent while changing the level of detail.",
+    "Separate observations, estimates, and assumptions. State dataset size, baseline, evaluation conditions, and known gaps with a result. Use examples of both success and failure. Explain what changed in the workflow and who reviews the output, rather than describing capability only through model names.",
+    "Finish a working update with the decision needed, accountable owner, and next evidence milestone. Avoid treating a pilot result as a production guarantee. Maintain an accessible limitations and incident communication plan so people know how to raise concerns after the initial presentation."
+  ],
+  "terms": [
+    {
+      "term": "Assumption",
+      "definition": "A condition treated as true until tested or otherwise established."
+    },
+    {
+      "term": "Evidence milestone",
+      "definition": "A planned point at which a specific uncertainty will be reduced."
+    },
+    {
+      "term": "Decision request",
+      "definition": "A clear statement of the choice, owner, and supporting information."
+    }
+  ],
+  "example": "A fictional pilot answered 42 of 50 questions correctly on approved documents, versus 35 for the baseline. The update names eight failures, review time, and untested languages. It requests a limited second pilot rather than claiming company-wide readiness.",
+  "mistakes": [
+    "Presenting a forecast as an observed result.",
+    "Hiding failed cases behind a single percentage.",
+    "Requesting approval without stating the exact scope."
+  ],
+  "exercise": "Write three 100-word updates about the same invented pilot for an executive, an operator, and an end user. Keep results identical, tailor detail, name limitations, and state a concrete decision or action.",
+  "order": 4,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "stakeholder-communication-1",
+      "type": "Conceptual",
+      "question": "What should determine the detail level of a stakeholder update?",
+      "answer": "The audience decision and responsibilities, while preserving the same underlying evidence.",
+      "distractor": "Changing the facts to fit what the audience wants to hear."
+    },
+    {
+      "id": "stakeholder-communication-2",
+      "type": "Practical",
+      "question": "What context belongs with a pilot accuracy percentage?",
+      "answer": "Sample size, baseline, test conditions, and important untested or failing cases.",
+      "distractor": "Only a large green percentage."
+    },
+    {
+      "id": "stakeholder-communication-3",
+      "type": "Scenario-based",
+      "question": "A pilot tested one language. What can be claimed about other languages?",
+      "answer": "Their performance is unverified until evaluated appropriately.",
+      "distractor": "The same score applies to all languages automatically."
+    },
+    {
+      "id": "stakeholder-communication-4",
+      "type": "Interview",
+      "question": "How does a decision request differ from a general progress update?",
+      "answer": "It names the specific choice, scope, owner, evidence, and next step.",
+      "distractor": "It avoids stating what anyone needs to decide."
+    },
+    {
+      "id": "stakeholder-communication-5",
+      "type": "Practical",
+      "question": "Why include failure examples in a pilot review?",
+      "answer": "They help stakeholders understand limits, consequences, and remaining work.",
+      "distractor": "They prove all future deployments must fail."
+    }
+  ],
+  "sources": [
+    {
+      "title": "NIST: AI risk management playbook",
+      "url": "https://airc.nist.gov/airmf-resources/playbook/"
+    },
+    {
+      "title": "Google: machine learning problem framing",
+      "url": "https://developers.google.com/machine-learning/problem-framing"
+    }
+  ]
+}

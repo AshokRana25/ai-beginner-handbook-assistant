@@ -1,0 +1,93 @@
+{
+  "id": "api-costs",
+  "category": "ai-application-development",
+  "title": "Managing model API costs",
+  "level": "Intermediate",
+  "description": "Estimate total workflow cost and enforce useful spending limits.",
+  "prerequisites": "API basics and LLM tokens.",
+  "objectives": [
+    "Calculate a request-cost estimate",
+    "Track costs per useful outcome rather than per successful HTTP response"
+  ],
+  "explanation": [
+    "A text-request estimate combines input tokens times the input rate and output tokens times the output rate. Providers may bill cached input, images, audio, tools, or storage differently. Read the actual billing terms for the chosen service; the numbers in this lesson are fictional arithmetic examples.",
+    "Include the whole workflow. Retries, retrieval, embeddings, evaluator calls, and agent loops add cost. Divide total cost by accepted outcomes to see whether a cheap model creates expensive rework. Record usage returned by the provider and reconcile estimates against billed totals.",
+    "Set limits per request and per user or workload, with a clear behavior when a limit is reached. Reduce unnecessary context, cap output, cache only where permissions and freshness allow, and compare model routing on a fixed evaluation set. Cost savings that create unacceptable errors do not meet the task."
+  ],
+  "terms": [
+    {
+      "term": "Unit cost",
+      "definition": "Cost per defined unit of work or accepted outcome."
+    },
+    {
+      "term": "Budget cap",
+      "definition": "An enforced upper bound on permitted spending or resource use."
+    },
+    {
+      "term": "Cache hit",
+      "definition": "Reuse of an eligible previous computation."
+    }
+  ],
+  "example": "At fictional rates of 2 currency units per million input tokens and 8 per million output tokens, 1,000 input and 250 output tokens cost 0.004 units. Three attempts cost 0.012 before other services. These are not current vendor prices.",
+  "mistakes": [
+    "Treating fictional example rates as a vendor quote.",
+    "Ignoring retries and review work.",
+    "Sharing cached answers across users with different permissions."
+  ],
+  "exercise": "Run token_cost.mjs. Estimate a 500-task workload with a 10% single-retry rate using its fictional rates. Add a review cost and compare two models using the number of accepted outcomes.",
+  "code": [
+    {
+      "title": "Estimate costs with fictional rates",
+      "language": "javascript",
+      "file": "token_cost.mjs",
+      "run": "node",
+      "expectedOutput": "single=0.004000\nthree-attempts=0.012000"
+    }
+  ],
+  "order": 4,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "questions": [
+    {
+      "id": "api-costs-1",
+      "type": "Conceptual",
+      "question": "Why count cost per accepted outcome?",
+      "answer": "It captures retries and failures that a per-request price hides.",
+      "distractor": "It guarantees the smallest model is always best."
+    },
+    {
+      "id": "api-costs-2",
+      "type": "Practical",
+      "question": "What else can be billed beyond generated text?",
+      "answer": "Depending on the service, embeddings, tools, storage, or other modalities may add charges.",
+      "distractor": "No service can bill anything except output tokens."
+    },
+    {
+      "id": "api-costs-3",
+      "type": "Scenario-based",
+      "question": "A cheaper model needs three attempts per task. What should be compared?",
+      "answer": "Total workflow cost and accepted quality, including retries and review.",
+      "distractor": "Only its advertised input-token rate."
+    },
+    {
+      "id": "api-costs-4",
+      "type": "Interview",
+      "question": "Why enforce budgets in application logic?",
+      "answer": "A model instruction does not reliably control calls, resource use, or billing.",
+      "distractor": "Prompts are legally binding billing caps."
+    },
+    {
+      "id": "api-costs-5",
+      "type": "Practical",
+      "question": "Can an answer cache ignore access permissions?",
+      "answer": "No. Cache eligibility must respect user authorization and data freshness.",
+      "distractor": "Yes, cached text is automatically public."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Ollama: chat API",
+      "url": "https://docs.ollama.com/api/chat"
+    }
+  ]
+}

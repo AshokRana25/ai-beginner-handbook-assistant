@@ -1,0 +1,92 @@
+{
+  "id": "langfuse-lab",
+  "category": "evaluation-and-observability",
+  "title": "Langfuse instrumentation lab",
+  "level": "Intermediate",
+  "description": "Create a trace with nested work and inspect it without sending private content.",
+  "prerequisites": "Evaluation tracing and Python environments.",
+  "objectives": [
+    "Instrument one request with parent and child observations",
+    "Inspect timing, errors, and data captured by telemetry"
+  ],
+  "explanation": [
+    "A trace connects work belonging to one request. Start with a request observation and nest retrieval, model generation, or tool observations beneath it. Use names and version metadata that make comparisons meaningful. Timing without a request relationship makes multi-step failures harder to diagnose.",
+    "The example uses the documented Langfuse Python get_client and start_as_current_observation interfaces. Install a compatible SDK in an isolated environment and configure your own project keys and base URL through environment variables. Run only invented data first, then inspect which attributes reached the project.",
+    "Close observations on both success and failure, and flush short-lived scripts so buffered events can be delivered. Redact or omit sensitive content before export. A tracing outage should not silently corrupt the application result; decide whether to drop telemetry, buffer it, or alert within bounded limits."
+  ],
+  "terms": [
+    {
+      "term": "Trace",
+      "definition": "A connected record of work for one request."
+    },
+    {
+      "term": "Observation",
+      "definition": "An instrumented operation within a trace."
+    },
+    {
+      "term": "Flush",
+      "definition": "Sending buffered telemetry before a process exits."
+    }
+  ],
+  "example": "langfuse_trace.py records a synthetic request and a child lookup returning only a count. It does not call a model. Inspect that the lookup appears under the request and that no secret key or private document is included.",
+  "mistakes": [
+    "Placing tracing secret keys in front-end code.",
+    "Assuming a trace proves the answer is correct.",
+    "Allowing telemetry queues to grow without limits."
+  ],
+  "exercise": "Configure a test Langfuse project with your own environment variables and run the optional sample. Find the parent-child relationship, timestamps, and synthetic output count. Add a deliberate local error and inspect how it is recorded.",
+  "code": [
+    {
+      "title": "Trace a synthetic lookup",
+      "language": "python",
+      "file": "langfuse_trace.py",
+      "note": "Optional integration example. Requires a compatible langfuse SDK and your own LANGFUSE_PUBLIC_KEY, LANGFUSE_SECRET_KEY, and LANGFUSE_BASE_URL. Sends synthetic telemetry; not run by the offline checks."
+    }
+  ],
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "questions": [
+    {
+      "id": "langfuse-lab-1",
+      "type": "Conceptual",
+      "question": "What connects retrieval and generation observations in one request?",
+      "answer": "Their shared trace and parent-child relationships.",
+      "distractor": "Identical timestamps are the only possible link."
+    },
+    {
+      "id": "langfuse-lab-2",
+      "type": "Practical",
+      "question": "Why flush a short-lived tracing script?",
+      "answer": "Buffered telemetry might otherwise remain unsent when the process exits.",
+      "distractor": "Flushing trains the application model."
+    },
+    {
+      "id": "langfuse-lab-3",
+      "type": "Scenario-based",
+      "question": "A trace contains a full private document. What should change?",
+      "answer": "Redact or omit sensitive payloads before export and review retention and access.",
+      "distractor": "Make the tracing project public to ease debugging."
+    },
+    {
+      "id": "langfuse-lab-4",
+      "type": "Interview",
+      "question": "Does successful trace delivery establish answer quality?",
+      "answer": "No. Tracing records execution; evaluation measures the required behavior.",
+      "distractor": "Yes, every recorded output is correct."
+    },
+    {
+      "id": "langfuse-lab-5",
+      "type": "Practical",
+      "question": "Where do Langfuse secret keys belong?",
+      "answer": "In the server or local process environment with appropriate access controls.",
+      "distractor": "In a public browser JavaScript bundle."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Langfuse: start tracing",
+      "url": "https://langfuse.com/docs/observability/get-started"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "ai-delivery",
+  "category": "ai-product-and-project-management",
+  "order": 1,
+  "title": "From AI idea to a measurable MVP",
+  "description": "Scope, deliver, and evaluate an AI product that solves a real problem.",
+  "level": "Beginner",
+  "minutes": 16,
+  "prerequisites": "No coding experience required.",
+  "objectives": [
+    "Define measurable acceptance criteria",
+    "Estimate value after review and operating costs"
+  ],
+  "explanation": [
+    "Start discovery with a user problem and a baseline. Observe the current workflow, its frequency, time cost, and failure consequences. Identify where AI could help and whether the necessary data and permissions exist. A compelling demo is useful evidence of possibility, not proof of product value.",
+    "Scope an MVP around one user group, one task, and a clear boundary. Write acceptance criteria before implementation: which cases must work, when to abstain, what a reviewer sees, and acceptable latency and cost. Deliver in short iterations with representative users and retain an escalation route.",
+    "Value depends on the whole workflow. Time saved generating a draft may be lost checking and correcting it. Estimate benefits after adoption, human review, failures, and operating costs. Assign owners for product outcomes, data, technical operations, and risk. Communicate uncertainty and use measured results to decide whether to expand, revise, or stop."
+  ],
+  "terms": [
+    {
+      "term": "MVP",
+      "definition": "A bounded first product used to test value and feasibility."
+    },
+    {
+      "term": "Acceptance criterion",
+      "definition": "A measurable condition for accepting a feature."
+    },
+    {
+      "term": "ROI",
+      "definition": "Net benefit relative to investment over a specified period."
+    }
+  ],
+  "example": "A team handles 1,000 requests monthly. If a draft assistant saves two minutes per request but adds one minute of review, gross time saved is 1,000 minutes. Convert that time into a realistic benefit and subtract recurring costs before claiming ROI.",
+  "code": [],
+  "mistakes": [
+    "Counting generated drafts instead of completed useful work.",
+    "Using a demo as the only acceptance test.",
+    "Omitting reviewer effort and incident handling from cost."
+  ],
+  "exercise": "Write a one-page MVP brief: user, problem, baseline, scope, exclusions, five acceptance criteria, risks, owners, and a go/no-go date.",
+  "questions": [
+    {
+      "id": "ai-delivery-1",
+      "type": "Conceptual",
+      "question": "What should discovery establish before selecting a model?",
+      "answer": "The user problem, current workflow, measurable baseline, data access, and consequences of failure.",
+      "distractor": "Only which model is most discussed online."
+    },
+    {
+      "id": "ai-delivery-2",
+      "type": "Practical",
+      "question": "What makes an acceptance criterion useful?",
+      "answer": "It is observable and measurable on representative cases, with a threshold and clear responsibility for checking it.",
+      "distractor": "It says the assistant should feel intelligent."
+    },
+    {
+      "id": "ai-delivery-3",
+      "type": "Scenario-based",
+      "question": "Drafting saves two minutes but review takes one. What is the net time saving per request?",
+      "answer": "One minute before other overheads; value calculations must include review rather than counting gross drafting savings.",
+      "distractor": "Three minutes, because both activities create value."
+    },
+    {
+      "id": "ai-delivery-4",
+      "type": "Interview",
+      "question": "How should an AI MVP be scoped?",
+      "answer": "Choose a specific user group and task, define boundaries and fallback behavior, and measure outcomes before expanding.",
+      "distractor": "Automate every workflow at launch."
+    },
+    {
+      "id": "ai-delivery-5",
+      "type": "Practical",
+      "question": "When should a team stop or revise an AI experiment?",
+      "answer": "When measured value, risk, or feasibility fails agreed criteria and there is no justified path to improvement within constraints.",
+      "distractor": "Never; any AI experiment must become a product."
+    }
+  ],
+  "sources": [
+    {
+      "title": "NIST AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

@@ -1,0 +1,89 @@
+{
+  "id": "git-experiments",
+  "category": "prerequisites",
+  "title": "Git and reproducible experiments",
+  "level": "Beginner",
+  "description": "Record enough context to understand and repeat an experiment.",
+  "prerequisites": "Basic terminal use.",
+  "objectives": [
+    "Review and commit a focused change",
+    "Connect a result to code, data, and configuration versions"
+  ],
+  "explanation": [
+    "Git records snapshots of tracked files. The working tree holds your current edits; the staging area selects what goes into the next commit. Use git status and git diff to inspect changes, then stage named files and inspect git diff --cached before committing.",
+    "A commit alone does not reproduce an AI experiment. Also record a data version or content hash, dependency versions, model identifier, configuration, evaluation cases, and random seeds where supported. External services and hardware can introduce variation even with the same seed.",
+    "Keep secrets, private datasets, generated caches, and large model files out of ordinary source commits. An ignore rule prevents accidental addition of untracked files; it does not remove files already tracked or erase history. Store a small experiment manifest beside a measured result so someone else can identify its inputs."
+  ],
+  "terms": [
+    {
+      "term": "Commit",
+      "definition": "A recorded snapshot linked to repository history."
+    },
+    {
+      "term": "Staging area",
+      "definition": "The selected changes prepared for the next commit."
+    },
+    {
+      "term": "Manifest",
+      "definition": "A record of the inputs and settings needed to identify an experiment."
+    }
+  ],
+  "example": "Experiment E12 compares two chunk sizes on the same ten questions. Its manifest records the code commit, document snapshot hash, embedding model version, chunk settings, and metrics. A changed source document becomes a new experiment input even if the code stays unchanged.",
+  "mistakes": [
+    "Committing credentials with experiment settings.",
+    "Assuming a seed controls a remote service.",
+    "Keeping results without identifying the input dataset."
+  ],
+  "exercise": "Create a small local repository with a script and an experiment manifest. Make one change, inspect the staged diff, and commit it. Write what another person would still need to reproduce the output.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "git-experiments-1",
+      "type": "Conceptual",
+      "question": "What does the Git staging area control?",
+      "answer": "It selects the changes included in the next commit.",
+      "distractor": "It automatically backs up every file on the computer."
+    },
+    {
+      "id": "git-experiments-2",
+      "type": "Practical",
+      "question": "Which command reviews changes selected for a commit?",
+      "answer": "git diff --cached shows the staged changes before committing.",
+      "distractor": "git push displays only unstaged changes."
+    },
+    {
+      "id": "git-experiments-3",
+      "type": "Scenario-based",
+      "question": "A model alias changes behind the same name. Is the experiment fully pinned?",
+      "answer": "No. Record a resolved model version or acknowledge that the provider can change it.",
+      "distractor": "Yes, a name always identifies immutable weights."
+    },
+    {
+      "id": "git-experiments-4",
+      "type": "Interview",
+      "question": "Why is a commit insufficient for experiment reproducibility?",
+      "answer": "Data, dependencies, configuration, external models, and environment can also affect results.",
+      "distractor": "Code cannot influence AI experiment results."
+    },
+    {
+      "id": "git-experiments-5",
+      "type": "Practical",
+      "question": "Will adding a tracked secret to .gitignore erase it from history?",
+      "answer": "No. Revoke the credential and follow an appropriate repository cleanup procedure.",
+      "distractor": "Yes, ignore rules rewrite all prior commits."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Git: recording changes",
+      "url": "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository"
+    },
+    {
+      "title": "scikit-learn: common pitfalls",
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html"
+    }
+  ]
+}

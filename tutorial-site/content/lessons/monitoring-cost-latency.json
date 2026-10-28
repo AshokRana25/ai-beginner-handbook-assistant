@@ -1,0 +1,89 @@
+{
+  "id": "monitoring-cost-latency",
+  "category": "evaluation-and-observability",
+  "title": "Monitoring latency, tokens and cost",
+  "level": "Intermediate",
+  "description": "Track user-visible performance and resource usage with actionable alerts.",
+  "prerequisites": "Evaluation tracing and API costs.",
+  "objectives": [
+    "Choose useful latency and usage metrics",
+    "Connect alerts to an owner and an investigation path"
+  ],
+  "explanation": [
+    "Measure total request latency and component durations, including queueing, retrieval, generation, and tools. For streaming, track time to first output separately. Percentiles expose the slow tail that a mean can hide. Define whether failed and cancelled requests are included in each metric.",
+    "Record input and output usage from the provider where available, labeling estimates as estimates. Attach model and application versions without including sensitive prompts. Aggregate by a small set of meaningful dimensions; unbounded request IDs belong in traces, not metric label sets.",
+    "Define a service objective, then alert on sustained user impact rather than every isolated slow request. Combine latency, error rate, cost per accepted task, and quality checks. Each alert needs an owner, a dashboard or trace link, and a first action. A low-token output can still be wrong or unusable."
+  ],
+  "terms": [
+    {
+      "term": "Percentile",
+      "definition": "A value at or below which a stated fraction of observations falls."
+    },
+    {
+      "term": "Cardinality",
+      "definition": "The number of distinct label combinations in telemetry."
+    },
+    {
+      "term": "Service objective",
+      "definition": "A measurable reliability or performance target over a stated window."
+    }
+  ],
+  "example": "An invented support service targets 95% of responses under four seconds over a rolling day. A rise in retrieval latency triggers investigation of the index, while a simultaneous retry increase explains extra usage. Those thresholds are exercise assumptions, not industry guarantees.",
+  "mistakes": [
+    "Reporting latency only for successful requests.",
+    "Adding every full prompt as a metric label.",
+    "Alerting without an owner or response procedure."
+  ],
+  "exercise": "Create a monitoring plan with five metrics, their denominators, aggregation windows, and labels. Define one sustained-impact alert and a three-step investigation. State how you distinguish measured tokens from estimated cost.",
+  "order": 4,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "monitoring-cost-latency-1",
+      "type": "Conceptual",
+      "question": "Why report a high latency percentile as well as the mean?",
+      "answer": "It reveals slower experiences that an average can obscure.",
+      "distractor": "It guarantees all users receive identical latency."
+    },
+    {
+      "id": "monitoring-cost-latency-2",
+      "type": "Practical",
+      "question": "Where should individual request IDs usually be inspected?",
+      "answer": "In traces or logs rather than as unbounded metric labels.",
+      "distractor": "As a new metric name for every request."
+    },
+    {
+      "id": "monitoring-cost-latency-3",
+      "type": "Scenario-based",
+      "question": "Latency improves after failed requests are excluded. What should be reported?",
+      "answer": "The denominator change and failure rate, so the improvement is not misleading.",
+      "distractor": "Only the lower latency number."
+    },
+    {
+      "id": "monitoring-cost-latency-4",
+      "type": "Interview",
+      "question": "What makes an alert actionable?",
+      "answer": "A defined impact, owner, evidence link, and initial response procedure.",
+      "distractor": "A notification with no context or responsible person."
+    },
+    {
+      "id": "monitoring-cost-latency-5",
+      "type": "Practical",
+      "question": "Does reduced token usage prove better application quality?",
+      "answer": "No. Quality and accepted-task outcomes need separate measurement.",
+      "distractor": "Yes, the shortest answer is always the best."
+    }
+  ],
+  "sources": [
+    {
+      "title": "OpenTelemetry: generative AI metrics",
+      "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-metrics/"
+    },
+    {
+      "title": "Ollama: chat API",
+      "url": "https://docs.ollama.com/api/chat"
+    }
+  ]
+}

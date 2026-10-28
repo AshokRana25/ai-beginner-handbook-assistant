@@ -1,0 +1,93 @@
+{
+  "id": "sql-for-ai",
+  "category": "prerequisites",
+  "title": "SQL for AI practitioners",
+  "level": "Beginner",
+  "description": "Select, join, and aggregate records without changing their meaning.",
+  "prerequisites": "Python essentials for working with data.",
+  "objectives": [
+    "Build a parameterized query",
+    "Check row counts and missing values before using a dataset"
+  ],
+  "explanation": [
+    "SQL describes which records you want from tables. SELECT chooses fields, WHERE filters rows, and GROUP BY creates groups for aggregates. Begin by defining what one row represents. A ticket table and a ticket-events table have different granularities, even if both contain ticket IDs.",
+    "A join combines matching rows. If one ticket has four events, joining tickets to events produces four rows for that ticket. Count distinct tickets or aggregate events first when your analysis needs one row per ticket. Use IS NULL to inspect missing values; SQL NULL is not the same as zero.",
+    "Bind user-supplied values through query parameters instead of joining them into SQL text. Parameters protect values; they do not choose safe table names or grant permissions. Keep extraction accounts read-only when possible and document the query, snapshot date, and filters used for a training dataset."
+  ],
+  "terms": [
+    {
+      "term": "Join",
+      "definition": "Combining rows according to matching keys."
+    },
+    {
+      "term": "Aggregation",
+      "definition": "Summarizing multiple rows with operations such as COUNT or AVG."
+    },
+    {
+      "term": "Parameter binding",
+      "definition": "Passing values separately from SQL command text."
+    }
+  ],
+  "example": "The SQLite example groups invented ticket scores by team. The NULL score is excluded from AVG, and a parameter limits the query to one team. Check the result count before interpreting a team average as representative.",
+  "mistakes": [
+    "Counting joined event rows as distinct customers.",
+    "Concatenating a search string into SQL.",
+    "Treating NULL as a measured zero."
+  ],
+  "exercise": "Run sql_summary.py. Add another score and an unknown score to the invented records. Predict AVG and COUNT(score), then compare them with COUNT(*). Explain which count answers each question.",
+  "code": [
+    {
+      "title": "Aggregate invented ticket scores",
+      "language": "python",
+      "file": "sql_summary.py",
+      "run": "python",
+      "expectedOutput": "support: average=4.0, known=2, rows=3"
+    }
+  ],
+  "order": 2,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "questions": [
+    {
+      "id": "sql-for-ai-1",
+      "type": "Conceptual",
+      "question": "Why define table granularity before a join?",
+      "answer": "It tells you whether a join multiplies entities and changes the meaning of later counts.",
+      "distractor": "It guarantees every key occurs only once."
+    },
+    {
+      "id": "sql-for-ai-2",
+      "type": "Practical",
+      "question": "How should a team name enter a SQL query?",
+      "answer": "Bind it as a query parameter rather than interpolating it into SQL text.",
+      "distractor": "Append it directly after the WHERE keyword."
+    },
+    {
+      "id": "sql-for-ai-3",
+      "type": "Scenario-based",
+      "question": "One ticket joins to three events. How many joined rows can result?",
+      "answer": "Three; use a suitable aggregation when you need one record per ticket.",
+      "distractor": "Exactly one because SQL automatically deduplicates entities."
+    },
+    {
+      "id": "sql-for-ai-4",
+      "type": "Interview",
+      "question": "What is the difference between COUNT(*) and COUNT(score)?",
+      "answer": "COUNT(*) counts rows; COUNT(score) counts rows where score is not NULL.",
+      "distractor": "Both always ignore rows containing any NULL field."
+    },
+    {
+      "id": "sql-for-ai-5",
+      "type": "Practical",
+      "question": "Does parameter binding authorize access to a table?",
+      "answer": "No. The database identity still needs appropriate access permissions.",
+      "distractor": "Yes, binding a value grants read access automatically."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Python: sqlite3",
+      "url": "https://docs.python.org/3/library/sqlite3.html"
+    }
+  ]
+}

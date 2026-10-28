@@ -1,0 +1,85 @@
+{
+  "id": "computer-vision",
+  "category": "deep-learning",
+  "title": "Introduction to computer vision",
+  "level": "Intermediate",
+  "description": "Choose an image task and build an evaluation that reflects real use.",
+  "prerequisites": "Neural networks and model evaluation.",
+  "objectives": [
+    "Distinguish classification, detection, and segmentation",
+    "Design a transfer-learning baseline without image leakage"
+  ],
+  "explanation": [
+    "Computer vision transforms images into outputs for a task. Classification assigns labels to an image. Detection adds object locations, usually boxes. Segmentation assigns labels to pixels. Choose the output required by the user before selecting a model or collecting annotations.",
+    "Transfer learning starts with a model trained elsewhere. You can freeze a feature extractor and train a new head, or fine-tune selected layers. Keep resize, channel order, and normalization consistent with the chosen model. Apply random augmentation to training images, while evaluation preprocessing should be repeatable.",
+    "Split by the source of correlated images. Adjacent video frames, repeated photos of the same object, or one camera session can leak across a random split. Evaluate lighting, viewpoint, background, and device differences. A model can exploit a label watermark instead of learning the intended object."
+  ],
+  "terms": [
+    {
+      "term": "Detection",
+      "definition": "Predicting object categories and locations."
+    },
+    {
+      "term": "Segmentation",
+      "definition": "Assigning a category to individual pixels."
+    },
+    {
+      "term": "Transfer learning",
+      "definition": "Adapting representations learned from another training task."
+    }
+  ],
+  "example": "A fictional packaging inspection project needs the location of torn labels, so image-level classification alone is insufficient. Keep all photos of a package in one partition and include a separate lighting setup in the evaluation.",
+  "mistakes": [
+    "Splitting neighboring video frames randomly.",
+    "Changing image normalization between training and inference.",
+    "Treating a confidence score as a calibrated probability without checking."
+  ],
+  "exercise": "Define an inspection task with five invented image descriptions. Choose the annotation type, group-based split, two realistic augmentations, and a failure review plan. Explain what image-level accuracy would miss.",
+  "order": 2,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "computer-vision-1",
+      "type": "Conceptual",
+      "question": "Which output distinguishes detection from image classification?",
+      "answer": "Detection includes object locations as well as category predictions.",
+      "distractor": "Detection only reports the file size."
+    },
+    {
+      "id": "computer-vision-2",
+      "type": "Practical",
+      "question": "What should match a pretrained vision model at inference?",
+      "answer": "The expected input channels, size handling, and normalization.",
+      "distractor": "Any arbitrary preprocessing because pretrained models are invariant to it."
+    },
+    {
+      "id": "computer-vision-3",
+      "type": "Scenario-based",
+      "question": "Why keep photos of one physical object in one data split?",
+      "answer": "Closely related images can otherwise make evaluation unrealistically easy.",
+      "distractor": "Objects cannot be photographed more than once."
+    },
+    {
+      "id": "computer-vision-4",
+      "type": "Interview",
+      "question": "How does a frozen feature extractor differ from full fine-tuning?",
+      "answer": "Its parameters stay fixed while a task-specific head can be trained.",
+      "distractor": "It retrains every parameter from random values."
+    },
+    {
+      "id": "computer-vision-5",
+      "type": "Practical",
+      "question": "What is a useful robustness check for a camera classifier?",
+      "answer": "Evaluate different lighting and backgrounds representative of deployment.",
+      "distractor": "Only repeat the same image many times."
+    }
+  ],
+  "sources": [
+    {
+      "title": "PyTorch: transfer learning for computer vision",
+      "url": "https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial.html"
+    }
+  ]
+}

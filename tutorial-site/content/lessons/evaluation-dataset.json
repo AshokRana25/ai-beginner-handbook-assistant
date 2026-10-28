@@ -1,0 +1,89 @@
+{
+  "id": "evaluation-dataset",
+  "category": "evaluation-and-observability",
+  "title": "Building an evaluation dataset",
+  "level": "Intermediate",
+  "description": "Construct a repeatable set of cases that represents decisions and failures.",
+  "prerequisites": "Model evaluation and evaluation tracing.",
+  "objectives": [
+    "Turn user tasks into scored cases",
+    "Control leakage, coverage, and evaluator disagreement"
+  ],
+  "explanation": [
+    "An evaluation dataset is a collection of inputs with expectations and scoring rules. Start from important user tasks and failure consequences. Include common cases, boundary cases, missing information, and unsafe requests relevant to the application. Use invented or approved data with provenance.",
+    "A case can have more than one acceptable output. Specify required facts, prohibited claims, allowed format, and expected tool behavior instead of comparing prose character by character. For subjective judgments, write a rubric and calibrate reviewers on shared examples.",
+    "Keep development cases separate from a final holdout. Version both cases and rubrics, deduplicate related examples, and report counts for each slice. An aggregate score can hide a critical failure. When a production issue becomes a regression case, record why it was added so future readers understand the dataset composition."
+  ],
+  "terms": [
+    {
+      "term": "Rubric",
+      "definition": "Explicit criteria used to assign a judgment or score."
+    },
+    {
+      "term": "Slice",
+      "definition": "A meaningful subset of evaluation cases."
+    },
+    {
+      "term": "Holdout contamination",
+      "definition": "Using reserved evaluation information while tuning a system."
+    }
+  ],
+  "example": "An invented assistant has 20 evaluation cases: ten ordinary questions, four missing-evidence cases, three permission boundaries, and three ambiguous requests. Each records expected behavior and acceptable evidence, not just a single preferred sentence.",
+  "mistakes": [
+    "Using only memorable successes from a demo.",
+    "Changing the rubric after seeing a candidate score without documenting it.",
+    "Counting duplicate cases as independent coverage."
+  ],
+  "exercise": "Write ten cases for one practice project. Give every case an ID, input, evidence, expected behavior, scoring rule, slice, and source. Have another person score two outputs and resolve any disagreement before testing a model.",
+  "order": 2,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "evaluation-dataset-1",
+      "type": "Conceptual",
+      "question": "Why can exact text equality be inappropriate for generated answers?",
+      "answer": "Several phrasings may satisfy the same factual and behavioral requirements.",
+      "distractor": "Generated answers can never be evaluated."
+    },
+    {
+      "id": "evaluation-dataset-2",
+      "type": "Practical",
+      "question": "What makes a subjective evaluation more repeatable?",
+      "answer": "A clear rubric with calibration examples and reviewed disagreements.",
+      "distractor": "Removing all written scoring criteria."
+    },
+    {
+      "id": "evaluation-dataset-3",
+      "type": "Scenario-based",
+      "question": "All normal cases pass but permission-boundary cases fail. Is the average sufficient?",
+      "answer": "No. Inspect critical slices and enforce their release requirements.",
+      "distractor": "Yes, enough ordinary cases cancel security failures."
+    },
+    {
+      "id": "evaluation-dataset-4",
+      "type": "Interview",
+      "question": "Why version the evaluation rubric with the dataset?",
+      "answer": "Changing scoring rules can change results even when model behavior is unchanged.",
+      "distractor": "Rubrics have no effect on scores."
+    },
+    {
+      "id": "evaluation-dataset-5",
+      "type": "Practical",
+      "question": "How should a newly observed failure enter the dataset?",
+      "answer": "As a documented regression case with expected behavior and provenance.",
+      "distractor": "As many identical copies to inflate its count."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Langfuse: evaluation overview",
+      "url": "https://langfuse.com/docs/evaluation/overview"
+    },
+    {
+      "title": "Hugging Face: processing datasets",
+      "url": "https://huggingface.co/docs/datasets/process"
+    }
+  ]
+}

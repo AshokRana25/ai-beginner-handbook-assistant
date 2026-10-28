@@ -1,0 +1,101 @@
+{
+  "id": "mcp-introduction",
+  "category": "model-context-protocol",
+  "order": 1,
+  "title": "Model Context Protocol, explained",
+  "description": "Understand hosts, clients, servers, and the capabilities they exchange.",
+  "level": "Intermediate",
+  "minutes": 16,
+  "prerequisites": "APIs and tool calling.",
+  "objectives": [
+    "Map host, client, and server responsibilities",
+    "Distinguish tools, resources, and prompts"
+  ],
+  "explanation": [
+    "Model Context Protocol defines a common way for AI applications to connect with external capabilities. A host application manages the user experience and connections. A client participates in the protocol connection to a server. A server exposes capabilities such as tools or contextual data. MCP is an integration protocol, not a model and not a guarantee of trustworthy content.",
+    "Tools represent callable operations; resources expose contextual data; prompts offer reusable interaction templates. Keep these responsibilities distinct when designing a server. A document source may provide read-only resources, while a ticketing integration may expose a tool to create a ticket.",
+    "MCP has two layers. The data layer uses JSON-RPC 2.0 messages for discovery and primitives such as tools/list and tools/call. The transport layer carries those messages: stdio for a local server process, or Streamable HTTP for remote servers, where MCP recommends OAuth to obtain tokens. A host creates one client per server connection.",
+    "Protocol details change between versions. In version 2026-07-28, each request carries its protocol version and client capabilities in a _meta field, and servers answer a server/discover request. Read the specification for the version you target. Regardless of transport, the host must preserve user control and application authorization. Discovering a tool does not imply permission to execute it."
+  ],
+  "terms": [
+    {
+      "term": "Host",
+      "definition": "The AI application managing user interaction and connections."
+    },
+    {
+      "term": "Client",
+      "definition": "The protocol participant connecting to a server."
+    },
+    {
+      "term": "Server",
+      "definition": "A component exposing MCP capabilities."
+    },
+    {
+      "term": "Transport",
+      "definition": "The channel carrying MCP messages, such as stdio or Streamable HTTP."
+    }
+  ],
+  "example": "In a policy assistant, the host connects through an MCP client to a policy server. The server advertises a search tool and policy resources. The host checks user permissions and presents source material; it does not treat a retrieved policy as an instruction to execute another tool.",
+  "code": [
+    {
+      "title": "A tools/call request (protocol version 2026-07-28)",
+      "language": "json",
+      "file": "mcp_tools_call.json",
+      "note": "Adapted from the official MCP architecture overview for version 2026-07-28. It is a protocol message, not runnable code; SDKs usually build it for you."
+    }
+  ],
+  "mistakes": [
+    "Treating MCP as a replacement for authorization.",
+    "Assuming every server supports every capability.",
+    "Copying transport examples without checking their protocol version."
+  ],
+  "exercise": "Design an inventory server with one read-only tool, one resource, and one prompt template. State what identity and permission checks each needs.",
+  "questions": [
+    {
+      "id": "mcp-introduction-1",
+      "type": "Conceptual",
+      "question": "Is MCP itself a language model?",
+      "answer": "No. It is a protocol for connecting AI applications to external capabilities and context.",
+      "distractor": "Yes, it is a model that trains on connected databases."
+    },
+    {
+      "id": "mcp-introduction-2",
+      "type": "Practical",
+      "question": "What is the host responsible for?",
+      "answer": "The host manages the application experience and connections, including how users control access and actions.",
+      "distractor": "The host must blindly execute every discovered tool."
+    },
+    {
+      "id": "mcp-introduction-3",
+      "type": "Scenario-based",
+      "question": "Does discovering a ticket-creation tool authorize its use?",
+      "answer": "No. The application still needs to check identity, permissions, arguments, and any required approval.",
+      "distractor": "Yes, discovery grants all users execution rights."
+    },
+    {
+      "id": "mcp-introduction-4",
+      "type": "Interview",
+      "question": "How do resources differ from tools?",
+      "answer": "Resources expose contextual data; tools expose callable operations. The application should preserve that distinction.",
+      "distractor": "Resources are always writable tools."
+    },
+    {
+      "id": "mcp-introduction-5",
+      "type": "Practical",
+      "question": "Why check the protocol version before using a transport example?",
+      "answer": "Connection and transport requirements evolve; an example for another version may be incompatible with your deployment.",
+      "distractor": "Protocol versions only change logos."
+    }
+  ],
+  "sources": [
+    {
+      "title": "MCP architecture overview",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture"
+    },
+    {
+      "title": "MCP specification (latest)",
+      "url": "https://modelcontextprotocol.io/specification/latest"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

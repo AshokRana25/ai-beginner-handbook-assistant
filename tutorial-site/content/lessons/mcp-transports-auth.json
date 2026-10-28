@@ -1,0 +1,89 @@
+{
+  "id": "mcp-transports-auth",
+  "category": "model-context-protocol",
+  "title": "MCP transports and authorization",
+  "level": "Advanced",
+  "description": "Choose local or remote transport and preserve the resource authorization boundary.",
+  "prerequisites": "MCP introduction and API authentication.",
+  "objectives": [
+    "Compare stdio with Streamable HTTP",
+    "Separate token validation from permission to perform a specific action"
+  ],
+  "explanation": [
+    "A transport carries MCP messages without changing the purpose of tools, resources, or prompts. In the 2026-07-28 specification, stdio uses a client-launched subprocess. Streamable HTTP sends messages to an MCP endpoint and carries replies as JSON or request-scoped event streams.",
+    "The HTTP authorization specification defines an OAuth-based flow for restricted remote servers. A client discovers authorization information and obtains a token intended for the resource server. The server must validate that token appropriately. Local stdio credentials instead come from the process environment or other local configuration; do not apply the HTTP OAuth flow blindly.",
+    "Authentication identifies a caller; authorization determines what that caller may do. Apply resource-level permissions after token validation and bind consequential actions to any required approval. Never forward a received bearer token to an unrelated downstream service. Pin the protocol and SDK versions because connection and metadata rules can evolve."
+  ],
+  "terms": [
+    {
+      "term": "Resource server",
+      "definition": "The service protecting an API or capability."
+    },
+    {
+      "term": "Audience",
+      "definition": "The intended recipient or resource for a token."
+    },
+    {
+      "term": "Scope",
+      "definition": "A declared range of access associated with authorization."
+    }
+  ],
+  "example": "A remote policy server accepts a token issued for that server, then restricts searches to the caller permitted teams. The same token is not reused as a credential for an unrelated billing API. A local demonstration uses stdio without publishing an HTTP port.",
+  "mistakes": [
+    "Treating a valid token as permission for every document.",
+    "Forwarding tokens to arbitrary tool-selected destinations.",
+    "Mixing old handshake examples with a different protocol version."
+  ],
+  "exercise": "Compare a local inventory tool and a remote policy server. For each, write transport, credential source, validation point, resource checks, expiry behavior, and error response. Include an expired token and wrong-audience case for the remote design.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "mcp-transports-auth-1",
+      "type": "Conceptual",
+      "question": "Does changing MCP transport change what a tool means?",
+      "answer": "No. Transport carries messages; capability semantics remain part of the protocol and application.",
+      "distractor": "Yes, every HTTP tool becomes a resource."
+    },
+    {
+      "id": "mcp-transports-auth-2",
+      "type": "Practical",
+      "question": "What must a remote service check about an access token?",
+      "answer": "That it is valid for the service and the requested access, including applicable issuer, audience, expiry, and scopes.",
+      "distractor": "Only that the string is nonempty."
+    },
+    {
+      "id": "mcp-transports-auth-3",
+      "type": "Scenario-based",
+      "question": "A valid caller requests another team private document. What should happen?",
+      "answer": "Resource-level authorization must deny access unless the caller has the required permission.",
+      "distractor": "Token validity automatically authorizes every team."
+    },
+    {
+      "id": "mcp-transports-auth-4",
+      "type": "Interview",
+      "question": "Why avoid passing an incoming token to an unrelated API?",
+      "answer": "It can violate audience boundaries and expose a credential to an unintended recipient.",
+      "distractor": "Tokens are public identifiers with no security meaning."
+    },
+    {
+      "id": "mcp-transports-auth-5",
+      "type": "Practical",
+      "question": "Should local stdio automatically use the HTTP OAuth flow?",
+      "answer": "No. The specification distinguishes local process credentials from HTTP authorization.",
+      "distractor": "Yes, every subprocess requires a browser OAuth callback."
+    }
+  ],
+  "sources": [
+    {
+      "title": "MCP: transports, version 2026-07-28",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports"
+    },
+    {
+      "title": "MCP: authorization, version 2026-07-28",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
+    }
+  ]
+}

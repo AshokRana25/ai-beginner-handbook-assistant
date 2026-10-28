@@ -1,0 +1,85 @@
+{
+  "id": "ml-problems",
+  "category": "machine-learning",
+  "order": 1,
+  "title": "Regression, classification & clustering",
+  "description": "Match the learning method to the question your data needs to answer.",
+  "level": "Beginner",
+  "minutes": 14,
+  "prerequisites": "Understand models and training.",
+  "objectives": [
+    "Separate supervised and unsupervised tasks",
+    "Choose a baseline and evaluation metric"
+  ],
+  "explanation": [
+    "Supervised learning uses examples with target answers. Regression predicts a numeric quantity, such as delivery time. Classification predicts a category or a probability over categories, such as whether a transaction needs review. The target must correspond to information you will actually know after the event.",
+    "Unsupervised learning searches for structure without a supplied target for every example. Clustering groups similar items according to a chosen representation and distance. A cluster is not automatically a meaningful business segment; people need to interpret and validate it.",
+    "Choose features available at the time of prediction. A support ticket closure date cannot help predict urgency when the ticket first arrives. Establish a baseline such as the median for regression or the most frequent class for classification, then check whether the model improves a useful metric."
+  ],
+  "terms": [
+    {
+      "term": "Feature",
+      "definition": "An input measurement used by a model."
+    },
+    {
+      "term": "Target",
+      "definition": "The outcome a supervised model learns to predict."
+    },
+    {
+      "term": "Clustering",
+      "definition": "Grouping examples by a chosen similarity notion."
+    }
+  ],
+  "example": "For a delivery service, predicted minutes is regression; late versus on-time is classification; grouping customers by ordering patterns is clustering. Each question requires different labels and a different way to judge success.",
+  "code": [],
+  "mistakes": [
+    "Including future information as a feature.",
+    "Interpreting cluster IDs as ordered scores.",
+    "Choosing accuracy for a highly imbalanced task without inspecting errors."
+  ],
+  "exercise": "Write one regression, one classification, and one clustering question for an online store. List inputs available at decision time.",
+  "questions": [
+    {
+      "id": "ml-problems-1",
+      "type": "Conceptual",
+      "question": "Is predicting a house price classification?",
+      "answer": "Usually no: predicting a numeric price is regression. Predicting a price band would be classification.",
+      "distractor": "Yes, all predictions are classifications."
+    },
+    {
+      "id": "ml-problems-2",
+      "type": "Practical",
+      "question": "What target does clustering require?",
+      "answer": "Clustering does not require a target label per example; it groups inputs using a representation and similarity rule.",
+      "distractor": "It requires the correct cluster label for every example."
+    },
+    {
+      "id": "ml-problems-3",
+      "type": "Scenario-based",
+      "question": "Can ticket closure time predict initial urgency?",
+      "answer": "Not if closure time is unknown when urgency is assigned. That would leak future information into development.",
+      "distractor": "Yes, any correlated column is a valid input."
+    },
+    {
+      "id": "ml-problems-4",
+      "type": "Interview",
+      "question": "Why start with a simple baseline?",
+      "answer": "It reveals whether added complexity produces a meaningful improvement over an inexpensive, understandable alternative.",
+      "distractor": "It guarantees the final model will be linear."
+    },
+    {
+      "id": "ml-problems-5",
+      "type": "Practical",
+      "question": "Are cluster labels 0 and 1 rankings?",
+      "answer": "No. Cluster identifiers are arbitrary names unless an explicit ranking is added and justified.",
+      "distractor": "Yes, cluster 1 is always better than cluster 0."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Google Machine Learning Crash Course",
+      "url": "https://developers.google.com/machine-learning/crash-course"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

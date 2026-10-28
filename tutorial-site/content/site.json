@@ -1,0 +1,417 @@
+{
+  "categories": [
+    {
+      "id": "ai-fundamentals",
+      "name": "AI fundamentals",
+      "icon": "brain",
+      "description": "Understand the ideas behind intelligent systems.",
+      "coverage": "AI capabilities, limitations, responsible AI",
+      "planned": []
+    },
+    {
+      "id": "prerequisites",
+      "name": "Prerequisites",
+      "icon": "terminal",
+      "description": "Build the foundations for hands-on AI.",
+      "coverage": "Python, SQL, APIs, Git, statistics, probability, linear algebra",
+      "planned": []
+    },
+    {
+      "id": "machine-learning",
+      "name": "Machine learning",
+      "icon": "chart-no-axes-combined",
+      "description": "Turn data into useful predictions.",
+      "coverage": "Regression, classification, clustering, feature engineering",
+      "planned": []
+    },
+    {
+      "id": "deep-learning",
+      "name": "Deep learning",
+      "icon": "network",
+      "description": "Explore neural networks and representations.",
+      "coverage": "Neural networks, embeddings, transformers, computer vision, NLP",
+      "planned": []
+    },
+    {
+      "id": "generative-ai",
+      "name": "Generative AI",
+      "icon": "sparkles",
+      "description": "Understand the models changing how we work.",
+      "coverage": "LLMs, tokens, context windows, inference, sampling, multimodal models",
+      "planned": []
+    },
+    {
+      "id": "prompt-engineering",
+      "name": "Prompt engineering",
+      "icon": "message-square",
+      "description": "Turn good questions into reliable results.",
+      "coverage": "Instructions, examples, structured outputs, testing",
+      "planned": []
+    },
+    {
+      "id": "ai-application-development",
+      "name": "AI application development",
+      "icon": "code-xml",
+      "description": "Connect models to real-world applications.",
+      "coverage": "APIs, authentication, streaming, tool calling, errors, costs",
+      "planned": []
+    },
+    {
+      "id": "rag",
+      "name": "RAG",
+      "icon": "database",
+      "description": "Give AI the right knowledge at the right time.",
+      "coverage": "Ingestion, chunking, vectors, retrieval, reranking",
+      "planned": []
+    },
+    {
+      "id": "ai-agents",
+      "name": "AI agents",
+      "icon": "bot",
+      "description": "Build systems that use tools and take action.",
+      "coverage": "Workflows, tools, memory, planning, human approval, multi-agent patterns",
+      "planned": []
+    },
+    {
+      "id": "model-context-protocol",
+      "name": "Model Context Protocol",
+      "icon": "plug",
+      "description": "Connect AI applications to tools and context.",
+      "coverage": "Architecture, clients, servers, tools, resources, prompts, transports, authentication",
+      "planned": []
+    },
+    {
+      "id": "model-customization",
+      "name": "Model customization",
+      "icon": "sliders-horizontal",
+      "description": "Choose how to adapt a model to your task.",
+      "coverage": "Fine-tuning, training data, prompting vs RAG",
+      "planned": []
+    },
+    {
+      "id": "evaluation-and-observability",
+      "name": "Evaluation & observability",
+      "icon": "activity",
+      "description": "Measure quality and understand failures.",
+      "coverage": "Test datasets, tracing, latency, tokens, cost, Langfuse",
+      "planned": []
+    },
+    {
+      "id": "deployment-and-operations",
+      "name": "Deployment & operations",
+      "icon": "cloud",
+      "description": "Take an AI application into production.",
+      "coverage": "Docker, cloud deployment, CI/CD, monitoring, scaling, secrets",
+      "planned": []
+    },
+    {
+      "id": "security-and-governance",
+      "name": "Security & governance",
+      "icon": "shield-check",
+      "description": "Design trustworthy and accountable systems.",
+      "coverage": "Privacy, access control, injection, bias, safety, audits",
+      "planned": []
+    },
+    {
+      "id": "ai-product-and-project-management",
+      "name": "AI product & project management",
+      "icon": "briefcase-business",
+      "description": "Turn an AI idea into measurable value.",
+      "coverage": "Discovery, MVP scope, Agile, acceptance criteria, ROI, stakeholders",
+      "planned": []
+    },
+    {
+      "id": "interview-preparation",
+      "name": "Interview preparation",
+      "icon": "messages-square",
+      "description": "Explain your thinking with confidence.",
+      "coverage": "Conceptual, practical, scenario-based, role-specific questions",
+      "planned": []
+    }
+  ],
+  "paths": [
+    {
+      "id": "beginner",
+      "name": "AI Beginner",
+      "icon": "sprout",
+      "color": "sage",
+      "tag": "START HERE",
+      "description": "Build a solid foundation. No technical background needed.",
+      "audience": "For the curious",
+      "lessons": [
+        "what-is-ai",
+        "everyday-ai",
+        "ai-glossary",
+        "responsible-ai",
+        "llm-basics",
+        "sampling-hallucinations",
+        "better-prompts",
+        "structured-outputs",
+        "ai-delivery",
+        "use-case-discovery",
+        "stakeholder-communication",
+        "mock-interviews"
+      ]
+    },
+    {
+      "id": "developer",
+      "name": "AI Developer",
+      "icon": "code-xml",
+      "color": "blue",
+      "tag": "BUILD WITH AI",
+      "description": "Go from your first prompt to a working AI application.",
+      "audience": "For software builders",
+      "lessons": [
+        "python-data",
+        "sql-for-ai",
+        "git-experiments",
+        "llm-basics",
+        "better-prompts",
+        "structured-outputs",
+        "api-basics",
+        "streaming-responses",
+        "tool-calling",
+        "api-costs",
+        "multimodal-design",
+        "rag-foundations",
+        "chunking-retrieval",
+        "vector-database",
+        "rag-evaluation",
+        "agent-workflows",
+        "agent-memory",
+        "multi-agent-patterns",
+        "mcp-introduction",
+        "first-mcp-server",
+        "mcp-transports-auth",
+        "secure-ai",
+        "adversarial-prompts",
+        "injection-defenses",
+        "evaluation-tracing",
+        "evaluation-dataset",
+        "langfuse-lab",
+        "deploy-ai",
+        "docker-service",
+        "cloud-cicd",
+        "production-secrets",
+        "mock-interviews"
+      ]
+    },
+    {
+      "id": "engineer",
+      "name": "AI Engineer",
+      "icon": "workflow",
+      "color": "peach",
+      "tag": "GO DEEPER",
+      "description": "Design, evaluate, and deploy reliable AI systems.",
+      "audience": "For technical minds",
+      "lessons": [
+        "python-data",
+        "sql-for-ai",
+        "git-experiments",
+        "statistics-probability",
+        "linear-algebra",
+        "ml-problems",
+        "model-evaluation",
+        "feature-engineering",
+        "unsupervised-learning",
+        "neural-networks",
+        "computer-vision",
+        "nlp-introduction",
+        "llm-basics",
+        "sampling-hallucinations",
+        "inference-serving",
+        "multimodal-design",
+        "rag-foundations",
+        "chunking-retrieval",
+        "vector-database",
+        "rag-evaluation",
+        "agent-workflows",
+        "tool-calling",
+        "agent-memory",
+        "multi-agent-patterns",
+        "mcp-introduction",
+        "first-mcp-server",
+        "mcp-transports-auth",
+        "customization",
+        "training-data-lab",
+        "fine-tuning-evaluation",
+        "evaluation-tracing",
+        "evaluation-dataset",
+        "langfuse-lab",
+        "monitoring-cost-latency",
+        "api-costs",
+        "deploy-ai",
+        "docker-service",
+        "cloud-cicd",
+        "production-secrets",
+        "secure-ai",
+        "adversarial-prompts",
+        "injection-defenses",
+        "bias-assessment",
+        "governance-audit",
+        "mock-interviews"
+      ]
+    },
+    {
+      "id": "manager",
+      "name": "AI Product / Project Manager",
+      "icon": "briefcase-business",
+      "color": "lavender",
+      "tag": "LEAD WITH CLARITY",
+      "description": "Turn AI opportunities into outcomes that matter.",
+      "audience": "For product & delivery leaders",
+      "lessons": [
+        "what-is-ai",
+        "everyday-ai",
+        "ai-glossary",
+        "responsible-ai",
+        "llm-basics",
+        "sampling-hallucinations",
+        "better-prompts",
+        "rag-foundations",
+        "agent-workflows",
+        "customization",
+        "model-evaluation",
+        "evaluation-tracing",
+        "evaluation-dataset",
+        "api-costs",
+        "monitoring-cost-latency",
+        "secure-ai",
+        "bias-assessment",
+        "governance-audit",
+        "ai-delivery",
+        "use-case-discovery",
+        "agile-ai-delivery",
+        "stakeholder-communication",
+        "mock-interviews"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "prompt-lab",
+      "title": "Build a prompt testing lab",
+      "category": "Prompt engineering",
+      "level": "Beginner",
+      "time": "1–2 hours",
+      "icon": "flask-conical",
+      "description": "Compare two prompts with a test set you can trust.",
+      "requirements": [
+        "A spreadsheet or text editor",
+        "Access to an AI assistant of your choice",
+        "Six invented support messages without personal data"
+      ],
+      "steps": [
+        "Define billing, technical, and unclear labels and write expected labels for six messages.",
+        "Write a minimal prompt, then a second prompt with examples and an ambiguity rule.",
+        "Run both prompts on the same messages. Record outputs and any formatting failures.",
+        "Compute label accuracy for each version and inspect every disagreement.",
+        "Add two difficult cases and write a short recommendation based on quality and effort."
+      ],
+      "criteria": [
+        "All eight cases have expected and observed outputs.",
+        "The comparison uses the same cases and model settings.",
+        "The recommendation names one limitation and a next experiment."
+      ],
+      "lessons": [
+        "better-prompts",
+        "structured-outputs"
+      ]
+    },
+    {
+      "id": "knowledge-base",
+      "title": "Design a grounded knowledge assistant",
+      "category": "RAG",
+      "level": "Intermediate",
+      "time": "3–4 hours",
+      "icon": "files",
+      "description": "Take a small document collection from questions to cited answers.",
+      "requirements": [
+        "Five short public or invented documents",
+        "A local script or spreadsheet",
+        "A way to inspect retrieved passages"
+      ],
+      "steps": [
+        "Assign source IDs, dates, and access labels to the documents.",
+        "Split at section boundaries and preserve source metadata.",
+        "Create ten answerable questions and three unanswerable questions with known evidence.",
+        "Implement simple keyword retrieval as a baseline and supply top passages to a model manually or through a server.",
+        "Review citations and abstentions; record missing evidence separately from generation errors."
+      ],
+      "criteria": [
+        "Every answer links to a source passage.",
+        "Unanswerable cases are labeled as unsupported.",
+        "Restricted content is excluded before generation.",
+        "A table separates retrieval failures from answer failures."
+      ],
+      "lessons": [
+        "rag-foundations",
+        "chunking-retrieval",
+        "secure-ai"
+      ]
+    },
+    {
+      "id": "delivery-brief",
+      "title": "Plan an AI MVP that earns its place",
+      "category": "AI product & project management",
+      "level": "Beginner",
+      "time": "1–2 hours",
+      "icon": "clipboard-list",
+      "description": "Turn one real workflow into a measurable delivery plan.",
+      "requirements": [
+        "A workflow you understand",
+        "A baseline estimate of time and volume",
+        "A document editor"
+      ],
+      "steps": [
+        "Describe the user and the current task in one paragraph.",
+        "Estimate volume, task time, review time, and failure impact.",
+        "Choose a narrow scope with explicit exclusions.",
+        "Write five acceptance criteria and an evaluation plan.",
+        "Create a risk register and a go/no-go recommendation with named owners."
+      ],
+      "criteria": [
+        "Benefits include human review and operating costs.",
+        "Each acceptance criterion has a measurable threshold.",
+        "Every major risk has an owner and testable mitigation."
+      ],
+      "lessons": [
+        "responsible-ai",
+        "ai-delivery",
+        "evaluation-tracing"
+      ]
+    },
+    {
+      "id": "approval-agent",
+      "title": "Design a support agent with human approval",
+      "category": "AI agents",
+      "level": "Intermediate",
+      "time": "2–3 hours",
+      "icon": "bot",
+      "description": "Specify tools, limits, and an approval step before any code is written.",
+      "requirements": [
+        "A support scenario with invented data",
+        "A diagramming tool or paper",
+        "The agent workflows and security lessons"
+      ],
+      "steps": [
+        "List every tool the agent could use and mark each one read-only or consequential.",
+        "Write the input schema and permission check for each tool.",
+        "Draw the loop with a step budget, a timeout, and a stop condition.",
+        "Design the approval screen: recipient, exact action, evidence, approve and reject.",
+        "Write five test cases, including a retrieved document that contains an injected instruction."
+      ],
+      "criteria": [
+        "No consequential tool can run without an approval step.",
+        "Every tool has a documented permission check outside the model.",
+        "The injection test case has a defined, blocked outcome.",
+        "The design names what memory is stored and when it is deleted."
+      ],
+      "lessons": [
+        "agent-workflows",
+        "secure-ai",
+        "mcp-introduction"
+      ]
+    }
+  ]
+}

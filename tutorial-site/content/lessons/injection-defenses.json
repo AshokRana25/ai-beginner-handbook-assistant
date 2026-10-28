@@ -1,0 +1,89 @@
+{
+  "id": "injection-defenses",
+  "category": "prompt-engineering",
+  "title": "Prompt injection defenses in depth",
+  "level": "Advanced",
+  "description": "Keep untrusted content from gaining authority over data and actions.",
+  "prerequisites": "Adversarial prompt testing and secure AI applications.",
+  "objectives": [
+    "Identify trust boundaries in a retrieval or tool workflow",
+    "Combine prompt separation with enforceable application controls"
+  ],
+  "explanation": [
+    "Prompt injection tries to make content supplied for one purpose act like an instruction with greater authority. It can arrive in a user message, retrieved page, tool result, image, or remembered note. Label provenance and keep external content separate from trusted application instructions.",
+    "Enforce the most important limits outside the model. Retrieval must respect the signed-in user permissions. Tool execution must validate arguments and resource access. Restrict outbound destinations and expose the smallest useful capability. A prompt asking the model to behave is not an authorization system.",
+    "For a consequential action, show the actual target and effect at an approval boundary and bind approval to those exact arguments. If arguments change, approval must be reconsidered. Test the whole sequence, including memory, retries, logs, and downstream rendering, because an attack can exploit more than the final response."
+  ],
+  "terms": [
+    {
+      "term": "Trust boundary",
+      "definition": "A point where data or control crosses between different authority levels."
+    },
+    {
+      "term": "Least privilege",
+      "definition": "Granting only the capabilities needed for a task."
+    },
+    {
+      "term": "Provenance",
+      "definition": "Information about where content came from and how it was obtained."
+    }
+  ],
+  "example": "A retrieved support page asks an assistant to email a customer list to an outside address. The application has only a read-only search tool and no outbound email capability. A separate approved export flow validates audience and destination independently of generated text.",
+  "mistakes": [
+    "Granting a broad shell tool to solve a narrow lookup task.",
+    "Relying on delimiters as a complete defense.",
+    "Reusing approval after the action recipient changes."
+  ],
+  "exercise": "Draw the path from user question to retrieval, model, proposed tool, approval, and execution. Mark every trust boundary. Write one enforceable check and one synthetic attack case for each boundary.",
+  "order": 4,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "injection-defenses-1",
+      "type": "Conceptual",
+      "question": "Can delimiters around retrieved text guarantee injection prevention?",
+      "answer": "No. They help communicate structure, but application controls must enforce critical boundaries.",
+      "distractor": "Yes, any XML tag makes external text trustworthy."
+    },
+    {
+      "id": "injection-defenses-2",
+      "type": "Practical",
+      "question": "Where should document access be checked?",
+      "answer": "In application retrieval and authorization logic using the actual user identity.",
+      "distractor": "Only in the wording of the model prompt."
+    },
+    {
+      "id": "injection-defenses-3",
+      "type": "Scenario-based",
+      "question": "An approved action changes recipient before execution. What is required?",
+      "answer": "Revalidate and obtain approval for the changed action when approval is required.",
+      "distractor": "Keep the old approval because the model selected the recipient."
+    },
+    {
+      "id": "injection-defenses-4",
+      "type": "Interview",
+      "question": "Why does a narrow read-only tool reduce risk?",
+      "answer": "It limits the effects possible even if generated instructions are manipulated.",
+      "distractor": "It proves that retrieved content contains no malicious text."
+    },
+    {
+      "id": "injection-defenses-5",
+      "type": "Practical",
+      "question": "Should a remembered note be trusted like application policy?",
+      "answer": "No. Preserve its source and treat unverified memory as potentially untrusted.",
+      "distractor": "Yes, storing text makes it authoritative."
+    }
+  ],
+  "sources": [
+    {
+      "title": "OWASP: prompt injection prevention",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html"
+    },
+    {
+      "title": "MCP: authorization, version 2026-07-28",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
+    }
+  ]
+}

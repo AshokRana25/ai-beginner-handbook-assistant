@@ -1,0 +1,85 @@
+{
+  "id": "multimodal-design",
+  "category": "generative-ai",
+  "title": "Multimodal application design",
+  "level": "Intermediate",
+  "description": "Combine images and text while preserving evidence and uncertainty.",
+  "prerequisites": "LLM basics and model evaluation.",
+  "objectives": [
+    "Choose a task-appropriate modality",
+    "Design checks for missing or unreadable evidence"
+  ],
+  "explanation": [
+    "A multimodal application processes more than one kind of input, such as text and images. Decide what each modality contributes. A product photo can show damage; a written description can supply context. Neither automatically establishes quantities, identity, or facts outside the visible evidence.",
+    "Check the selected model and API for supported modalities, file encodings, size limits, and output structure. Validate uploads before forwarding them. Keep the original evidence linked to extracted fields so a user can inspect the region or passage supporting an answer.",
+    "Evaluate failures specific to the inputs: blurry text, rotated images, missing pages, conflicting captions, or inaccessible audio. Give the system a way to report unknown rather than invent an observation. Treat instructions embedded inside images or documents as untrusted content, just as you would retrieved text."
+  ],
+  "terms": [
+    {
+      "term": "Modality",
+      "definition": "A type of input or output, such as image, audio, or text."
+    },
+    {
+      "term": "OCR",
+      "definition": "Recognizing characters from an image."
+    },
+    {
+      "term": "Grounding",
+      "definition": "Connecting an output claim to supporting input evidence."
+    }
+  ],
+  "example": "A fictional receipt assistant extracts date, vendor, and total. A blurred total becomes “needs review” with the original crop attached. Arithmetic can check subtotal plus tax, but a consistent sum does not prove the printed numbers were read correctly.",
+  "mistakes": [
+    "Assuming every text model accepts images.",
+    "Inferring hidden facts from a photograph.",
+    "Discarding source images immediately after extraction."
+  ],
+  "exercise": "Describe five receipt inputs: clear, blurred, rotated, missing total, and conflicting text caption. Define expected outputs, review triggers, and which evidence a reviewer needs. Include one unknown result.",
+  "order": 4,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "multimodal-design-1",
+      "type": "Conceptual",
+      "question": "Does a vision-capable model automatically support audio?",
+      "answer": "No. Check supported modalities for the selected model and endpoint.",
+      "distractor": "Yes, all multimodal models support every file type."
+    },
+    {
+      "id": "multimodal-design-2",
+      "type": "Practical",
+      "question": "What should accompany an extracted invoice total?",
+      "answer": "A reference to the supporting source region and a review state when unclear.",
+      "distractor": "A claim that visual extraction can never fail."
+    },
+    {
+      "id": "multimodal-design-3",
+      "type": "Scenario-based",
+      "question": "The amount in an image is unreadable. What should happen?",
+      "answer": "Return an explicit unknown or request clearer evidence instead of inventing a number.",
+      "distractor": "Choose a plausible amount from similar invoices."
+    },
+    {
+      "id": "multimodal-design-4",
+      "type": "Interview",
+      "question": "Why evaluate conflicting image and caption inputs?",
+      "answer": "They reveal how the application handles inconsistent evidence and possible manipulation.",
+      "distractor": "Captions are always more authoritative than images."
+    },
+    {
+      "id": "multimodal-design-5",
+      "type": "Practical",
+      "question": "Is a matching arithmetic checksum proof of correct OCR?",
+      "answer": "No. Multiple misread values can still form a consistent sum.",
+      "distractor": "Yes, arithmetic removes all recognition uncertainty."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Ollama: vision",
+      "url": "https://docs.ollama.com/capabilities/vision"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "id": "streaming-responses",
+  "category": "ai-application-development",
+  "title": "Streaming responses end to end",
+  "level": "Intermediate",
+  "description": "Handle partial bytes, completion, cancellation, and errors correctly.",
+  "prerequisites": "API basics and JavaScript async functions.",
+  "objectives": [
+    "Distinguish transport chunks from application messages",
+    "Design a cancellable streaming UI"
+  ],
+  "explanation": [
+    "Streaming sends pieces of a response as they become available. The server may encode events as server-sent events or newline-delimited JSON. A network chunk is an arbitrary group of bytes: it may end inside a character, a JSON object, or an event delimiter.",
+    "Decode text incrementally and buffer until a complete application record is available. Interpret records according to the documented protocol. In the UI, append text safely, track whether generation is still active, and distinguish explicit completion from a connection that simply closed.",
+    "Propagate cancellation from the browser to your server and upstream request where supported. Apply timeouts, account for backpressure, and clean up readers. If failure occurs after some text arrives, keep it visibly incomplete and offer a deliberate retry; silently appending a new generation can duplicate or contradict content."
+  ],
+  "terms": [
+    {
+      "term": "Chunk",
+      "definition": "A piece delivered by the transport, without guaranteed message boundaries."
+    },
+    {
+      "term": "Framing",
+      "definition": "Rules that identify complete application messages."
+    },
+    {
+      "term": "Cancellation",
+      "definition": "A request to stop ongoing work and release resources."
+    }
+  ],
+  "example": "The runnable parser receives two invented JSON events split across awkward byte boundaries. It buffers them and emits complete text only after parsing each full line. It demonstrates framing locally; a deployed server must also handle authentication, disconnects, and limits.",
+  "mistakes": [
+    "Calling JSON.parse on every network chunk.",
+    "Treating an interrupted connection as successful completion.",
+    "Rendering model output with unrestricted innerHTML."
+  ],
+  "exercise": "Run stream_records.mjs. Change the artificial chunk size to one byte and confirm the output. Design UI states for waiting, streaming, completed, cancelled, and failed after partial output.",
+  "code": [
+    {
+      "title": "Parse fragmented newline-delimited JSON",
+      "language": "javascript",
+      "file": "stream_records.mjs",
+      "run": "node",
+      "expectedOutput": "Hello café"
+    }
+  ],
+  "order": 2,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "questions": [
+    {
+      "id": "streaming-responses-1",
+      "type": "Conceptual",
+      "question": "Is one network chunk guaranteed to contain one JSON record?",
+      "answer": "No. Record boundaries and byte-chunk boundaries are independent.",
+      "distractor": "Yes, HTTP aligns all chunks with JSON objects."
+    },
+    {
+      "id": "streaming-responses-2",
+      "type": "Practical",
+      "question": "How should a partial multibyte character be handled?",
+      "answer": "Use a streaming decoder that preserves incomplete character bytes between reads.",
+      "distractor": "Decode each byte as an independent character."
+    },
+    {
+      "id": "streaming-responses-3",
+      "type": "Scenario-based",
+      "question": "A stream closes without its completion marker. What should the UI show?",
+      "answer": "An incomplete or failed state according to the protocol, preserving any partial text.",
+      "distractor": "An unconditional success message."
+    },
+    {
+      "id": "streaming-responses-4",
+      "type": "Interview",
+      "question": "Why propagate cancellation upstream?",
+      "answer": "It can stop unnecessary generation and release resources instead of only hiding text.",
+      "distractor": "It guarantees previously billed work will be refunded."
+    },
+    {
+      "id": "streaming-responses-5",
+      "type": "Practical",
+      "question": "How can streamed text be inserted safely into a page?",
+      "answer": "Use textContent or safe text nodes unless a controlled renderer sanitizes markup.",
+      "distractor": "Pass every token directly to innerHTML."
+    }
+  ],
+  "sources": [
+    {
+      "title": "MDN: using readable streams",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Streams_API/Using_readable_streams"
+    },
+    {
+      "title": "Ollama: chat API",
+      "url": "https://docs.ollama.com/api/chat"
+    }
+  ]
+}

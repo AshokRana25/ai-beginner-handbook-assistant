@@ -1,0 +1,97 @@
+{
+  "id": "rag-evaluation",
+  "category": "rag",
+  "title": "Evaluating a RAG system",
+  "level": "Intermediate",
+  "description": "Separate evidence-retrieval failures from unsupported answer generation.",
+  "prerequisites": "RAG foundations and model evaluation.",
+  "objectives": [
+    "Build evidence-labeled retrieval cases",
+    "Score citations and abstentions separately from retrieval"
+  ],
+  "explanation": [
+    "Evaluate retrieval and generation separately before scoring the full application. For each test question, identify the relevant source passages and whether the corpus can answer it. Retrieval recall at k measures how many known relevant passages occur in the first k results; ranking also matters when context is limited.",
+    "For generated answers, check whether claims are supported, whether cited sources actually support them, and whether the response addresses the question. A citation that points to a real document can still support the wrong claim. Include contradictory, outdated, and deliberately unanswerable cases.",
+    "Keep a fixed corpus snapshot and query set when comparing chunking or retrieval changes. Inspect per-case disagreements rather than just averaging a score. Combine clear automated checks with human review; a model judge can be inconsistent and should be calibrated against examples with known judgments."
+  ],
+  "terms": [
+    {
+      "term": "Recall at k",
+      "definition": "Fraction of known relevant items retrieved among the first k results."
+    },
+    {
+      "term": "Faithfulness",
+      "definition": "Whether answer claims are supported by supplied evidence."
+    },
+    {
+      "term": "Abstention",
+      "definition": "Explicitly declining to answer when the available evidence is insufficient."
+    }
+  ],
+  "example": "Three known passages answer a policy question. The top five results contain two, so recall at five is 2/3. If the answer invents a deadline absent from those passages, that is an answer-support failure even though retrieval partly succeeded.",
+  "mistakes": [
+    "Measuring only whether an answer sounds helpful.",
+    "Counting any citation as proof of support.",
+    "Testing only questions known to have answers."
+  ],
+  "exercise": "Create five answerable and three unanswerable questions over invented documents. Record supporting passage IDs, retrieved IDs, answer claims, and citation judgments. Run retrieval_metrics.py to check a toy recall calculation.",
+  "code": [
+    {
+      "title": "Recall over known relevant passage IDs",
+      "language": "python",
+      "file": "retrieval_metrics.py",
+      "run": "python",
+      "expectedOutput": "recall@3=0.667"
+    }
+  ],
+  "order": 4,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "questions": [
+    {
+      "id": "rag-evaluation-1",
+      "type": "Conceptual",
+      "question": "What does retrieval recall at k measure?",
+      "answer": "The fraction of known relevant passages found within the first k results.",
+      "distractor": "The fraction of generated sentences containing punctuation."
+    },
+    {
+      "id": "rag-evaluation-2",
+      "type": "Practical",
+      "question": "What belongs in an evidence-labeled RAG test case?",
+      "answer": "The query, corpus snapshot, relevant passage IDs, and whether an answer is supported.",
+      "distractor": "Only a preferred writing style."
+    },
+    {
+      "id": "rag-evaluation-3",
+      "type": "Scenario-based",
+      "question": "A correct document is retrieved but the answer adds an invented date. Which stage failed?",
+      "answer": "Generation or grounding failed even if retrieval found useful evidence.",
+      "distractor": "Retrieval must be perfect whenever an answer is fluent."
+    },
+    {
+      "id": "rag-evaluation-4",
+      "type": "Interview",
+      "question": "Why include questions with no supporting passage in a RAG evaluation?",
+      "answer": "To measure whether the system abstains instead of manufacturing unsupported answers.",
+      "distractor": "To ensure every question receives a confident answer."
+    },
+    {
+      "id": "rag-evaluation-5",
+      "type": "Practical",
+      "question": "Is a real citation URL sufficient evidence of faithfulness?",
+      "answer": "No. The cited passage must support the associated claim.",
+      "distractor": "Yes, any working URL proves the sentence."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Langfuse: evaluation overview",
+      "url": "https://langfuse.com/docs/evaluation/overview"
+    },
+    {
+      "title": "Chroma: query and get",
+      "url": "https://docs.trychroma.com/docs/querying-collections/query-and-get"
+    }
+  ]
+}

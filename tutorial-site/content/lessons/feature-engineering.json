@@ -1,0 +1,89 @@
+{
+  "id": "feature-engineering",
+  "category": "machine-learning",
+  "title": "Feature engineering in practice",
+  "level": "Intermediate",
+  "description": "Create useful inputs while preventing training and evaluation leakage.",
+  "prerequisites": "Machine learning problem types and model evaluation.",
+  "objectives": [
+    "Choose features available at prediction time",
+    "Fit transformations on training data only"
+  ],
+  "explanation": [
+    "Feature engineering turns raw records into inputs that help a model solve a task. Examples include time since a previous event, a count within a past window, and a category encoding. Write down when each input becomes available; an excellent predictor that appears after the decision is leakage.",
+    "Split examples before learning preprocessing statistics. Fit imputation, scaling, vocabulary, and feature selection on the training partition, then apply the fitted transformations to validation and test partitions. A pipeline helps keep transformations attached to the model and inside each cross-validation fold.",
+    "Evaluate additions against a simple baseline. Scaling can help distance-based and regularized models; categorical encoding needs a policy for unseen values. Compare metrics and error slices after each change. Keep feature definitions shared between training and serving so the same record receives the same interpretation."
+  ],
+  "terms": [
+    {
+      "term": "Leakage",
+      "definition": "Using information that would not legitimately be available for the prediction."
+    },
+    {
+      "term": "Imputation",
+      "definition": "Filling missing inputs using an explicit rule."
+    },
+    {
+      "term": "Training-serving skew",
+      "definition": "A mismatch between feature processing during training and use."
+    }
+  ],
+  "example": "To predict whether a support request will breach a deadline, use its age at scoring time and queue size. Do not use the final resolution timestamp. Fit median replacement values on historical training records, then apply those fixed values to newer requests.",
+  "mistakes": [
+    "Fitting a scaler on the full dataset before splitting.",
+    "Adding post-outcome fields as predictors.",
+    "Silently assigning an unseen category to an unrelated known category."
+  ],
+  "exercise": "List six possible features for the support example. Mark when each becomes available. Reject leaked features, specify missing and unknown-category rules, and design a time-based comparison with the baseline.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "feature-engineering-1",
+      "type": "Conceptual",
+      "question": "Why can resolution time leak information into a breach predictor?",
+      "answer": "It is known after the outcome, while the model must predict beforehand.",
+      "distractor": "Every timestamp is forbidden in machine learning."
+    },
+    {
+      "id": "feature-engineering-2",
+      "type": "Practical",
+      "question": "Where should a scaler learn its mean and variance?",
+      "answer": "On the training data within each evaluation fold.",
+      "distractor": "On all records including the final test set."
+    },
+    {
+      "id": "feature-engineering-3",
+      "type": "Scenario-based",
+      "question": "A new category appears in production. What is needed?",
+      "answer": "A documented unknown-category policy supported by the fitted transformation.",
+      "distractor": "A new arbitrary numeric meaning on every request."
+    },
+    {
+      "id": "feature-engineering-4",
+      "type": "Interview",
+      "question": "What does a preprocessing pipeline help prevent?",
+      "answer": "Inconsistent transformations and fitting steps outside the intended training split.",
+      "distractor": "All possible dataset bias automatically."
+    },
+    {
+      "id": "feature-engineering-5",
+      "type": "Practical",
+      "question": "How do you know a new feature helps?",
+      "answer": "Compare held-out performance and relevant error slices against the same baseline.",
+      "distractor": "Count how many columns the dataset now has."
+    }
+  ],
+  "sources": [
+    {
+      "title": "scikit-learn: common pitfalls",
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html"
+    },
+    {
+      "title": "scikit-learn: preprocessing",
+      "url": "https://scikit-learn.org/stable/modules/preprocessing.html"
+    }
+  ]
+}

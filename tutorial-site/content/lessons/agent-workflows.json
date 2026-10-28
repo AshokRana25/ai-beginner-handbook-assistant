@@ -1,0 +1,85 @@
+{
+  "id": "agent-workflows",
+  "category": "ai-agents",
+  "order": 1,
+  "title": "AI agents: workflows, tools & guardrails",
+  "description": "Build useful automation with clear boundaries and human control.",
+  "level": "Intermediate",
+  "minutes": 14,
+  "prerequisites": "API basics and prompt engineering.",
+  "objectives": [
+    "Distinguish fixed workflows from agent decisions",
+    "Bound tools, memory, and execution"
+  ],
+  "explanation": [
+    "A workflow follows a defined sequence of steps. An agent lets a model choose some next steps based on observations. Use a fixed workflow when the route is predictable; add model-directed decisions only where flexibility creates measurable value. Every extra decision creates another opportunity for failure.",
+    "Tools expose actions or information through a defined interface. Treat a proposed call as an untrusted request: check arguments and permissions before execution. Separate read-only research from actions such as sending a message or changing a record. Require human approval where the consequence warrants it.",
+    "Memory can preserve useful state, but it can also preserve stale or sensitive information. Define what is stored, for how long, and who may access it. Add a step budget, timeout, and stop condition. Multi-agent patterns multiply communication and coordination costs, so first test whether one controlled workflow is sufficient."
+  ],
+  "terms": [
+    {
+      "term": "Tool",
+      "definition": "An application capability exposed through an interface."
+    },
+    {
+      "term": "State",
+      "definition": "Information carried between execution steps."
+    },
+    {
+      "term": "Stop condition",
+      "definition": "A rule that ends a workflow or agent loop."
+    }
+  ],
+  "example": "A support agent can search articles, draft a reply, and present it to a human. Give search read-only permissions. Keep sending behind a separate approval step that displays the recipient and exact message. Stop after three unsuccessful searches.",
+  "code": [],
+  "mistakes": [
+    "Giving every tool broad credentials.",
+    "Assuming another agent independently verifies facts.",
+    "Keeping memory forever without a deletion policy."
+  ],
+  "exercise": "Draw a support workflow with one model decision. Add an approval boundary, a maximum step count, and an escalation path.",
+  "questions": [
+    {
+      "id": "agent-workflows-1",
+      "type": "Conceptual",
+      "question": "When is a fixed workflow a good choice?",
+      "answer": "When the sequence is predictable and testable, a fixed workflow can be simpler and easier to control than model-directed planning.",
+      "distractor": "Only when no language model is used anywhere."
+    },
+    {
+      "id": "agent-workflows-2",
+      "type": "Practical",
+      "question": "What should a send-message approval show?",
+      "answer": "The exact recipient, message, and relevant consequences so the person approves the concrete action.",
+      "distractor": "Only a generic continue button."
+    },
+    {
+      "id": "agent-workflows-3",
+      "type": "Scenario-based",
+      "question": "An agent keeps repeating failed searches. What prevents runaway cost?",
+      "answer": "Enforce step and time budgets, detect repeated failures, and escalate through a defined stop condition.",
+      "distractor": "Tell the agent to try forever."
+    },
+    {
+      "id": "agent-workflows-4",
+      "type": "Interview",
+      "question": "Does adding a second agent guarantee verification?",
+      "answer": "No. Agents can share assumptions or repeat errors; verification needs independent evidence and explicit checks.",
+      "distractor": "Yes, agreement between two agents proves truth."
+    },
+    {
+      "id": "agent-workflows-5",
+      "type": "Practical",
+      "question": "What policy should agent memory have?",
+      "answer": "Define purpose, access, retention, correction, and deletion so stored state remains useful and appropriately controlled.",
+      "distractor": "Store every interaction permanently by default."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Anthropic: building effective agents",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

@@ -1,0 +1,85 @@
+{
+  "id": "use-case-discovery",
+  "category": "ai-product-and-project-management",
+  "title": "Use-case selection and discovery",
+  "level": "Beginner",
+  "description": "Choose a valuable, measurable problem before committing to an AI solution.",
+  "prerequisites": "What is AI? and AI delivery foundations.",
+  "objectives": [
+    "Write a clear user problem and baseline",
+    "Rank opportunities using value, feasibility, and risk"
+  ],
+  "explanation": [
+    "Discovery starts with the user task and its current cost. Observe the workflow, interview users, and record examples of friction. Separate a desired outcome, such as faster evidence lookup, from a proposed feature, such as a chatbot. Consider a search improvement or process change as a baseline alternative.",
+    "Assess value, data availability, technical feasibility, risk, and the effort of human review. A frequent task may offer large benefits, but poor evidence or costly mistakes can make automation unattractive. Write down assumptions explicitly and identify the cheapest experiment that could disprove them.",
+    "Choose a narrow first scope with measurable acceptance criteria and exclusions. Assign a user owner and an operational owner. Decide in advance what result would justify continuation, a pivot, or stopping. A persuasive demonstration answers whether something can look useful; discovery tests whether it helps the actual workflow."
+  ],
+  "terms": [
+    {
+      "term": "Problem statement",
+      "definition": "A description of a user need, context, and desired outcome."
+    },
+    {
+      "term": "Hypothesis",
+      "definition": "A testable assumption about value or feasibility."
+    },
+    {
+      "term": "Go/no-go criterion",
+      "definition": "A predeclared condition for continuing or stopping work."
+    }
+  ],
+  "example": "A fictional team spends ten minutes finding each policy answer. Before building an agent, test whether better document titles and search reduce that to three minutes. If users still need synthesis across documents, compare a cited-answer prototype with that improved search baseline.",
+  "mistakes": [
+    "Choosing a model before understanding the workflow.",
+    "Estimating benefits without review and operating costs.",
+    "Using only enthusiastic volunteers as evidence of broad demand."
+  ],
+  "exercise": "Write a one-page opportunity brief for an invented workflow. Include user, frequency, current time, error impact, baseline alternative, available data, review cost, smallest experiment, and a stop criterion.",
+  "order": 2,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "use-case-discovery-1",
+      "type": "Conceptual",
+      "question": "Why distinguish a user outcome from a proposed AI feature?",
+      "answer": "It keeps alternative solutions open and makes value measurable.",
+      "distractor": "It prevents any prototype from being built."
+    },
+    {
+      "id": "use-case-discovery-2",
+      "type": "Practical",
+      "question": "What belongs in a realistic benefit estimate?",
+      "answer": "Task volume, time saved, review effort, operating cost, and failure impact.",
+      "distractor": "Only the number of generated tokens."
+    },
+    {
+      "id": "use-case-discovery-3",
+      "type": "Scenario-based",
+      "question": "Better search solves most of the problem. What should a product team do?",
+      "answer": "Compare remaining needs and costs before adding a more complex AI workflow.",
+      "distractor": "Add an agent anyway because it was the initial idea."
+    },
+    {
+      "id": "use-case-discovery-4",
+      "type": "Interview",
+      "question": "Why define a stop criterion before an experiment?",
+      "answer": "It reduces the temptation to reinterpret weak results as success.",
+      "distractor": "It guarantees the experiment will fail."
+    },
+    {
+      "id": "use-case-discovery-5",
+      "type": "Practical",
+      "question": "Which evidence is stronger than an impressive demo alone?",
+      "answer": "Observed improvement on representative user tasks against a clear baseline.",
+      "distractor": "A longer list of model features."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Google: machine learning problem framing",
+      "url": "https://developers.google.com/machine-learning/problem-framing"
+    }
+  ]
+}

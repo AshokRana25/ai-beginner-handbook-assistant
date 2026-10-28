@@ -1,0 +1,85 @@
+{
+  "id": "evaluation-tracing",
+  "category": "evaluation-and-observability",
+  "order": 1,
+  "title": "Evaluate and observe your AI application",
+  "description": "Turn production behavior into evidence you can act on.",
+  "level": "Intermediate",
+  "minutes": 10,
+  "prerequisites": "A basic AI application design.",
+  "objectives": [
+    "Build a representative evaluation set",
+    "Use traces without collecting unnecessary sensitive data"
+  ],
+  "explanation": [
+    "Evaluation defines whether a system is good enough for a purpose. Build a dataset from representative tasks, including difficult and unanswerable cases. Score dimensions separately: correctness, support, completeness, safety, latency, and cost. A single average can hide a serious regression in a small but important category.",
+    "Observability helps explain what happened in one execution. A trace can connect a request to retrieval, model calls, and tools. Platforms such as Langfuse support tracing and evaluation workflows; your application must still decide what to record and how to protect it. Redact sensitive content and establish retention rules.",
+    "Connect evaluation to releases. Compare a candidate with a baseline using the same cases and rubric. Inspect examples where scores change, not just the average. Monitor production drift and use reviewed failures to improve future test sets. Treat automatic judges as fallible measurements that need calibration."
+  ],
+  "terms": [
+    {
+      "term": "Trace",
+      "definition": "A record connecting steps within an execution."
+    },
+    {
+      "term": "Latency",
+      "definition": "Time taken to complete an operation."
+    },
+    {
+      "term": "Regression",
+      "definition": "A deterioration compared with a previous system."
+    }
+  ],
+  "example": "For a policy assistant, record retrieval duration, selected source IDs, model version, token counts, and an answer-quality review. Avoid storing employee medical details in traces. Compare the release candidate on a fixed set of policy questions before deployment.",
+  "code": [],
+  "mistakes": [
+    "Logging complete prompts without checking for personal data.",
+    "Using only a model judge with no human calibration.",
+    "Optimizing average latency while ignoring slow tail requests."
+  ],
+  "exercise": "Draft a release scorecard with five quality dimensions, thresholds, an owner, and a rollback decision.",
+  "questions": [
+    {
+      "id": "evaluation-tracing-1",
+      "type": "Conceptual",
+      "question": "Why score quality dimensions separately?",
+      "answer": "It exposes trade-offs and regressions that one combined score can hide, such as faster answers with weaker factual support.",
+      "distractor": "Separate scores guarantee every output is correct."
+    },
+    {
+      "id": "evaluation-tracing-2",
+      "type": "Practical",
+      "question": "What does a trace help diagnose?",
+      "answer": "It shows how retrieval, model calls, and tools contributed to an execution, making latency and failure locations easier to inspect.",
+      "distractor": "It automatically fixes all production failures."
+    },
+    {
+      "id": "evaluation-tracing-3",
+      "type": "Scenario-based",
+      "question": "A trace contains sensitive employee information. What should change?",
+      "answer": "Minimize and redact recorded content, restrict access, and apply retention rules appropriate to the data.",
+      "distractor": "Publish the trace for easier debugging."
+    },
+    {
+      "id": "evaluation-tracing-4",
+      "type": "Interview",
+      "question": "Can an automatic judge replace all human evaluation?",
+      "answer": "No. Judges can be biased or inconsistent; calibrate them against human-reviewed examples and inspect disagreements.",
+      "distractor": "Yes, judge outputs are objective ground truth."
+    },
+    {
+      "id": "evaluation-tracing-5",
+      "type": "Practical",
+      "question": "Why track tail latency?",
+      "answer": "Averages can hide very slow requests that harm some users; percentile measures reveal that experience.",
+      "distractor": "Only the fastest request affects user experience."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Langfuse documentation",
+      "url": "https://langfuse.com/docs"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

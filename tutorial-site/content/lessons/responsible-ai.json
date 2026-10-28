@@ -1,0 +1,85 @@
+{
+  "id": "responsible-ai",
+  "category": "ai-fundamentals",
+  "order": 2,
+  "title": "Capabilities, limitations & responsible AI",
+  "description": "Know where AI helps, where it fails, and who stays accountable.",
+  "level": "Beginner",
+  "minutes": 10,
+  "prerequisites": "Read What is AI?",
+  "objectives": [
+    "Recognize plausible but unsupported outputs",
+    "Design an escalation and review process"
+  ],
+  "explanation": [
+    "AI systems can compress information, classify examples, and produce useful drafts, but their outputs need a purpose-specific standard of correctness. A persuasive answer is not evidence. Errors can arise from missing context, poor examples, distribution changes, or the limits of the method itself.",
+    "Responsible use begins with people affected by the system. Identify the decision owner, the potential harm, and a route to appeal. Measure performance for relevant groups and situations rather than reporting one average. A system that works well overall may fail badly for a small group.",
+    "Use a risk register as a living design artifact. Write the failure, its impact, its owner, and a mitigation that can be checked. A human-review label is meaningful only if reviewers have time, evidence, authority, and a way to override the output."
+  ],
+  "terms": [
+    {
+      "term": "Hallucination",
+      "definition": "An output that appears credible but lacks factual support."
+    },
+    {
+      "term": "Distribution shift",
+      "definition": "A change between development data and real use."
+    },
+    {
+      "term": "Oversight",
+      "definition": "A practical way for people to review and intervene."
+    }
+  ],
+  "example": "For an internal policy assistant, require links to approved policies, display the document date, and route unanswered questions to HR. Audit a sample of answers weekly. Do not permit the assistant to make employment decisions.",
+  "code": [],
+  "mistakes": [
+    "Treating a disclaimer as a complete mitigation.",
+    "Testing only easy or frequent cases.",
+    "Giving reviewers no access to the evidence."
+  ],
+  "exercise": "Create a risk register for a support assistant with three failures, named owners, mitigations, and a test for each.",
+  "questions": [
+    {
+      "id": "responsible-ai-1",
+      "type": "Conceptual",
+      "question": "Does confident wording prove an AI answer is correct?",
+      "answer": "No. Fluency and correctness are different properties. Check important claims against evidence appropriate to the task.",
+      "distractor": "Yes, confidence in wording reflects verified facts."
+    },
+    {
+      "id": "responsible-ai-2",
+      "type": "Practical",
+      "question": "What makes human review effective?",
+      "answer": "Reviewers need evidence, time, authority, and a clear override route; merely showing a confirmation button is insufficient.",
+      "distractor": "A reviewer clicking approve on every output."
+    },
+    {
+      "id": "responsible-ai-3",
+      "type": "Scenario-based",
+      "question": "A model fails on a new customer group. What next?",
+      "answer": "Inspect representative examples and group-specific metrics, constrain use if needed, and evaluate fixes before expanding access.",
+      "distractor": "Keep using the overall accuracy score."
+    },
+    {
+      "id": "responsible-ai-4",
+      "type": "Interview",
+      "question": "Who owns an AI-assisted decision?",
+      "answer": "An accountable person or organization must own the decision and its consequences; the model cannot take responsibility.",
+      "distractor": "The model becomes legally and operationally responsible."
+    },
+    {
+      "id": "responsible-ai-5",
+      "type": "Practical",
+      "question": "What belongs in a risk register?",
+      "answer": "A concrete failure, affected people, likelihood or exposure, impact, owner, mitigation, and verification plan.",
+      "distractor": "Only a list of model names."
+    }
+  ],
+  "sources": [
+    {
+      "title": "NIST AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

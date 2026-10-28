@@ -1,0 +1,85 @@
+{
+  "id": "multi-agent-patterns",
+  "category": "ai-agents",
+  "title": "Multi-agent coordination patterns",
+  "level": "Advanced",
+  "description": "Choose delegation patterns with clear ownership and bounded coordination.",
+  "prerequisites": "Agent workflows, tool calling, and agent memory.",
+  "objectives": [
+    "Compare supervisor, pipeline, and parallel specialist patterns",
+    "Prevent conflicting writes and unbounded delegation"
+  ],
+  "explanation": [
+    "Multiple agents can divide a task by expertise or independent work, but each handoff adds latency, cost, and opportunities for misunderstanding. Start with a single-agent baseline. Delegate when the task boundaries and evidence make the division useful, not simply because more agents are available.",
+    "A supervisor assigns work and combines results. A pipeline passes a structured result between stages. Parallel specialists can inspect independent aspects before a final review. Define each task input, output schema, evidence requirements, budget, and owner so one agent cannot silently expand another responsibility.",
+    "Coordinate writes explicitly. Give one owner responsibility for shared files or use isolated branches with reviewed integration. Deduplicate external actions, bound recursion, and propagate cancellation. Agreement between agents using the same evidence or model is correlated; it does not independently establish correctness."
+  ],
+  "terms": [
+    {
+      "term": "Supervisor",
+      "definition": "A coordinator that assigns tasks and integrates outputs."
+    },
+    {
+      "term": "Handoff",
+      "definition": "Transfer of a task and its required state to another worker."
+    },
+    {
+      "term": "Write ownership",
+      "definition": "An explicit rule deciding who may change a shared resource."
+    }
+  ],
+  "example": "One agent reviews retrieval evidence while another reviews user-interface copy. They return structured findings with source IDs to a single integrator. Only the integrator changes the release branch, and all workers share a total time budget.",
+  "mistakes": [
+    "Letting several agents edit the same file without coordination.",
+    "Treating majority agreement as ground truth.",
+    "Allowing delegates to create unlimited further delegates."
+  ],
+  "exercise": "Split a fictional document-assistant release review into at most three tasks. Specify each output, integration owner, shared-state policy, cancellation rule, and total budget. Compare with a single reviewer on the same checklist.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "multi-agent-patterns-1",
+      "type": "Conceptual",
+      "question": "When is agent delegation worth considering?",
+      "answer": "When tasks can be separated with clear contracts and measurable benefit over a simpler baseline.",
+      "distractor": "Whenever increasing agent count is technically possible."
+    },
+    {
+      "id": "multi-agent-patterns-2",
+      "type": "Practical",
+      "question": "What should a handoff include?",
+      "answer": "The goal, bounded scope, required evidence, output format, and remaining constraints.",
+      "distractor": "Only a vague request to improve everything."
+    },
+    {
+      "id": "multi-agent-patterns-3",
+      "type": "Scenario-based",
+      "question": "Two agents need to change one shared file. What reduces conflict?",
+      "answer": "Assign one writer or isolate changes and integrate them deliberately.",
+      "distractor": "Let both overwrite it without checking."
+    },
+    {
+      "id": "multi-agent-patterns-4",
+      "type": "Interview",
+      "question": "Does agreement among similar agents prove a claim?",
+      "answer": "No. Shared assumptions and evidence can produce correlated mistakes.",
+      "distractor": "Yes, a majority vote is always factual verification."
+    },
+    {
+      "id": "multi-agent-patterns-5",
+      "type": "Practical",
+      "question": "How should recursive delegation be constrained?",
+      "answer": "With explicit limits on depth, worker count, time, and resource budget.",
+      "distractor": "By trusting every worker to decide an unlimited budget."
+    }
+  ],
+  "sources": [
+    {
+      "title": "LangChain: multi-agent patterns",
+      "url": "https://docs.langchain.com/oss/python/langchain/multi-agent"
+    }
+  ]
+}

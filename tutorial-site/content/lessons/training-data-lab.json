@@ -1,0 +1,85 @@
+{
+  "id": "training-data-lab",
+  "category": "model-customization",
+  "title": "Training data preparation lab",
+  "level": "Intermediate",
+  "description": "Create a versioned, deduplicated dataset with useful labels and safe splits.",
+  "prerequisites": "Model customization and Python data handling.",
+  "objectives": [
+    "Define an annotation contract",
+    "Separate related examples before training and evaluation"
+  ],
+  "explanation": [
+    "Begin with the behavior to teach. Define the input format, desired output, exclusions, and annotation rules before collecting many examples. Include ordinary, ambiguous, and invalid inputs with deliberate target behavior. Check ownership and permission to use the data; availability alone does not establish suitability.",
+    "Validate required fields, types, duplicates, label values, and length limits. Review disagreements between annotators rather than silently choosing one answer. Remove unnecessary personal information and secrets. Preserve the raw source separately from the prepared dataset so transformations are traceable.",
+    "Split by entities or sources that could leak information, such as customer, document, template, or time. Freeze a held-out evaluation set before iterating on training examples. Save dataset version, provenance, transformation code, and counts by label. A larger dataset with inconsistent targets can teach the wrong behavior more efficiently."
+  ],
+  "terms": [
+    {
+      "term": "Annotation contract",
+      "definition": "Rules describing how examples receive their target outputs."
+    },
+    {
+      "term": "Deduplication",
+      "definition": "Finding repeated or near-identical examples."
+    },
+    {
+      "term": "Data lineage",
+      "definition": "The history linking prepared data to its sources and transformations."
+    }
+  ],
+  "example": "A fictional extractor learns invoice fields from invented text. Two examples derived from the same invoice template remain in the same split. A missing amount maps to an explicit null target, and the dataset records why that label is correct.",
+  "mistakes": [
+    "Putting template variants in both training and test sets.",
+    "Keeping contradictory labels without review.",
+    "Including access tokens in supposedly harmless training logs."
+  ],
+  "exercise": "Create twelve invented labeled records in a CSV or JSON file. Include one duplicate, one missing field, and two ambiguous records. Write validation rules, resolve annotation disagreements, and assign source-grouped splits.",
+  "order": 2,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "training-data-lab-1",
+      "type": "Conceptual",
+      "question": "What should be defined before large-scale annotation?",
+      "answer": "A clear target behavior, input/output schema, and annotation rules.",
+      "distractor": "Only the desired number of rows."
+    },
+    {
+      "id": "training-data-lab-2",
+      "type": "Practical",
+      "question": "Which checks belong in a training-data validator?",
+      "answer": "Required fields, allowed labels, types, duplicates, and appropriate length limits.",
+      "distractor": "Only whether the filename ends in JSON."
+    },
+    {
+      "id": "training-data-lab-3",
+      "type": "Scenario-based",
+      "question": "Two records share a nearly identical template. How should splitting handle them?",
+      "answer": "Keep the related group together to reduce information leakage.",
+      "distractor": "Always put one in training and one in testing."
+    },
+    {
+      "id": "training-data-lab-4",
+      "type": "Interview",
+      "question": "Why retain data lineage?",
+      "answer": "It supports auditing, corrections, and reproduction of transformations.",
+      "distractor": "It automatically makes every source legally usable."
+    },
+    {
+      "id": "training-data-lab-5",
+      "type": "Practical",
+      "question": "Should ambiguous examples receive arbitrary targets?",
+      "answer": "No. Resolve them through the annotation policy or mark uncertainty explicitly.",
+      "distractor": "Yes, consistency never matters for fine-tuning."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Hugging Face: processing datasets",
+      "url": "https://huggingface.co/docs/datasets/process"
+    }
+  ]
+}

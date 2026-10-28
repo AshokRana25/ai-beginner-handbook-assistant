@@ -1,0 +1,85 @@
+{
+  "id": "customization",
+  "category": "model-customization",
+  "order": 1,
+  "title": "Prompting, RAG, or fine-tuning?",
+  "description": "Choose the right intervention for the failure you actually have.",
+  "level": "Intermediate",
+  "minutes": 8,
+  "prerequisites": "Prompts, RAG, and model evaluation.",
+  "objectives": [
+    "Match customization to a measured failure",
+    "Prepare training examples without test contamination"
+  ],
+  "explanation": [
+    "Customization should start with error analysis. If instructions are unclear, improve the prompt and examples. If answers require current private knowledge, supply relevant evidence through retrieval. If a repeated behavior or output style remains difficult despite a strong baseline, fine-tuning may be worth evaluating.",
+    "Fine-tuning updates model parameters with additional examples. It requires data preparation, evaluation, and operational ownership. Good examples consistently demonstrate the desired behavior; duplicated, contradictory, or low-quality records can reinforce the wrong pattern. Separate evaluation data before iterating on training examples.",
+    "These methods can be combined. A tuned model may still need retrieval for fresh facts and validation for business rules. Compare the whole system on quality, cost, latency, maintainability, and failure behavior. Choose the simplest intervention that addresses the observed gap."
+  ],
+  "terms": [
+    {
+      "term": "Fine-tuning",
+      "definition": "Additional training that updates model parameters."
+    },
+    {
+      "term": "Training example",
+      "definition": "An input and desired behavior used for learning."
+    },
+    {
+      "term": "Held-out set",
+      "definition": "Examples reserved from development for evaluation."
+    }
+  ],
+  "example": "A support assistant uses the wrong tone and outdated policy facts. Test prompt examples for tone and retrieval for current policy first. Fine-tuning might later improve consistent tone, but should not become the only place policy knowledge is stored.",
+  "code": [],
+  "mistakes": [
+    "Fine-tuning to store frequently changing facts.",
+    "Mixing evaluation examples into training data.",
+    "Comparing systems without accounting for data maintenance."
+  ],
+  "exercise": "For three failures—wrong format, stale price, and inconsistent domain style—choose a first intervention and define how to measure improvement.",
+  "questions": [
+    {
+      "id": "customization-1",
+      "type": "Conceptual",
+      "question": "What is a good first response to unclear instructions?",
+      "answer": "Improve the prompt and examples, then measure whether the specific failure decreases before adopting more complex training.",
+      "distractor": "Immediately train a new foundation model."
+    },
+    {
+      "id": "customization-2",
+      "type": "Practical",
+      "question": "Which approach fits frequently changing internal policies?",
+      "answer": "Retrieval can supply current approved documents without relying on periodic weight updates for every policy change.",
+      "distractor": "Store every policy exclusively in fine-tuned weights."
+    },
+    {
+      "id": "customization-3",
+      "type": "Scenario-based",
+      "question": "A tuned model still invents current prices. What is missing?",
+      "answer": "It needs an authoritative current data source and validation; learned style or behavior does not ensure fresh facts.",
+      "distractor": "It only needs a more confident tone."
+    },
+    {
+      "id": "customization-4",
+      "type": "Interview",
+      "question": "Why separate evaluation data before training iterations?",
+      "answer": "It reduces contamination and provides a more credible estimate of behavior on examples not used to improve the system.",
+      "distractor": "It prevents the model from accepting any prompts."
+    },
+    {
+      "id": "customization-5",
+      "type": "Practical",
+      "question": "Can prompting, RAG, and fine-tuning coexist?",
+      "answer": "Yes. They address different needs and can be combined when measured benefits justify the added complexity.",
+      "distractor": "No, choosing one prohibits the others."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Hugging Face LLM course",
+      "url": "https://huggingface.co/learn/llm-course/chapter1/1"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

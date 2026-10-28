@@ -1,0 +1,85 @@
+{
+  "id": "governance-audit",
+  "category": "security-and-governance",
+  "title": "Governance & audit workshop",
+  "level": "Intermediate",
+  "description": "Connect ownership, risk decisions, and release evidence in a practical review.",
+  "prerequisites": "Responsible AI, secure AI, and evaluation tracing.",
+  "objectives": [
+    "Create an accountable system record",
+    "Trace release claims to evidence and unresolved risks"
+  ],
+  "explanation": [
+    "Governance makes decisions and responsibility explicit throughout a system lifecycle. Record the intended use, affected users, accountable owner, data sources, model dependencies, and excluded uses. A review should show who can accept a risk, who can stop the system, and how concerns reach them.",
+    "Build an evidence bundle around specific claims. Link release criteria to evaluation cases, access-control checks, incident procedures, and change records. Give each risk an owner, mitigation, evidence, review date, and remaining uncertainty. A completed form is not evidence that its controls work.",
+    "Use a framework such as the NIST AI RMF as a structure for context, measurement, and risk management, not as a universal certification checklist. Revisit the record when data, model, users, or authority changes. Define incident escalation and retirement so responsibility continues after initial launch."
+  ],
+  "terms": [
+    {
+      "term": "Risk owner",
+      "definition": "The person accountable for tracking and resolving a specific risk."
+    },
+    {
+      "term": "Evidence bundle",
+      "definition": "Artifacts supporting stated system or release claims."
+    },
+    {
+      "term": "Residual risk",
+      "definition": "Risk that remains after planned controls are applied."
+    }
+  ],
+  "example": "A fictional knowledge assistant release claims that users see only permitted documents. The bundle includes the authorization design, cross-team denial tests, a named owner, and the exact tested release. A new document source triggers a renewed access review.",
+  "mistakes": [
+    "Treating policy text as proof of implementation.",
+    "Assigning risk ownership to an unnamed team.",
+    "Reusing old evidence after material system changes."
+  ],
+  "exercise": "Hold a mock release review for a practice project. Produce an intended-use statement, three-row risk register, evidence links, open limitations, decision owner, review date, incident contact, and retirement condition.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "governance-audit-1",
+      "type": "Conceptual",
+      "question": "What makes a risk register actionable?",
+      "answer": "Named owners, concrete mitigations, evidence, review dates, and unresolved risk.",
+      "distractor": "A long list of risks with no responsible person."
+    },
+    {
+      "id": "governance-audit-2",
+      "type": "Practical",
+      "question": "What supports a claim that document access is enforced?",
+      "answer": "Tests and implementation evidence tied to the specific release and authorization policy.",
+      "distractor": "A checkbox saying “secure.”"
+    },
+    {
+      "id": "governance-audit-3",
+      "type": "Scenario-based",
+      "question": "A new corpus is added after approval. What should be reconsidered?",
+      "answer": "Data permissions, risk assumptions, evaluation coverage, and evidence affected by the change.",
+      "distractor": "Nothing, because approval can never expire."
+    },
+    {
+      "id": "governance-audit-4",
+      "type": "Interview",
+      "question": "Is the NIST playbook a universal certification checklist?",
+      "answer": "No. Its suggested actions must be applied to the system context.",
+      "distractor": "Yes, completing every item certifies every AI product."
+    },
+    {
+      "id": "governance-audit-5",
+      "type": "Practical",
+      "question": "Who should be able to stop a problematic system?",
+      "answer": "A clearly identified operational owner with a tested stop or rollback process.",
+      "distractor": "Only the model, when it decides the situation is serious."
+    }
+  ],
+  "sources": [
+    {
+      "title": "NIST: AI risk management playbook",
+      "url": "https://airc.nist.gov/airmf-resources/playbook/"
+    }
+  ]
+}

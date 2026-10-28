@@ -1,0 +1,93 @@
+{
+  "id": "model-evaluation",
+  "category": "machine-learning",
+  "order": 2,
+  "title": "Evaluate models without fooling yourself",
+  "description": "Use careful splits and error analysis to measure generalization.",
+  "level": "Intermediate",
+  "minutes": 16,
+  "prerequisites": "Regression and classification.",
+  "objectives": [
+    "Prevent leakage in preprocessing",
+    "Explain precision and recall"
+  ],
+  "explanation": [
+    "A model needs evaluation on examples that were not used to fit it. Separate training, validation, and final test roles. Training fits parameters; validation guides choices; the final test estimates performance after those choices are settled. Repeatedly optimizing against the test set makes it part of development.",
+    "Choose a split that resembles deployment. For future forecasting, train on earlier records and test on later ones. For patient or customer data, keep one person out of multiple splits when that would create near-duplicate examples. Fit preprocessing on training data only.",
+    "Precision asks how many positive predictions are correct; recall asks how many actual positives are found. The right trade-off depends on the cost of false alarms and missed cases. Inspect mistakes and report uncertainty rather than treating a single score as a universal guarantee."
+  ],
+  "terms": [
+    {
+      "term": "Leakage",
+      "definition": "Information available during development that would not legitimately be available in production."
+    },
+    {
+      "term": "Precision",
+      "definition": "True positives divided by predicted positives."
+    },
+    {
+      "term": "Recall",
+      "definition": "True positives divided by actual positives."
+    }
+  ],
+  "example": "A review queue flags 20 payments; 15 are truly problematic. There are 30 problematic payments overall. Precision is 15/20 = 75%; recall is 15/30 = 50%. Improving recall may increase the reviewer workload.",
+  "code": [
+    {
+      "title": "Compute precision and recall",
+      "language": "python",
+      "file": "precision_recall.py",
+      "run": "python",
+      "expectedOutput": "precision=0.75 recall=0.50"
+    }
+  ],
+  "mistakes": [
+    "Normalizing on the entire dataset before splitting.",
+    "Reporting only accuracy when positives are rare.",
+    "Changing the model repeatedly after inspecting the final test results."
+  ],
+  "exercise": "Draw a confusion matrix for 15 true positives, 5 false positives, 15 false negatives, and 65 true negatives. Compute precision and recall.",
+  "questions": [
+    {
+      "id": "model-evaluation-1",
+      "type": "Conceptual",
+      "question": "Why keep a final test set separate?",
+      "answer": "It estimates performance after model choices are fixed. Reusing it to tune choices biases the estimate.",
+      "distractor": "It supplies extra training labels during every iteration."
+    },
+    {
+      "id": "model-evaluation-2",
+      "type": "Practical",
+      "question": "What is precision for 15 correct flags out of 20 flags?",
+      "answer": "75%, because precision divides true positives by all predicted positives.",
+      "distractor": "50%, because precision divides by all actual positives."
+    },
+    {
+      "id": "model-evaluation-3",
+      "type": "Scenario-based",
+      "question": "How should a future-demand model be split?",
+      "answer": "Use a time-aware split that trains on earlier data and evaluates on later data, matching the intended prediction setting.",
+      "distractor": "Always shuffle all dates randomly."
+    },
+    {
+      "id": "model-evaluation-4",
+      "type": "Interview",
+      "question": "Why can 99% accuracy be misleading?",
+      "answer": "If only 1% of examples are positive, predicting negative every time reaches 99% while finding none of the positives.",
+      "distractor": "Accuracy above 90% always proves usefulness."
+    },
+    {
+      "id": "model-evaluation-5",
+      "type": "Practical",
+      "question": "Where should a scaler be fitted?",
+      "answer": "Fit it on training data, then apply the learned transformation to validation and test sets to avoid leakage.",
+      "distractor": "Fit it on all data before creating splits."
+    }
+  ],
+  "sources": [
+    {
+      "title": "scikit-learn: model selection and evaluation",
+      "url": "https://scikit-learn.org/stable/model_selection.html"
+    }
+  ],
+  "reviewed": "2026-09-29"
+}

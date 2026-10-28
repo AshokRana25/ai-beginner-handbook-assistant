@@ -1,0 +1,97 @@
+{
+  "id": "docker-service",
+  "category": "deployment-and-operations",
+  "title": "Containerizing an AI service with Docker",
+  "level": "Intermediate",
+  "description": "Package application code with clear runtime, storage, and secret boundaries.",
+  "prerequisites": "API basics and deployment foundations.",
+  "objectives": [
+    "Explain build-time versus runtime concerns",
+    "Create a container with a limited build context and non-root process"
+  ],
+  "explanation": [
+    "A container image packages application files, dependencies, and startup instructions. A running container adds process state and a writable layer. Use a Dockerfile to describe the image, and a .dockerignore file to exclude private datasets, credentials, caches, and irrelevant files from the build context.",
+    "Copy dependency manifests before frequently changing source when useful for build caching. Choose and maintain a supported base image, and use a non-root account for the application. Supply secrets at runtime through the deployment platform rather than baking them into image layers.",
+    "Decide where models and indexes live. Large weights may be mounted or fetched through a controlled provisioning step; persistent data must not depend on a disposable container layer. Bound memory and startup time, expose a readiness check, and verify a restart can reconnect to required services."
+  ],
+  "terms": [
+    {
+      "term": "Image",
+      "definition": "A packaged filesystem and startup configuration for containers."
+    },
+    {
+      "term": "Build context",
+      "definition": "Files available to the image build process."
+    },
+    {
+      "term": "Volume",
+      "definition": "Storage attached to a container with a lifecycle independent of its writable layer."
+    }
+  ],
+  "example": "The supplied Dockerfile packages a small standard-library health endpoint as a non-root user. Copy Dockerfile and health_service.py into an empty exercise directory, build with docker build -t ai-health-demo ., then run with docker run --rm -p 127.0.0.1:8080:8080 ai-health-demo. It contains no model server.",
+  "mistakes": [
+    "Copying an entire private working directory into an image.",
+    "Embedding API keys using Dockerfile ENV.",
+    "Keeping the only copy of an index in a disposable container layer."
+  ],
+  "exercise": "Build the health demo in a separate directory and request /health. Stop and restart the container, inspect its configured user, and explain which additional readiness check an actual model service would need.",
+  "code": [
+    {
+      "title": "A non-root health-service image",
+      "language": "dockerfile",
+      "file": "Dockerfile",
+      "note": "Optional Docker lab. Place this Dockerfile beside health_service.py in a separate build directory. Container execution is not part of the offline example checks."
+    },
+    {
+      "title": "A tiny health endpoint",
+      "language": "python",
+      "file": "health_service.py"
+    }
+  ],
+  "order": 2,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "questions": [
+    {
+      "id": "docker-service-1",
+      "type": "Conceptual",
+      "question": "How does an image differ from a running container?",
+      "answer": "An image is a package; a container is a running instance with runtime state.",
+      "distractor": "An image is always a running virtual machine."
+    },
+    {
+      "id": "docker-service-2",
+      "type": "Practical",
+      "question": "What should .dockerignore exclude from an AI service build?",
+      "answer": "Secrets, private data, caches, and other files not required by the image.",
+      "distractor": "Only the Dockerfile itself."
+    },
+    {
+      "id": "docker-service-3",
+      "type": "Scenario-based",
+      "question": "An index disappears after container replacement. What design issue is likely?",
+      "answer": "It was stored only in the disposable writable layer instead of appropriate persistent storage.",
+      "distractor": "All vector indexes are inherently temporary."
+    },
+    {
+      "id": "docker-service-4",
+      "type": "Interview",
+      "question": "Why inject secrets at runtime?",
+      "answer": "It avoids distributing credentials inside image layers and supports controlled rotation.",
+      "distractor": "It makes secret values safe to print in logs."
+    },
+    {
+      "id": "docker-service-5",
+      "type": "Practical",
+      "question": "Does a healthy HTTP process prove the model is ready?",
+      "answer": "No. Readiness may also need to check model loading and required dependencies.",
+      "distractor": "Yes, any open port proves inference works."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Docker: writing a Dockerfile",
+      "url": "https://docs.docker.com/get-started/docker-concepts/building-images/writing-a-dockerfile/"
+    }
+  ]
+}

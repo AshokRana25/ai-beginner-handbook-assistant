@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f5a45">
+  <meta name="description" content="AI Learning Hub: structured AI tutorials, learning paths, practice projects, and interview questions with answers.">
+  <title>AI Learning Hub</title>
+  <script>
+    // Apply the saved or system theme before first paint to avoid a flash.
+    try {
+      const t = localStorage.getItem('ai-learning-hub:theme');
+      document.documentElement.dataset.theme = t || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    } catch { document.documentElement.dataset.theme = 'light'; }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main" onclick="event.preventDefault();document.getElementById('main')?.focus();">Skip to content</a>
+  <div id="app"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <noscript><p style="padding:2rem">AI Learning Hub needs JavaScript enabled to show lessons.</p></noscript>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

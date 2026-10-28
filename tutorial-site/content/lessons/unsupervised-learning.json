@@ -1,0 +1,85 @@
+{
+  "id": "unsupervised-learning",
+  "category": "machine-learning",
+  "title": "Unsupervised learning beyond clustering",
+  "level": "Intermediate",
+  "description": "Explore dimensionality reduction and anomaly detection without target labels.",
+  "prerequisites": "Machine learning problem types and linear algebra intuition.",
+  "objectives": [
+    "Distinguish compression from clustering",
+    "Evaluate an unsupervised result against its intended use"
+  ],
+  "explanation": [
+    "Unsupervised methods look for structure without a supplied target for each example. Clustering groups similar items; dimensionality reduction compresses a representation; anomaly detection identifies observations unlike a reference population. These objectives do not automatically discover useful business categories.",
+    "Principal component analysis finds orthogonal directions of variation and projects data onto selected directions. Scaling affects which features dominate the result. Retaining high variance can preserve important structure, but a low-variance feature may still carry the signal needed for a downstream task.",
+    "Evaluate the intended use. For compression, inspect reconstruction error and downstream performance. For anomaly alerts, review a labeled sample and estimate analyst workload. For a two-dimensional plot, avoid interpreting distance as proof of real-world similarity. Hold out data when selecting transformations and thresholds."
+  ],
+  "terms": [
+    {
+      "term": "PCA",
+      "definition": "A linear projection onto directions of variation."
+    },
+    {
+      "term": "Reconstruction error",
+      "definition": "Difference between an input and its reconstruction from a compressed representation."
+    },
+    {
+      "term": "Anomaly",
+      "definition": "An observation unusual relative to a chosen reference."
+    }
+  ],
+  "example": "A team compresses 40 sensor measurements to six components. It checks whether a later fault detector still catches faults. Separately, an outlier detector flags unusual devices for inspection; a flag can reflect a broken sensor rather than an actual equipment fault.",
+  "mistakes": [
+    "Equating unusual with harmful.",
+    "Naming clusters as if the algorithm verified their meaning.",
+    "Choosing dimensionality only because a plot looks attractive."
+  ],
+  "exercise": "Design a small sensor experiment. Specify the reference population, scaling, a holdout period, one compression metric, and one downstream success metric. Describe two harmless reasons for an anomaly alert.",
+  "order": 4,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "unsupervised-learning-1",
+      "type": "Conceptual",
+      "question": "Does unsupervised learning require a target label for every example?",
+      "answer": "No. Its training objective can use structure in the inputs themselves.",
+      "distractor": "Yes, all unsupervised algorithms require class labels."
+    },
+    {
+      "id": "unsupervised-learning-2",
+      "type": "Practical",
+      "question": "Why inspect scaling before PCA?",
+      "answer": "Features with larger numeric variation can dominate the selected directions.",
+      "distractor": "Scaling converts PCA into a supervised classifier."
+    },
+    {
+      "id": "unsupervised-learning-3",
+      "type": "Scenario-based",
+      "question": "An anomaly detector flags a new device model. What should an analyst check?",
+      "answer": "Whether the reference distribution covers that device before treating the alert as a fault.",
+      "distractor": "Assume novelty proves physical damage."
+    },
+    {
+      "id": "unsupervised-learning-4",
+      "type": "Interview",
+      "question": "Does high explained variance guarantee predictive quality?",
+      "answer": "No. Preserved variance may not contain the signal needed by the downstream task.",
+      "distractor": "Yes, the highest-variance direction is always the target."
+    },
+    {
+      "id": "unsupervised-learning-5",
+      "type": "Practical",
+      "question": "How can compression be evaluated?",
+      "answer": "Measure reconstruction and the performance of the downstream task on held-out data.",
+      "distractor": "Check only the number of colors in a plot."
+    }
+  ],
+  "sources": [
+    {
+      "title": "scikit-learn: decomposition",
+      "url": "https://scikit-learn.org/stable/modules/decomposition.html"
+    }
+  ]
+}

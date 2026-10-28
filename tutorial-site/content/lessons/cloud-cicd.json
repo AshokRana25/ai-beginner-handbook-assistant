@@ -1,0 +1,89 @@
+{
+  "id": "cloud-cicd",
+  "category": "deployment-and-operations",
+  "title": "Cloud CI/CD implementation",
+  "level": "Intermediate",
+  "description": "Build a repeatable path from tested change to a recoverable release.",
+  "prerequisites": "Git experiments and deployment foundations.",
+  "objectives": [
+    "Separate build, evaluation, deployment, and verification",
+    "Design a release with restricted credentials and rollback"
+  ],
+  "explanation": [
+    "Continuous integration validates a change using a repeatable environment. Run fast checks first, then application tests and a bounded evaluation set. Keep dependency versions reproducible and build one identifiable artifact for the release. Treat third-party actions and build scripts as code executing with pipeline permissions.",
+    "A deployment job promotes an artifact to an environment. Use least-privilege credentials, preferably short-lived identity where supported, and restrict which branches and events can access them. Do not expose production secrets to untrusted pull-request code. Environment protection can add review at a production boundary.",
+    "After deployment, run a smoke check against the actual endpoint and monitor quality and reliability. Record the code, prompt, model, index, and configuration versions together. Rollback should restore a compatible set; reverting only code may fail when data or index schemas changed."
+  ],
+  "terms": [
+    {
+      "term": "Artifact",
+      "definition": "An identifiable build output promoted through environments."
+    },
+    {
+      "term": "Deployment gate",
+      "definition": "A condition required before a release proceeds."
+    },
+    {
+      "term": "Rollback",
+      "definition": "Restoring a previously working compatible release."
+    }
+  ],
+  "example": "A fictional assistant pipeline validates JSON content, checks examples, runs browser tests, and builds a static bundle. A deployment job uploads that exact bundle. The release record points to the commit and test run; a smoke check opens a lesson from the published path.",
+  "mistakes": [
+    "Building different artifacts independently for staging and production.",
+    "Allowing untrusted pull requests to read deployment secrets.",
+    "Declaring success before checking the deployed endpoint."
+  ],
+  "exercise": "Sketch a pipeline for one practice project. Specify triggers, checks, artifact identity, permissions, deployment gate, smoke check, and rollback. Include a failing evaluation and an incompatible index change.",
+  "order": 3,
+  "minutes": 8,
+  "reviewed": "2026-10-28",
+  "code": [],
+  "questions": [
+    {
+      "id": "cloud-cicd-1",
+      "type": "Conceptual",
+      "question": "Why promote one built artifact across environments?",
+      "answer": "It makes the deployed bytes identifiable and avoids accidental rebuild differences.",
+      "distractor": "It removes the need for environment configuration."
+    },
+    {
+      "id": "cloud-cicd-2",
+      "type": "Practical",
+      "question": "Should untrusted pull-request code receive production secrets?",
+      "answer": "No. Keep deployment credentials outside untrusted execution paths.",
+      "distractor": "Yes, every contribution needs full production access."
+    },
+    {
+      "id": "cloud-cicd-3",
+      "type": "Scenario-based",
+      "question": "A deployment succeeds but lesson assets return 404. What was missing?",
+      "answer": "A smoke check against the actual deployed base path and assets.",
+      "distractor": "An extra success message in the build logs."
+    },
+    {
+      "id": "cloud-cicd-4",
+      "type": "Interview",
+      "question": "Why can rolling back only code be insufficient?",
+      "answer": "Prompts, model versions, data, or index schemas may need a compatible rollback too.",
+      "distractor": "Code never affects application behavior."
+    },
+    {
+      "id": "cloud-cicd-5",
+      "type": "Practical",
+      "question": "What should identify a release beyond a friendly version label?",
+      "answer": "The commit, artifact, configuration, and relevant model or data versions.",
+      "distractor": "Only the name of the person who clicked deploy."
+    }
+  ],
+  "sources": [
+    {
+      "title": "GitHub: secrets in Actions",
+      "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets"
+    },
+    {
+      "title": "GitHub: reviewing deployments",
+      "url": "https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/review-deployments"
+    }
+  ]
+}

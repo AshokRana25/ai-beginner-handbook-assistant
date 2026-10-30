@@ -1,0 +1,37 @@
+https://www.linkedin.com/learning/agile-software-development-creating-an-agile-culture/failure-versus-experimentation?autoplay=true&u=83375098
+
+
+Team Please Create sub-tasks,log hours and changes it's status to inprogress before starting any work on issue.
+Every effort means alot to us and to logging its value really helpful.
+ 
+
+Dashboards 
+--> Current Sprint Healh
+--> Sprint Burndown Board
+--> Current Sprint Team Workload(As on Today)
+--> Current Sprint Data (By Issue Type)
+--> Current Sprint Story (By Status)
+--> Current Sprint Bugs (By Status)
+--> Current Sprint User Stories By Status
+--> Current Sprint All Items ByAssignee
+
+
+Implementation Agile methodology in D2C NA Project 
+
+Agile and sprint practice implementation.
+Remove blocker
+Highlight higher risk item to line manger or stakeholders
+
+
+Implement different agile ceremonies
+Implementation of agile KPIs to measure team performance, velocity and test coverage.
+Proposed actions to improve teams performance.
+
+
+projects, assignments, and achievements in different charts
+
+Initial triage of SAP dependencies
+
+Make it independent.
+Create new forms
+Adapt the exiting forms to new markets scope

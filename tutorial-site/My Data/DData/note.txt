@@ -1,0 +1,39 @@
+Risks
+------
+1. Effect of refactor work on existing code base and it's changing running funtionality
+2. Story hold by resources whose working in other team can delay in delivery.
+
+Create squad team
+   
+
+https://beamsuntory.atlassian.net/browse/GWST-18462
+https://beamsuntory.atlassian.net/browse/GWST-18460
+https://beamsuntory.atlassian.net/browse/GWST-15916
+https://beamsuntory.atlassian.net/browse/GWST-17829
+https://beamsuntory.atlassian.net/browse/GWST-15018
+
+
+Unit of work
+
+whiskeydrop
+
+DTC is providing ecommerce platform for a user to get a whisky drop on his door step. DTC is having  two major product 'Maker's Mark' &   'James B Beam' in North-America.
+
+DTC is selling whisky drop products directly to customers online while bypassing third-party retailers and wholesalers. We are having two major product 'Maker's Mark' & 'James B Beam' in North-America. User can register himself in our platform to get the product subscription. In online platform, user is having full access to continue subscription or leave the system any time. Also, system is providing feature to replace the product or get the refund as per company terms and conditions.
+
+
+1. Providing ecommerce platform for a user to get a whisky drop on door step.
+2. Good shopping experience 
+3. Beam is a leading contributor in Libov industry.
+4. To face new challenges and feel good 
+5. Because most of effort are dedicated to team goals and have some business value.
+
+How do we do it?
+-What is the key value proposition?
+-What are your key differentiators?
+
+What do we do?
+
+What is your product's story?
+-What is your authentic story that can help people understand your beliefs, your mission, and why you are doing what you are doing?
+

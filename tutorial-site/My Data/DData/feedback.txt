@@ -1,0 +1,15 @@
+1. https://beamsuntory.atlassian.net/browse/DTCNACC-741 
+741-- UI not decided at the time of inception/earily stage. Dev have to rework on same item and QA had to test same story 4 times hence small changes got tail at the of sprint
+
+2.
+
+Thursday, April 7, 2022 11:00 AM-12:00 PM
+Wednesday, April 20, 2022 10:00 AM-11:00 AM,
+Tuesday, April 19, 2022 6:00 PM-10:00 PM,
+
+
+Annual Compliance Refresh 2021- Module 3
+
+1.Create most of sub-tasks and Logging hours in Planning day
+2. Not enough time to create sub-task in Grooming session.
+3. Requirement changes multipe time so that team not able 

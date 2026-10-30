@@ -1,0 +1,128 @@
+
+
+Components White Label
+
+bienvenido compañero
+
+GWST Sprint 62 25/Sep/23 - 6/Oct/23
+GWST Sprint 63 09/Oct/23 - 20/Oct/23
+GWST Sprint 64 23/Oct/23 - 3/Nov/23
+GWST Sprint 65 6/Nov/23  - 17/Nov/23
+GWST Sprint 66 20/Nov/23 - 1/Dec/23
+GWST Sprint 67 4/Dec/23  - 15/Dec/23
+GWST Sprint 68 18/Dec/23 - 29/Dec/23
+GWST Sprint 69 1/Jan/24  - 12/Jan/24
+GWST Sprint 70 15/Jan/24 - 26/Jan/24
+
+GWST Sprint 61 9-06-23
+
+One more request : We are facing one issue related to stories which we mark as Done as they suggested to be part of release.
+We need one status "Closed" that means we are seleting story not for release and we did some work in it.
+So, we will treat "Done" means selected for release.
+You don't have permission to invite people to Jira Software. Contact your admin for more information.
+
+
+Plan the work and then work the plan
+
+https://beamsuntory.atlassian.net/browse/GWST-28594---Deleted sub-Task assigned to KrishanKant Sharma(story owner: Naveen)
+https://beamsuntory.atlassian.net/browse/GWST-28595---Deleted sub-Task assigned to KrishanKant Sharma(story owner: Naveen)
+https://beamsuntory.atlassian.net/browse/GWST-11373---Deleted sub-Task assigned to Priyanka.Sharma.Metacube(story owner: Bidhu)
+https://beamsuntory.atlassian.net/browse/GWST-11374---Deleted sub-Task assigned to Priyanka.Sharma.Metacube(story owner: Bidhu)
+https://beamsuntory.atlassian.net/browse/GWST-28620---Deleted sub-Task assigned to Manish kumar(story owner : Priyanka Kumber)
+https://beamsuntory.atlassian.net/browse/GWST-28614---Deleted sub-Task assigned to Manish kumar(story owner : Piyush.sharma.Metacube)
+https://beamsuntory.atlassian.net/browse/GWST-28615---Deleted sub-Task assigned to Manish kumar(story owner : Piyush.sharma.Metacube)
+https://beamsuntory.atlassian.net/browse/GWST-28615---Deleted sub-Task assigned to Manish kumar(story owner : Piyush.sharma.Metacube)
+https://beamsuntory.atlassian.net/browse/GWST-29034---Deleted sub-Task assigned to Piyush.sharma(story owner : Piyush.sharma.Metacube)
+https://beamsuntory.atlassian.net/browse/GWST-28593---Deleted sub-Task assigned to KrishanKant Sharma(story owner: Bidhu)
+https://beamsuntory.atlassian.net/browse/GWST-28596---Deleted sub-Task assigned to KrishanKant Sharma(story owner: Bidhu)
+https://beamsuntory.atlassian.net/browse/GWST-28536---Deleted sub-Task assigned to Ankita Chouhan(story owner: Ankita)
+https://beamsuntory.atlassian.net/browse/GWST-28612---Deleted sub-Task assigned to Manish kumar(story owner: Bidhu)
+https://beamsuntory.atlassian.net/browse/GWST-28613---Deleted sub-Task assigned to Manish kumar(story owner: Bidhu)
+https://beamsuntory.atlassian.net/browse/GWST-28563---Deleted sub-Task assigned to Manish kumar(story owner: Manuel)
+https://beamsuntory.atlassian.net/browse/GWST-28564---Deleted sub-Task assigned to Manish kumar(story owner: Manuel)
+
+project = GWST AND issuetype in (Bug, Story) AND status = "Pending Prod RollOut" AND labels = WhiteLabel ORDER BY Rank ASC
+
+Delete board : https://beamsuntory.atlassian.net/jira/software/c/projects/GWST/boards/520
+
+
+--Effective Refinement Planning
+--Help team on work existing issue/tickets instead of taking new work in ending days of sprint
+--Manage QA work effectively like regression & sprint stories
+--Mentioning How part in Technical Details and Separate FE & BE work if required
+--To manage release delivery, all release items should be finalized at least 10 days before and accordingly deployed on stage.  
+
+https://beamsuntory.atlassian.net/browse/GWST-27798 --Risk
+https://beamsuntory.atlassian.net/browse/GWST-27971 --TD not clear --Risk
+https://beamsuntory.atlassian.net/browse/GWST-28329--Nearly Risk
+https://beamsuntory.atlassian.net/browse/GWST-29038--Risk
+
+
+Integration story for QA
+We should have hardining week after sprint
+
+
+
+
+
+29570
+
+we have make plan to complete dependend story first in first 
+
+ GWST Sprint 60 --> 30 Aug  – 8 Sept
+ GWST Sprint 61 --> 11 Sept - 22 Sept
+ GWST Sprint 62 --> 25 Sept - 6 Oct
+ GWST Sprint 63 --> 9 Oct - 20 Oct
+ GWST Sprint 64 --> 23 Oct - 3 Nov
+ GWST Sprint 65 --> 6 Nov - 17 Nov
+ GWST Sprint 66 --> 20 Nov - 1 Dec
+ GWST Sprint 67 --> 4 Dec - 15 Dec
+ GWST Sprint 68 --> 18 Dec - 29 Dec
+
+
+GWST Sprint 69 --> 11 Sept - 22 Sept
+GWST Sprint 70 --> 11 Sept - 22 Sept
+
+
+Benefits of affirmations.
+
+What is RGA
+What is DTC & Non-DTC
+
+
+Fix For Versions (all)
+Total Issues: 77
+74
+
+https://beamsuntory.atlassian.net/browse/GWST-29042--Already communicate to nacho(Moving to next)Design Pending(dely)
+https://beamsuntory.atlassian.net/browse/GWST-29093--Will move to new year(Musfa will colse it
+https://beamsuntory.atlassian.net/browse/GWST-23518--Musfa will move it to next
+https://beamsuntory.atlassian.net/browse/GWST-27949--How part still not decided(
+https://beamsuntory.atlassian.net/browse/GWST-29061--Over work less bw
+https://beamsuntory.atlassian.net/browse/GWST-29063--Over work less bw
+https://beamsuntory.atlassian.net/browse/GWST-29068--Blocked due to expected to pick toworrow
+https://beamsuntory.atlassian.net/browse/GWST-29477--In risk due to FE work-- JQuery
+https://beamsuntory.atlassian.net/browse/GWST-29473--In Risk due to FE work -- JQuery
+https://beamsuntory.atlassian.net/browse/GWST-28958---In Risk due to JS issue
+https://beamsuntory.atlassian.net/browse/GWST-29960--Bidhu follow up with shubum
+https://beamsuntory.atlassian.net/browse/GWST-28403--Bidhu will connect to Nacho for QA 
+https://beamsuntory.atlassian.net/browse/GWST-27892---Need to Add AC to move to DTC board
+
+
+
+
+
+Agenda:​
+
+
+
+Domain Name,Record Name,Record Type,Record Value
+*.ardray.com,
+_7021f405cd1e8ee87ffc600c3e4af2b7.ardray.com.,
+CNAME,
+_e2a4dae4ae9659a3be6aea45eb317c38.xjzpjgzgnc.acm-validations.aws.
+
+
+
+
+

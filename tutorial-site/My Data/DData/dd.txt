@@ -1,0 +1,100 @@
+1. List of all Dev,QA,Leads,PO
+2. Schedule calender for Scrum meeting,
+
+1. Grooming backlog refinement twice in a wee
+
+
+Just had meeting with all Magento Devs
+Activity :-
+1. Jira Board Clean Up
+2. Discussion about Blockers( a) SAP b) Template)
+3. End date of few stories.
+4. Find that few stories are done but not pushed to QA.
+   Few of them QA will get it on coming thrusday(30th Septmber)
+
+We should separte both SAP & Magento stories.
+As we have specific team for each, its pretty complex to manage or ask for estimated required time in single story.
+
+US eCommerce DTC
+
+
+Shared toughts with Alvaro today:
+1. We have to proactively work on setting up priories & separation of each technical item on our board.
+2. Story should be fully tested as a individual item or function without dependances.
+3. If we have dependance of integration testing, then we should take one single story for DEV/QA integration testing.
+4. Holding any task on board not appropriate for achiving desired result or goad of sprint.
+
+
+Today's Update 29 September 2021
+---------------
+1) Meeting with Dario
+2) Current Board walk through with Neeraj
+3) Points from today's Stand up meeting
+--> Discuss about all stories and blockers
+--> Address the blocker from SAP Team and Alvaro taken confirmation from their side
+--> Discuss about technical & non-technical changes within sprint and it's frequency
+--> Need more transparency of each stories and better communication between supporting team(SAP)
+--> Suggested team to spend at least few minutes to update status of story at EOD
+
+
+30 September 2021
+Today's Status
+---------------
+1. Connect with Alvaro & Stephen
+2. Story discussion with team in Cross Colaboration Meeting.
+  --> Discuss about blocker within same call
+  --> Megento Team will delivery most of stories by tomorrow
+  --> Suggested Doe-Anderson team to update status and delivery date in stories
+***Found that there is big communication gap bettween SAP & Megento team(Which killing valuable time)
+***Willingness to complete story or taking ownership is very low.
+***PO & BA should be align with deliverables as Alvaro is on leave for now.
+
+
+1 October 2021
+Today's Status
+---------------
+1. Detailed meeting with Dario on Congneto stories, suggested him not to collect all required information before taking it in next coming sprint. If we are not sure about it and some research work need on that, then we can take one R&D story for same.
+2. Deo Anderson clarify most of things in stand up call today and they are going to complete most of it by today.
+We also had demo on same call which cover few stories.(recorded too)
+3. QA will start by Monday
+4. Suggested to sync up both PO & BA for coming sprint backlog.
+5. Clarify that next week mostly dedicated for Testing and Refinement.
+
+
+Hi Shannon,
+
+In meeting we discuss about blockers and shared mail trails with Alok.
+Alvaro explain current status of sprint.
+Alok suggested to take up technical discussion and sync up call to Dario.
+
+Dario saying that you are scrum master you have to ask question about status of each story . etc.
+
+We can ask question. But not responsible for story writing and updating
+PO should write the story and Dev Team should update the status
+f its not there how we are planning to run the sprint and providing requirement to dev teams
+
+We are asking question when we will get the user storys and backlog for coming sprints
+
+Dario suggesting me what i have to do as a Scurm master
+But no one discussed about when we will get the user story and backlog for coming sprints
+PO should write the story and Dev Team should update the status if need help we can do
+Thats all we need from PO and Dev Team
+
+
+6th Oct 2021
+-------------
+Today's Status
+---------------
+1. Discussed about all story status with QA
+2. Each person's status taken and discuss about blockers.
+3. Shared expectation with Dario and Alvaro(mailed too)
+
+Yesterday, I had call with Alok along with Dario & Alvaro. Explained all expectation to them and what is 'Defination of Ready' means for story.
+
+---One major point noticed : Testing Scripts Creation 
+(Majorly QA putting their valueble time in creating testing scripts as instructed by BA. We need to found workaound to reduce that effort.It's mainly happening because of requirement changes within sprint)
+
+
+Bukhari 5134 and Nasai 3378
+
+

@@ -8,3 +8,7 @@ playwright-report/
 .curriculum-*.mjs
 .complete-curriculum.mjs
 !index.html
+
+# Private local data, never commit
+My Data/
+*.zip

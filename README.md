@@ -4,9 +4,11 @@ A local-first, single-user handbook assistant that runs on your own computer. As
 
 Built with **Python · Streamlit · Ollama · Chroma**, with a Windows 11 x64 setup guide and macOS/Linux alternatives.
 
+**🌐 Live tutorial site:** [ashokrana25.github.io/ai-beginner-handbook-assistant](https://ashokrana25.github.io/ai-beginner-handbook-assistant/)
+
 ## AI Learning Hub tutorial website
 
-The repository also includes an independent [AI Learning Hub website](tutorial-site/README.md) in `tutorial-site/`: **57 tutorials, 285 questions, 16 topic categories, four learning paths, and four practice projects**. All previously planned tutorials are published, with quizzes, bookmarks, browser-local progress, and light/dark themes.
+The repository also includes an independent AI Learning Hub website in `tutorial-site/` ([open the live site](https://ashokrana25.github.io/ai-beginner-handbook-assistant/) · [read its README](tutorial-site/README.md)): **57 tutorials, 285 questions, 16 topic categories, four learning paths, and four practice projects**. All previously planned tutorials are published, with quizzes, bookmarks, browser-local progress, and light/dark themes.
 
 To run it, install Node.js 24, then run `cd tutorial-site`, `npm ci`, and `npm run dev`. It is a static website and does not require Ollama, Python assistant credentials, or model API keys. Its own README explains tests, optional tutorial integrations, and publication. The `Tutorial site` GitHub Actions workflow verifies and packages changes; optional GitHub Pages deployment is available through its manual run after Pages is configured.
 

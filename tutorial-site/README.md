@@ -4,8 +4,8 @@ A responsive learning site for AI: structured tutorials, learning paths, practic
 
 **🌐 Live site:** https://ashokrana25.github.io/ai-beginner-handbook-assistant/
 
-- **57 published tutorials** across the curriculum, each with objectives, examples, practice, sources, and a quiz
-- **285 distinct questions** with answers (conceptual, practical, scenario-based, interview)
+- **58 published tutorials** across the curriculum, each with objectives, examples, practice, sources, and a quiz
+- **290 distinct questions** with answers (conceptual, practical, scenario-based, interview)
 - **16 topic categories**, with all 37 previously planned lessons now published
 - 4 learning paths, 4 practice projects, search, filters, quizzes, bookmarks, progress tracking
 - Light and dark modes, keyboard accessible, and responsive from phone to desktop

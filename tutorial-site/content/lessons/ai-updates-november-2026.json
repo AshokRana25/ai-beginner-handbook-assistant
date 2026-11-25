@@ -1,0 +1,113 @@
+{
+  "id": "ai-updates-november-2026",
+  "category": "generative-ai",
+  "title": "AI updates: November 2026 briefing",
+  "level": "Beginner",
+  "description": "A dated summary of recent model, protocol, and policy changes, plus a method for judging AI news before you act on it.",
+  "prerequisites": "What is a large language model?",
+  "objectives": [
+    "Summarize the main AI model, protocol, and policy changes as of 25 November 2026",
+    "Separate vendor claims from independent evidence when reading AI news",
+    "Decide whether a release actually affects your project before changing anything"
+  ],
+  "explanation": [
+    "This briefing reflects public reporting up to 25 November 2026. AI news moves quickly and early reports often conflict, so every item below links to a source and should be rechecked before you rely on it. Model names, prices, and availability change; the method at the end of this lesson lasts longer than the list.",
+    "New frontier models. OpenAI announced GPT-6.2 on 17 November 2026 as two models: GPT-6.2 Astra for long, difficult work and GPT-6.2 Sol for everyday tasks, both offered in ChatGPT for paying users and in the API, with a reported 20% cut to Astra's standard API rate. Anthropic started its Claude 5.5 family with Claude Opus 5.5 on 22 September 2026, reported at about 40% lower cost than Opus 5, and followed with Claude Sonnet 5.5 and Claude Haiku 5.5. Google's most recent widely reported Gemini release was a set of cheaper models in July 2026, including Gemini 3.5 Flash-Lite; a new flagship Gemini Pro had not been confirmed. Benchmark figures in launch posts come from the vendors themselves, so treat them as claims until independent evaluations appear.",
+    "Protocols and tooling. The Model Context Protocol (MCP) specification version 2026-07-28 is now the current release. It removes the initialize handshake and session header in favour of a stateless core: each request carries its protocol version and client capabilities, which makes servers easier to run behind ordinary load balancers. Roots, Sampling, and Logging are deprecated, and older versions have a 12-month deprecation window. The MCP lessons on this site already use 2026-07-28; if you follow an older tutorial elsewhere, check which version it targets.",
+    "Policy and industry. In the EU, legislators reached a provisional Digital Omnibus agreement in May 2026 that would move most high-risk AI Act obligations from August 2026 to December 2027, and to August 2028 for AI embedded in regulated products; transparency duties were not all postponed, so confirm the adopted text with your legal or compliance team. In the United States, several state lawsuits about generative AI harms were filed in November. On the business side, Anthropic began trading on Nasdaq under the ticker ANT on 19 November 2026. Market news rarely changes how you build, but it can affect vendor roadmaps, pricing, and support commitments.",
+    "How to read AI news. Ask four questions before acting. First, who is the source: a primary announcement, independent reporting, or an aggregator repeating others? Second, what is the evidence: a vendor benchmark, an independent evaluation, or your own test? Third, does it change something you depend on: an API, a price, a protocol version, a law that applies to you? Fourth, what is the cheapest way to check: rerun your evaluation set against the new model before switching. If sources disagree, wait for a primary statement rather than choosing the most dramatic version."
+  ],
+  "terms": [
+    {
+      "term": "Frontier model",
+      "definition": "One of the most capable general-purpose models available at a given time, usually from a large lab."
+    },
+    {
+      "term": "Vendor benchmark",
+      "definition": "A test result published by the company that built the model; useful, but not independent evidence."
+    },
+    {
+      "term": "Deprecation window",
+      "definition": "The period during which an old version keeps working after a replacement is announced, giving users time to migrate."
+    },
+    {
+      "term": "Aggregator",
+      "definition": "A site or newsletter that summarizes other reports; it can spread errors when early reports conflict."
+    }
+  ],
+  "example": "A fictional support team uses one model to draft replies. A newsletter says a new model is 'far better'. Instead of switching at once, the team reruns its 50-question evaluation set on both models, compares answer quality, latency, and cost per reply, and checks the provider's own release notes for API changes. The new model scores slightly higher but costs more, so the team switches only its hardest ticket category and records the decision with the date and evidence.",
+  "mistakes": [
+    "Treating launch-day benchmark charts as independent proof of quality.",
+    "Switching models in production without rerunning your own evaluation set.",
+    "Repeating a dramatic headline when other sources report something different.",
+    "Assuming a delayed regulation means no obligations apply in the meantime."
+  ],
+  "exercise": "Pick one item from this briefing that could affect a project you know. Find its primary source, write one sentence on what changed, one on the evidence offered, and one on what you would test before acting. Note the date you checked, because the answer may differ next month.",
+  "order": 5,
+  "minutes": 10,
+  "reviewed": "2026-11-25",
+  "code": [],
+  "questions": [
+    {
+      "id": "ai-updates-november-2026-1",
+      "type": "Conceptual",
+      "question": "Why should vendor benchmark results in a model launch post be treated with care?",
+      "answer": "They are produced by the company selling the model, so they need confirmation from independent evaluations or your own tests.",
+      "distractor": "They are always independently audited before publication, so they can be relied on directly."
+    },
+    {
+      "id": "ai-updates-november-2026-2",
+      "type": "Practical",
+      "question": "A new frontier model is released. What is the safest first step before switching your application to it?",
+      "answer": "Run your existing evaluation set on both models and compare quality, latency, and cost on your own tasks.",
+      "distractor": "Switch all production traffic immediately, because newer models are always better for every task."
+    },
+    {
+      "id": "ai-updates-november-2026-3",
+      "type": "Scenario-based",
+      "question": "Two newsletters report opposite versions of the same AI industry event. What should you do?",
+      "answer": "Wait for or look up a primary statement or reliable independent reporting before repeating or acting on either claim.",
+      "distractor": "Share the more dramatic version, since aggregators usually check each other's facts."
+    },
+    {
+      "id": "ai-updates-november-2026-4",
+      "type": "Conceptual",
+      "question": "What did MCP specification version 2026-07-28 change about connection setup?",
+      "answer": "It removed the initialize handshake and session header, so each request carries its own protocol version and client capabilities.",
+      "distractor": "It made every MCP server require a long-lived session that must be created before any tool call."
+    },
+    {
+      "id": "ai-updates-november-2026-5",
+      "type": "Interview",
+      "question": "How do you keep up with fast-moving AI news without chasing every headline?",
+      "answer": "Check primary sources, focus on changes to the APIs, prices, protocols, or rules I depend on, and verify with my own evaluations before acting.",
+      "distractor": "Adopt every newly announced model and tool the week it launches so the project never falls behind."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Digital Trends: OpenAI launches GPT-6.2 Astra and Sol",
+      "url": "https://www.digitaltrends.com/computing/openai-gpt-6-2-astra-sol-launch/"
+    },
+    {
+      "title": "TechCrunch: Anthropic releases Claude Opus 5.5",
+      "url": "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/"
+    },
+    {
+      "title": "TechCrunch: Google releases three new Gemini models",
+      "url": "https://techcrunch.com/2026/07/21/google-releases-three-new-gemini-models-but-no-3-5-pro/"
+    },
+    {
+      "title": "Model Context Protocol blog: the 2026-07-28 specification",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/"
+    },
+    {
+      "title": "Hogan Lovells: EU legislators agree to delay for high-risk AI rules",
+      "url": "https://www.hoganlovells.com/en/publications/eu-legislators-agree-to-delay-for-highrisk-ai-rules"
+    },
+    {
+      "title": "Al Jazeera: Anthropic starts trading in the US after IPO",
+      "url": "https://www.aljazeera.com/economy/2026/11/19/anthropic-starts-trading-in-the-us-after-blockbuster-ipo"
+    }
+  ]
+}

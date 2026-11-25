@@ -11,9 +11,9 @@ async function openNav(page) {
 
 test.describe('content', () => {
   test('publishes the required scope', () => {
-    expect(curriculum.lessons).toHaveLength(57);
+    expect(curriculum.lessons).toHaveLength(58);
     const questions = curriculum.lessons.flatMap(l => l.questions);
-    expect(questions).toHaveLength(285);
+    expect(questions).toHaveLength(290);
     expect(new Set(questions.map(q => q.question)).size).toBe(questions.length);
     expect(curriculum.categories).toHaveLength(16);
     expect(curriculum.categories.flatMap(c => c.planned)).toEqual([]);
@@ -387,7 +387,7 @@ test('production bundle works under a nested static hosting path', async ({ page
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
   await page.screenshot({ path: testInfo.outputPath('lesson.png'), fullPage: true });
   await page.getByRole('link', { name: 'AI Learning Hub home' }).click();
-  await expect(page.locator('.stats').first()).toContainText('285');
+  await expect(page.locator('.stats').first()).toContainText('290');
   await page.screenshot({ path: testInfo.outputPath('home.png'), fullPage: true });
   await page.getByRole('button', { name: 'Switch to dark mode' }).click();
   await page.screenshot({ path: testInfo.outputPath('home-dark.png'), fullPage: true });

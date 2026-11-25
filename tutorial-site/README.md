@@ -1,13 +1,13 @@
 # AI Learning Hub
 
-A responsive learning site for AI: structured tutorials, learning paths, practice projects, and searchable questions with answers. It serves beginners, software developers, and technical managers.
+A responsive learning site for AI: structured tutorials, learning paths, practice projects, and searchable questions with answers. It serves beginners, software developers, QA and test engineers, and technical managers.
 
 **🌐 Live site:** https://ashokrana25.github.io/ai-beginner-handbook-assistant/
 
-- **58 published tutorials** across the curriculum, each with objectives, examples, practice, sources, and a quiz
-- **290 distinct questions** with answers (conceptual, practical, scenario-based, interview)
-- **16 topic categories**, with all 37 previously planned lessons now published
-- 4 learning paths, 4 practice projects, search, filters, quizzes, bookmarks, progress tracking
+- **66 published tutorials** across the curriculum, each with objectives, examples, practice, sources, and a quiz
+- **330 distinct questions** with answers (conceptual, practical, scenario-based, interview)
+- **17 topic categories**, including a dedicated Testing & QA for AI section, with all 37 previously planned lessons now published
+- 5 learning paths (including AI QA / Test Engineer), 5 practice projects, search, filters, quizzes, bookmarks, progress tracking
 - Light and dark modes, keyboard accessible, and responsive from phone to desktop
 
 ## Stack
@@ -44,7 +44,7 @@ npm run check:examples            # runs lesson code examples and compares their
 
 The end-to-end tests cover every published lesson, navigation, breadcrumbs, previous/next links, the table of contents, library and global search, filters, empty and error states, quizzes, bookmarks, progress and theme persistence, the mobile menu, and horizontal overflow at three viewport sizes. Regression checks cover malformed links, searches pending during navigation, damaged stored data, immediate bookmark removal, and unique identifiers in repeated role groups.
 
-Ten dependency-free Python/Node examples have expected-output checks. The optional Chroma, MCP, Langfuse, and Docker integration labs include setup instructions and are labeled separately; they require their own environments or services and are not claimed as live-verified by the offline checks. All lesson code is available in `content/examples/` as well as on the tutorial pages. No paid model API is needed to run this website.
+Fifteen dependency-free Python/Node examples have expected-output checks. The optional Chroma, MCP, Langfuse, and Docker integration labs include setup instructions and are labeled separately; they require their own environments or services and are not claimed as live-verified by the offline checks. All lesson code is available in `content/examples/` as well as on the tutorial pages. No paid model API is needed to run this website.
 
 ## Build and publish
 

@@ -11,7 +11,7 @@ export function pathsView() {
     html: `<div class="container page">
       ${breadcrumbs([['Home', '#/'], ['Learning paths']])}
       <header class="page-head"><h1 tabindex="-1">Learning paths</h1>
-      <p class="lead">Ordered lessons for four roles. Your progress is saved in this browser.</p></header>
+      <p class="lead">Ordered lessons for five roles. Your progress is saved in this browser.</p></header>
       <div class="grid grid-2">${data.paths.map(pathCard).join('')}</div>
     </div>`
   };

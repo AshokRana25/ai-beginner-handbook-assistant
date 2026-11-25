@@ -113,6 +113,14 @@
       "planned": []
     },
     {
+      "id": "ai-testing-qa",
+      "name": "Testing & QA for AI",
+      "icon": "list-checks",
+      "description": "Test AI features like a QA professional.",
+      "coverage": "Test design, oracles, LLM judges, red teaming, agent testing, release gates",
+      "planned": []
+    },
+    {
       "id": "ai-product-and-project-management",
       "name": "AI product & project management",
       "icon": "briefcase-business",
@@ -289,6 +297,37 @@
         "stakeholder-communication",
         "mock-interviews"
       ]
+    },
+    {
+      "id": "qa",
+      "name": "AI QA / Test Engineer",
+      "icon": "shield-check",
+      "color": "teal",
+      "tag": "TEST WITH CONFIDENCE",
+      "description": "Learn to test, break, and sign off AI features with evidence.",
+      "audience": "For QA & test engineers",
+      "lessons": [
+        "llm-basics",
+        "sampling-hallucinations",
+        "qa-testing-ai-basics",
+        "better-prompts",
+        "structured-outputs",
+        "qa-test-design",
+        "qa-oracles-assertions",
+        "evaluation-dataset",
+        "evaluation-tracing",
+        "rag-evaluation",
+        "qa-rag-agent-testing",
+        "adversarial-prompts",
+        "injection-defenses",
+        "qa-security-red-teaming",
+        "qa-non-functional",
+        "bias-assessment",
+        "monitoring-cost-latency",
+        "qa-regression-release",
+        "qa-ai-assisted-testing",
+        "mock-interviews"
+      ]
     }
   ],
   "projects": [
@@ -415,6 +454,38 @@
         "agent-workflows",
         "secure-ai",
         "mcp-introduction"
+      ]
+    },
+    {
+      "id": "ai-qa-suite",
+      "title": "Build a QA test suite for an AI assistant",
+      "category": "Testing & QA for AI",
+      "level": "Intermediate",
+      "time": "3–4 hours",
+      "icon": "list-checks",
+      "description": "Plan, automate, and report on tests for a support chatbot.",
+      "requirements": [
+        "Python 3 or any test framework you know",
+        "Access to an AI assistant or a stub that returns sample responses",
+        "A written list of the assistant's rules, such as refund limits and topics it must refuse"
+      ],
+      "steps": [
+        "Write a one-page test plan: scope, risks, test types, acceptance thresholds, and what blocks release.",
+        "Build a 30-case golden dataset across common, edge, out-of-scope, and must-refuse classes, with required and forbidden properties.",
+        "Automate deterministic checks for format, allowed values, and personal-data leaks, and add three metamorphic relations.",
+        "Add five prompt-injection cases with a canary token, including two hidden in documents.",
+        "Run every case five times, report pass rates per class, and write a release recommendation with open risks."
+      ],
+      "criteria": [
+        "Thresholds were written before the test run.",
+        "Every failure is linked to a case, a severity, and a suggested fix.",
+        "The report separates quality, security, and robustness results and names one limitation of the testing."
+      ],
+      "lessons": [
+        "qa-test-design",
+        "qa-oracles-assertions",
+        "qa-security-red-teaming",
+        "qa-regression-release"
       ]
     }
   ]

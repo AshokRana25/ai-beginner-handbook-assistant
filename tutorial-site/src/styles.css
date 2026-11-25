@@ -178,6 +178,7 @@ mark { background: #ffe58a; color: #1c2420; border-radius: 2px; padding: 0 .1em;
 .path-blue { --path: #3a6ea8; }
 .path-peach { --path: #b86a3c; }
 .path-lavender { --path: #7a5fb0; }
+.path-teal { --path: #2b7a7f; }
 .category-card { flex-direction: row; gap: 1rem; }
 .category-card .cat-icon { margin: 0; }
 .category-card p { margin-bottom: .4rem; font-size: .92rem; }

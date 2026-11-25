@@ -1,0 +1,88 @@
+{
+  "id": "qa-rag-agent-testing",
+  "category": "ai-testing-qa",
+  "order": 5,
+  "title": "Testing RAG pipelines and AI agents end to end",
+  "level": "Advanced",
+  "description": "Test each stage of retrieval and agent workflows, including tool calls and trajectories.",
+  "prerequisites": "Test oracles and assertions, RAG foundations, and agent workflows.",
+  "minutes": 18,
+  "objectives": [
+    "Isolate failures to retrieval, generation, or orchestration",
+    "Assert on agent trajectories, not only final answers",
+    "Test agents safely with sandboxed or mocked tools"
+  ],
+  "explanation": [
+    "A RAG answer can fail in several places: documents were not ingested, chunks split the key fact, retrieval returned the wrong passages, the model ignored the evidence, or the citation points to the wrong source. Test each stage separately. Check ingestion counts and parsing, measure retrieval against passages labeled as relevant, then check that answer claims are supported by the retrieved text. Include unanswerable questions and check that the system says it does not know.",
+    "Agents are harder because they take several steps and call tools. A correct final answer can hide a bad path, such as calling a refund tool before checking policy, or making ten unnecessary paid API calls. Record the trace of every run, which is the ordered list of model calls and tool calls with their arguments. Then assert on it: required tools appear in the right order, forbidden tools never appear, arguments are valid, and the step count and cost stay within a budget.",
+    "Never let an agent under test touch real customers, payments, or production data. Use mocked tools that return fixed responses, or a sandbox environment with fake accounts. Mocks also let you inject failures: a tool timeout, an error response, an empty search result, or a malicious tool output. Check that the agent retries sensibly, stops, or asks for help rather than looping or inventing results.",
+    "Because there can be several valid paths, assert on what must and must not happen rather than one exact sequence. Measure task success over many runs, and review a sample of full traces by hand. Tracing tools such as Langfuse make traces searchable, which helps when a run fails only occasionally."
+  ],
+  "terms": [
+    { "term": "Trace", "definition": "A recorded sequence of model calls, tool calls, inputs, outputs, timing, and cost for one run." },
+    { "term": "Trajectory evaluation", "definition": "Checking the steps an agent took, not just its final answer." },
+    { "term": "Fault injection", "definition": "Deliberately making a dependency fail or misbehave to test how the system responds." },
+    { "term": "Sandbox", "definition": "An isolated environment with fake data where an agent's actions cannot cause real harm." }
+  ],
+  "example": "A refund agent is tested with mocked order, policy, and refund tools. In one run the final message says 'refund issued', but the trace shows issue_refund was called before check_refund_policy. The trajectory test fails even though the answer looked correct. A second test makes the policy tool time out and checks that the agent escalates instead of issuing the refund.",
+  "code": [
+    {
+      "title": "Assertions on an agent's tool-call trajectory",
+      "language": "python",
+      "file": "trajectory_check.py",
+      "run": "python",
+      "expectedOutput": "PASS required tools in order\nPASS no forbidden tools\nPASS within step budget\nPASS refund within limit\nPASS refund matches looked-up order",
+      "note": "The trace is a fixed sample. In practice, read it from your tracing tool or agent framework."
+    }
+  ],
+  "mistakes": [
+    "Checking only the final answer while the agent took unsafe or wasteful steps.",
+    "Running agent tests against real payment, email, or customer systems.",
+    "Blaming the model for wrong answers that were caused by missing or badly chunked documents.",
+    "Requiring one exact tool sequence when several orders are valid."
+  ],
+  "exercise": "Write down the tools of an agent you know. Define three must-happen rules, two must-never-happen rules, and a step budget. Edit the trace in trajectory_check.py to break each rule once and confirm the right check fails.",
+  "questions": [
+    {
+      "id": "qa-rag-agent-testing-1",
+      "type": "Conceptual",
+      "question": "Why test RAG retrieval and generation separately?",
+      "answer": "So a wrong answer can be traced to missing evidence or to the model ignoring good evidence, which need different fixes.",
+      "distractor": "Because retrieval and generation always fail at the same time."
+    },
+    {
+      "id": "qa-rag-agent-testing-2",
+      "type": "Practical",
+      "question": "What does a trajectory test check for an AI agent?",
+      "answer": "Which tools were called, in what order, with what arguments, and within what step and cost budget.",
+      "distractor": "Only the spelling of the final answer."
+    },
+    {
+      "id": "qa-rag-agent-testing-3",
+      "type": "Scenario-based",
+      "question": "An agent's final answer is correct, but it called the refund tool before checking the policy. Should the test pass?",
+      "answer": "No. The trajectory violates a required order, so it is a defect even though the answer looks right.",
+      "distractor": "Yes. Only the final answer matters for agents."
+    },
+    {
+      "id": "qa-rag-agent-testing-4",
+      "type": "Interview",
+      "question": "How would you test an agent's behavior when a tool times out?",
+      "answer": "Use a mocked tool that injects the timeout and assert that the agent retries sensibly, escalates, or stops without inventing results.",
+      "distractor": "Wait for the real service to go down in production."
+    },
+    {
+      "id": "qa-rag-agent-testing-5",
+      "type": "Practical",
+      "question": "Where should agent tests that can issue refunds or send emails run?",
+      "answer": "Against mocked tools or a sandbox with fake accounts, never real customers or payments.",
+      "distractor": "In production, so the test is realistic."
+    }
+  ],
+  "sources": [
+    { "title": "Anthropic: demystifying evals for AI agents", "url": "https://www.anthropic.com/research/demystifying-evals-for-ai-agents" },
+    { "title": "Anthropic: building effective agents", "url": "https://www.anthropic.com/engineering/building-effective-agents" },
+    { "title": "Langfuse: evaluation overview", "url": "https://langfuse.com/docs/evaluation/overview" }
+  ],
+  "reviewed": "2026-11-25"
+}

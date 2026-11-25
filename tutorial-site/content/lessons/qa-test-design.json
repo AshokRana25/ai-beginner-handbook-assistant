@@ -1,0 +1,88 @@
+{
+  "id": "qa-test-design",
+  "category": "ai-testing-qa",
+  "order": 2,
+  "title": "Designing test cases and golden datasets for AI features",
+  "level": "Intermediate",
+  "description": "Build a versioned evaluation set that covers real usage, edge cases, and risks.",
+  "prerequisites": "How testing AI apps differs from traditional QA.",
+  "minutes": 15,
+  "objectives": [
+    "Apply equivalence partitioning and risk-based selection to prompts",
+    "Build and version a golden dataset with expected properties",
+    "Use metamorphic relations to generate more test cases"
+  ],
+  "explanation": [
+    "Start from requirements and real usage, not from whatever prompts come to mind. Group inputs into classes that should behave the same way: common requests, rare but valid requests, ambiguous requests, out-of-scope requests, and requests the system must refuse. Pick representative cases from every class, then add boundary cases such as empty input, very long input, mixed languages, typos, emojis, and formatting the UI may send.",
+    "A golden dataset stores each case with its input, context such as retrieved documents or user role, and the expected outcome. For open-ended answers the expected outcome is usually a set of properties ('mentions the 30-day limit', 'does not promise a refund', 'asks for the order number') rather than a full reference answer. Tag every case with its class, risk level, and source, so you can report results per area. Version the dataset with the code and record which version produced each result.",
+    "Use real, anonymized questions where policy allows, because invented cases tend to be too clean. Remove personal data first. Keep a held-out portion that prompt authors do not see, so the team does not tune the prompt to the test set. Add every production bug as a new regression case.",
+    "Metamorphic testing helps when you cannot know the single right answer. Define a relation that must hold between two inputs, for example 'adding a polite greeting must not change the category' or 'rephrasing the question must not change the cited policy'. Each seed case then produces several automatic checks. In the example, a synonym change ('charged' to 'billed') breaks a keyword-based classifier, which is exactly the kind of brittleness these tests reveal."
+  ],
+  "terms": [
+    { "term": "Equivalence class", "definition": "A group of inputs expected to be handled the same way, so one representative can stand for many." },
+    { "term": "Golden dataset", "definition": "A curated, versioned set of test inputs with labels or expected properties." },
+    { "term": "Metamorphic relation", "definition": "A rule about how output should change, or stay the same, when the input is transformed." },
+    { "term": "Held-out set", "definition": "Test cases kept away from prompt and model tuning so results are not overfitted." }
+  ],
+  "example": "For a refund assistant, the team writes 80 cases: 40 common refund questions, 15 edge cases (no order number, foreign currency, items past 30 days), 15 out-of-scope requests, and 10 abuse attempts. Each case lists required and forbidden properties. Ten paraphrase transforms are applied to the common cases to test robustness.",
+  "code": [
+    {
+      "title": "Metamorphic checks find a brittle classifier",
+      "language": "python",
+      "file": "metamorphic_check.py",
+      "run": "python",
+      "expectedOutput": "FAIL synonym: 'Hello, I was billed twice this month.'\n11/12 metamorphic checks passed",
+      "note": "classify() is a stand-in. In a real test it would call your AI feature."
+    }
+  ],
+  "mistakes": [
+    "Writing only happy-path questions the system is known to answer well.",
+    "Letting prompt authors tune against the whole test set, so scores no longer predict production quality.",
+    "Storing real customer data in test files without removing personal information.",
+    "Changing the dataset silently, so results from different weeks cannot be compared."
+  ],
+  "exercise": "Choose a feature and write 12 cases across at least four equivalence classes. For each case, list two required and one forbidden property. Then define three metamorphic relations and run metamorphic_check.py to see how a relation exposes a failure.",
+  "questions": [
+    {
+      "id": "qa-test-design-1",
+      "type": "Conceptual",
+      "question": "What does a golden dataset for an open-ended AI feature usually store as the expected result?",
+      "answer": "Expected properties, such as facts that must appear and content that must not, together with labels and tags.",
+      "distractor": "One exact reference answer that every run must reproduce word for word."
+    },
+    {
+      "id": "qa-test-design-2",
+      "type": "Practical",
+      "question": "Why keep a held-out portion of the evaluation set?",
+      "answer": "So prompt and model changes are not tuned to the test cases, keeping scores predictive of real use.",
+      "distractor": "To make the test run shorter by never using those cases."
+    },
+    {
+      "id": "qa-test-design-3",
+      "type": "Scenario-based",
+      "question": "Adding 'Hi team,' before a message changes its predicted category. What kind of test caught this?",
+      "answer": "A metamorphic robustness test, because a meaningless input change should not change the output.",
+      "distractor": "A load test, because greetings increase traffic."
+    },
+    {
+      "id": "qa-test-design-4",
+      "type": "Interview",
+      "question": "How do you choose which inputs to include in an AI test set?",
+      "answer": "Partition inputs into classes such as common, edge, ambiguous, out-of-scope, and must-refuse, then add risk-weighted and real anonymized cases.",
+      "distractor": "Ask the model to list its favorite questions and test only those."
+    },
+    {
+      "id": "qa-test-design-5",
+      "type": "Practical",
+      "question": "A production user found a wrong answer. What should happen to the evaluation set?",
+      "answer": "Add the anonymized case as a regression test with its expected properties.",
+      "distractor": "Nothing, because production bugs are unrelated to testing."
+    }
+  ],
+  "sources": [
+    { "title": "Claude docs: define success criteria and build evaluations", "url": "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests" },
+    { "title": "OpenAI: evaluation best practices", "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices" },
+    { "title": "Hypothesis: property-based testing for Python", "url": "https://hypothesis.readthedocs.io/en/latest/" }
+  ],
+  "reviewed": "2026-11-25"
+}

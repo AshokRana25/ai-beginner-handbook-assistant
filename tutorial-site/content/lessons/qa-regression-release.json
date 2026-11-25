@@ -1,0 +1,88 @@
+{
+  "id": "qa-regression-release",
+  "category": "ai-testing-qa",
+  "order": 6,
+  "title": "Regression testing, flakiness, and release gates for AI",
+  "level": "Advanced",
+  "description": "Run AI evaluations in CI, handle variable results statistically, and monitor after release.",
+  "prerequisites": "Designing test cases, test oracles, and basic statistics.",
+  "minutes": 16,
+  "objectives": [
+    "Decide what runs on every commit, nightly, and before release",
+    "Use repeated runs and confidence bounds instead of single results",
+    "Connect pre-release gates to production monitoring"
+  ],
+  "explanation": [
+    "Any change to the prompt, model version, temperature, retrieval settings, tools, or document corpus can change behavior, so each one needs regression testing. Split the suite by cost and speed. On every commit, run deterministic tests with stubbed models plus a small smoke set against the real model. Nightly, run the full evaluation set. Before release, add repeated runs, security suites, and human review of a sample.",
+    "Variable results are expected, so do not handle them by re-running until the build is green. Run important cases several times and record the pass rate. A pass rate from ten runs is uncertain, so gate on a conservative lower bound such as a 95% Wilson interval. In the example, a case that passed 9 of 10 times is still blocked at a 70% gate, because ten runs cannot rule out a true rate near 60%. More runs, or a less variable design, give a clearer answer.",
+    "Separate genuine flakiness from real regressions. If a case was stable last week and now fails half the time, something changed. Pin model versions where the provider allows it, record the model, prompt version, dataset version, and settings with every result, and compare results per case, not only as an average. An average can stay flat while one critical area drops.",
+    "Pre-release testing cannot cover everything users do. After release, monitor sampled production traces with the same checks, track user feedback, latency, cost, and refusal rates, and alert on sudden changes. Use staged rollouts or feature flags so a bad change reaches few users. Feed production failures back into the evaluation set."
+  ],
+  "terms": [
+    { "term": "Release gate", "definition": "A rule that blocks a release unless agreed quality, safety, and performance thresholds are met." },
+    { "term": "Pass rate", "definition": "The fraction of repeated runs in which a case met its acceptance criteria." },
+    { "term": "Confidence lower bound", "definition": "A conservative estimate of the true pass rate given the limited number of runs." },
+    { "term": "Model pinning", "definition": "Using a fixed, dated model version so behavior does not change without a deliberate upgrade." }
+  ],
+  "example": "A team upgrades its model. The nightly suite shows overall accuracy unchanged at 91%, but per-category results show 'cancellation' cases dropped from 95% to 78%. The release gate blocks the upgrade, and the team fixes the prompt before a 5% staged rollout.",
+  "code": [
+    {
+      "title": "Gate on a conservative pass-rate bound",
+      "language": "python",
+      "file": "pass_rate_gate.py",
+      "run": "python",
+      "expectedOutput": "refund-policy: 10/10 passed, lower bound 0.72 -> OK\ncancel-order: 9/10 passed, lower bound 0.60 -> BLOCK\nunanswerable-question: 6/10 passed, lower bound 0.31 -> BLOCK",
+      "note": "The pass counts are sample data. Thresholds should come from your agreed acceptance criteria."
+    }
+  ],
+  "mistakes": [
+    "Re-running failed AI tests until they pass and calling the build green.",
+    "Comparing results without recording model, prompt, dataset, and settings versions.",
+    "Looking only at the overall average and missing a drop in one critical category.",
+    "Treating pre-release testing as complete and skipping production monitoring."
+  ],
+  "exercise": "Design a three-tier test plan (per commit, nightly, pre-release) for an AI feature, with what runs in each tier and its time budget. Change the pass counts in pass_rate_gate.py to see how many runs are needed before a 9-in-10 case clears a 70% gate.",
+  "questions": [
+    {
+      "id": "qa-regression-release-1",
+      "type": "Conceptual",
+      "question": "Why gate AI releases on a lower confidence bound instead of the raw pass rate?",
+      "answer": "A pass rate from few runs is uncertain, and the lower bound is a conservative estimate of the true rate.",
+      "distractor": "Because raw pass rates are always higher than 100%."
+    },
+    {
+      "id": "qa-regression-release-2",
+      "type": "Practical",
+      "question": "What should be recorded with every AI evaluation result?",
+      "answer": "The model version, prompt version, dataset version, and settings such as temperature.",
+      "distractor": "Only the date, because versions never affect results."
+    },
+    {
+      "id": "qa-regression-release-3",
+      "type": "Scenario-based",
+      "question": "Overall accuracy is unchanged after a model upgrade, but one category dropped sharply. What should QA do?",
+      "answer": "Report the per-category regression and block or fix the change, because averages can hide critical drops.",
+      "distractor": "Approve it because the overall number did not move."
+    },
+    {
+      "id": "qa-regression-release-4",
+      "type": "Interview",
+      "question": "How would you handle a flaky AI test in CI?",
+      "answer": "Measure its pass rate over repeated runs, investigate what changed, and set a statistical gate rather than retrying until green.",
+      "distractor": "Retry it automatically until it passes and hide the failures."
+    },
+    {
+      "id": "qa-regression-release-5",
+      "type": "Practical",
+      "question": "Why use staged rollouts for AI changes?",
+      "answer": "So a regression that testing missed reaches only a small share of users while monitoring checks real behavior.",
+      "distractor": "Because staged rollouts make the model more accurate."
+    }
+  ],
+  "sources": [
+    { "title": "pytest: flaky tests", "url": "https://docs.pytest.org/en/stable/explanation/flaky.html" },
+    { "title": "OpenAI: evaluation best practices", "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices" },
+    { "title": "Google Research: the ML Test Score", "url": "https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/" }
+  ],
+  "reviewed": "2026-11-25"
+}

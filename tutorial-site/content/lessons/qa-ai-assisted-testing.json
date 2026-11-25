@@ -1,0 +1,78 @@
+{
+  "id": "qa-ai-assisted-testing",
+  "category": "ai-testing-qa",
+  "order": 8,
+  "title": "Using AI to speed up your own QA work",
+  "level": "Intermediate",
+  "description": "Use AI assistants to draft test ideas, data, and automation, and review their output safely.",
+  "prerequisites": "Better prompts and basic test automation experience.",
+  "minutes": 12,
+  "objectives": [
+    "Use AI to draft test cases, test data, and automation scripts",
+    "Review AI-generated tests for missing coverage and false confidence",
+    "Protect confidential data when using AI tools at work"
+  ],
+  "explanation": [
+    "AI assistants are useful QA helpers. Given a requirement, they can suggest test scenarios, boundary values, and negative cases you may have missed. They can generate realistic fake test data, draft Playwright or pytest scripts from a described flow, explain unfamiliar code, summarize long logs, and turn a bug description into clear reproduction steps.",
+    "Treat everything an assistant produces as a draft from a fast but unreliable colleague. Generated tests can assert the wrong thing, test the implementation instead of the requirement, use fragile selectors, or pass without checking anything. A test that always passes is worse than no test, because it gives false confidence. Review each assertion, run the test, and make it fail on purpose at least once to confirm it can catch a defect.",
+    "Give the assistant good context: the requirement, acceptance criteria, existing test style, and examples of good tests. Ask for specific outputs, such as 'a table of ten negative cases with input, expected result, and risk'. Ask it to list assumptions and questions about unclear requirements; those questions are often as valuable as the tests.",
+    "Follow your organization's rules about which AI tools are approved and what data may be shared. Do not paste customer data, secrets, credentials, or confidential code into unapproved tools. Use synthetic data for prompts and test fixtures. Keep humans responsible for the test strategy and the release decision."
+  ],
+  "terms": [
+    { "term": "Synthetic test data", "definition": "Realistic but invented data used for testing so no real personal information is exposed." },
+    { "term": "False confidence", "definition": "Believing software is tested because tests pass, when the tests do not actually check the risk." },
+    { "term": "Mutation check", "definition": "Deliberately breaking code or data to confirm a test fails when it should." },
+    { "term": "Approved tool", "definition": "An AI service your organization has cleared for the type of data you plan to share." }
+  ],
+  "example": "A QA engineer asks an approved assistant for negative test cases for a password reset form and gets 14 ideas, including expired tokens and reused links. The drafted Playwright test passes, but when they break the expiry check on purpose the test still passes. The assertion only checked that a page loaded. They fix the assertion before committing.",
+  "mistakes": [
+    "Committing AI-generated tests without running them or checking that they can fail.",
+    "Pasting real customer data or secrets into an AI tool to generate test data.",
+    "Letting AI-generated volume replace risk-based thinking about what matters.",
+    "Accepting generated selectors and waits that make UI tests flaky."
+  ],
+  "exercise": "Give an approved AI assistant a short requirement and ask for ten test cases and one automated test. Review each case, mark which are useful, and break the feature or test data on purpose to confirm the automated test fails.",
+  "questions": [
+    {
+      "id": "qa-ai-assisted-testing-1",
+      "type": "Practical",
+      "question": "How can you confirm an AI-generated test actually checks something?",
+      "answer": "Run it, then break the feature or data on purpose and confirm the test fails.",
+      "distractor": "Check that it passes once and commit it."
+    },
+    {
+      "id": "qa-ai-assisted-testing-2",
+      "type": "Conceptual",
+      "question": "Why is a test that always passes dangerous?",
+      "answer": "It creates false confidence that a risk is covered when no defect would ever be caught.",
+      "distractor": "It is not dangerous, because green builds always mean working software."
+    },
+    {
+      "id": "qa-ai-assisted-testing-3",
+      "type": "Scenario-based",
+      "question": "You need realistic customer records to prompt an AI tool for test data. What should you use?",
+      "answer": "Synthetic or properly anonymized data in an approved tool, never real customer records.",
+      "distractor": "A copy of the production customer table pasted into any public chatbot."
+    },
+    {
+      "id": "qa-ai-assisted-testing-4",
+      "type": "Interview",
+      "question": "How do you use AI assistants in your QA work responsibly?",
+      "answer": "Use them for drafts and ideas with good context, review and verify every output, follow data rules, and keep humans accountable.",
+      "distractor": "Let the assistant decide what to test and approve releases on its own."
+    },
+    {
+      "id": "qa-ai-assisted-testing-5",
+      "type": "Practical",
+      "question": "What context makes an AI assistant produce better test cases?",
+      "answer": "The requirement, acceptance criteria, existing test style, examples, and a requested output format.",
+      "distractor": "As little context as possible so the assistant stays creative."
+    }
+  ],
+  "sources": [
+    { "title": "Playwright: getting started", "url": "https://playwright.dev/docs/intro" },
+    { "title": "pytest documentation", "url": "https://docs.pytest.org/en/stable/" },
+    { "title": "NIST AI Risk Management Framework", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+  ],
+  "reviewed": "2026-11-25"
+}

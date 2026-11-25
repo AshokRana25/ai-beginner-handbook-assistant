@@ -1,0 +1,78 @@
+{
+  "id": "qa-testing-ai-basics",
+  "category": "ai-testing-qa",
+  "order": 1,
+  "title": "How testing AI apps differs from traditional QA",
+  "level": "Beginner",
+  "description": "Adapt your QA skills to features whose output changes from run to run.",
+  "prerequisites": "Basic software testing experience and LLM basics.",
+  "minutes": 12,
+  "objectives": [
+    "Explain why exact-match assertions break for model output",
+    "Name the main risk areas a QA engineer owns in an AI feature",
+    "Describe a layered test strategy for an AI application"
+  ],
+  "explanation": [
+    "In traditional software the same input gives the same output, so a test compares the actual result with one expected value. A language model can give different but equally acceptable answers to the same input, and occasionally a wrong one. Sampling settings, model version changes, retrieved documents, and prompt edits all change behavior. QA for AI therefore asks a different question: not 'is this exactly the expected string?' but 'does this output meet the requirements, and how often?'",
+    "Most of your existing skills still apply. An AI feature is still software: its API contracts, UI states, authentication, error handling, timeouts, and data flows need normal functional, integration, and end-to-end tests. Test the deterministic parts deterministically. Replace the model with a stub or recorded response when you test the code around it, so those tests stay fast and stable.",
+    "The model-dependent behavior needs extra test types. Quality tests check correctness, relevance, groundedness, and tone against a written rubric. Robustness tests check that small, meaningless input changes do not change the result. Safety and security tests check refusals, prompt injection, data leakage, and harmful content. Non-functional tests cover latency, cost per request, and behavior under load or provider outages. Regression tests re-run a fixed evaluation set whenever the prompt, model, or retrieval changes.",
+    "Because results vary, a single passing run proves little. Run important cases several times and report pass rates. Define acceptance thresholds before testing, for example 'at least 95% of billing questions are classified correctly and no response leaks personal data'. Severity still matters: one data leak can block a release even when average quality is high."
+  ],
+  "terms": [
+    { "term": "Non-determinism", "definition": "The property that the same input can produce different outputs on different runs." },
+    { "term": "Test oracle", "definition": "The mechanism that decides whether an observed output is acceptable." },
+    { "term": "Evaluation set", "definition": "A versioned collection of inputs, expected properties, and labels used to measure AI quality repeatedly." },
+    { "term": "Stub model", "definition": "A fake model that returns fixed responses so surrounding code can be tested deterministically." }
+  ],
+  "example": "A support chatbot's 'summarize ticket' button is tested in three layers. UI and API tests use a stub model and check loading, error, and retry states. A 60-case evaluation set checks that summaries mention the customer's issue and invent no order numbers. A security suite checks that a ticket containing 'ignore your instructions' does not change the bot's behavior.",
+  "mistakes": [
+    "Asserting that model output equals one exact string, causing constant false failures.",
+    "Calling a feature tested after trying a few prompts by hand.",
+    "Testing only the model and forgetting the UI, API, and error paths around it.",
+    "Treating a high average score as acceptable when a few cases are severe safety failures."
+  ],
+  "exercise": "Pick an AI feature you use, such as an email reply suggester. List its deterministic parts and its model-dependent parts. For each part, write one test idea and say whether it needs an exact assertion, a property check, or human review.",
+  "questions": [
+    {
+      "id": "qa-testing-ai-basics-1",
+      "type": "Conceptual",
+      "question": "Why do exact-match assertions often fail when testing LLM features?",
+      "answer": "The model can produce different but acceptable wording for the same input, so tests should check required properties instead of one exact string.",
+      "distractor": "Because LLM outputs are always wrong and cannot be tested at all."
+    },
+    {
+      "id": "qa-testing-ai-basics-2",
+      "type": "Practical",
+      "question": "How should you test the UI and API code around an AI feature?",
+      "answer": "Replace the model with a stub or recorded response so the surrounding code can be tested quickly and deterministically.",
+      "distractor": "Always call the live model so UI tests vary on every run."
+    },
+    {
+      "id": "qa-testing-ai-basics-3",
+      "type": "Scenario-based",
+      "question": "A summarization case passed once in a manual check. Is that enough evidence to sign off?",
+      "answer": "No. Run it several times as part of an evaluation set and judge the pass rate against a threshold agreed before testing.",
+      "distractor": "Yes. One passing run proves the model will always behave that way."
+    },
+    {
+      "id": "qa-testing-ai-basics-4",
+      "type": "Interview",
+      "question": "Which test categories would you add for an AI feature beyond normal functional tests?",
+      "answer": "Quality against a rubric, robustness to meaningless input changes, safety and security, non-functional cost and latency, and regression on a fixed evaluation set.",
+      "distractor": "None. Functional tests of the buttons cover AI behavior completely."
+    },
+    {
+      "id": "qa-testing-ai-basics-5",
+      "type": "Scenario-based",
+      "question": "Average quality is 97%, but one case leaks another customer's email address. What should QA recommend?",
+      "answer": "Treat the leak as a severe defect that can block release regardless of the average score.",
+      "distractor": "Ship it because the average score is above 95%."
+    }
+  ],
+  "sources": [
+    { "title": "Claude docs: define success criteria and build evaluations", "url": "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests" },
+    { "title": "OpenAI: evaluation best practices", "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices" },
+    { "title": "NIST AI Risk Management Framework", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+  ],
+  "reviewed": "2026-11-25"
+}

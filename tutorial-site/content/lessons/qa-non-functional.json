@@ -1,0 +1,78 @@
+{
+  "id": "qa-non-functional",
+  "category": "ai-testing-qa",
+  "order": 7,
+  "title": "Non-functional testing: performance, cost, fairness, and UX",
+  "level": "Intermediate",
+  "description": "Test latency, cost, resilience, bias, accessibility, and the user experience of AI features.",
+  "prerequisites": "How testing AI apps differs from traditional QA.",
+  "minutes": 14,
+  "objectives": [
+    "Measure latency and cost per request for AI features",
+    "Test behavior during provider errors, rate limits, and timeouts",
+    "Check fairness, multilingual quality, and accessible AI interfaces"
+  ],
+  "explanation": [
+    "AI calls are slower and more variable than most API calls, and each one costs money. Measure time to first token and total response time, and report percentiles such as p50 and p95 rather than averages. Measure tokens and cost per request for typical and worst-case inputs, such as a long document or a conversation with many turns. A feature that is correct but takes 40 seconds or costs too much per request can still fail its requirements.",
+    "Test resilience. Model providers return rate-limit errors, timeouts, and outages. Use a mock or proxy to inject these, and check that the app retries with backoff, shows a clear message, keeps the user's input, and does not charge twice or create duplicate records. Load-test with realistic concurrency and watch rate limits and queues.",
+    "Test fairness and coverage. Run the same case with different names, dialects, and languages and compare outcomes. Check that quality in supported languages is measured, not assumed. If the app makes or supports decisions about people, involve domain and legal experts in defining what fair treatment means.",
+    "Test the user experience of AI. Streaming text should be announced sensibly to screen readers, and controls should work by keyboard. Users should see that content is AI-generated where required, be able to stop generation, copy results, and give feedback. Check empty, loading, partial, refused, and error states, and make sure error messages do not expose internal prompts or stack traces."
+  ],
+  "terms": [
+    { "term": "Time to first token", "definition": "The delay between sending a request and receiving the first part of a streamed response." },
+    { "term": "p95 latency", "definition": "The response time that 95% of requests are faster than; it shows the slow tail that averages hide." },
+    { "term": "Backoff", "definition": "Waiting progressively longer between retries after errors such as rate limits." },
+    { "term": "Counterfactual test", "definition": "Changing only one attribute, such as a name, to check whether the outcome changes unfairly." }
+  ],
+  "example": "Load tests of a contract summarizer show a p50 of 6 seconds but a p95 of 38 seconds for long PDFs, and a cost of four times the estimate. Fault injection reveals that a rate-limit error loses the uploaded file. The team adds chunked processing, a progress indicator, a cost cap, and retry with backoff that keeps the upload.",
+  "mistakes": [
+    "Reporting only average latency and missing the slow tail users notice.",
+    "Never testing provider errors, so the first outage becomes a production incident.",
+    "Assuming a model works equally well in every language the UI offers.",
+    "Forgetting accessibility for streaming and dynamically updated AI content."
+  ],
+  "exercise": "For one AI feature, write acceptance criteria for p95 latency, cost per request, and behavior on rate-limit errors. Then design three counterfactual test pairs that change only a name or language and say what result would count as a fairness defect.",
+  "questions": [
+    {
+      "id": "qa-non-functional-1",
+      "type": "Conceptual",
+      "question": "Why report p95 latency for AI features instead of only the average?",
+      "answer": "AI response times vary widely, and the slow tail that p95 shows is what frustrated users experience.",
+      "distractor": "Because averages cannot be calculated for AI calls."
+    },
+    {
+      "id": "qa-non-functional-2",
+      "type": "Practical",
+      "question": "How do you test an app's behavior when the model provider returns rate-limit errors?",
+      "answer": "Inject the errors with a mock or proxy and check retries with backoff, a clear message, and no lost input or duplicate actions.",
+      "distractor": "Wait until the provider has a real outage and watch what happens."
+    },
+    {
+      "id": "qa-non-functional-3",
+      "type": "Scenario-based",
+      "question": "Changing only an applicant's name changes the AI's recommendation. What has the test found?",
+      "answer": "A potential fairness defect, found by a counterfactual test, which needs investigation before release.",
+      "distractor": "Normal variation that never needs to be reported."
+    },
+    {
+      "id": "qa-non-functional-4",
+      "type": "Interview",
+      "question": "Which cost scenarios would you test for an LLM feature?",
+      "answer": "Typical requests and worst cases such as very long inputs and long conversations, checked against a per-request budget or cap.",
+      "distractor": "Only the shortest possible request, since cost does not depend on input."
+    },
+    {
+      "id": "qa-non-functional-5",
+      "type": "Practical",
+      "question": "What should QA check about streaming AI responses for accessibility?",
+      "answer": "That screen readers announce updates sensibly, controls work by keyboard, and users can stop generation.",
+      "distractor": "Nothing, because streaming text is automatically accessible."
+    }
+  ],
+  "sources": [
+    { "title": "NIST AI 600-1: Generative AI profile", "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf" },
+    { "title": "Langfuse: start tracing", "url": "https://langfuse.com/docs/observability/get-started" },
+    { "title": "OpenAI: evaluation best practices", "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices" }
+  ],
+  "reviewed": "2026-11-25"
+}

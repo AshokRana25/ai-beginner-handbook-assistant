@@ -3,7 +3,7 @@ import { terms } from './utils.js';
 export const data = { categories: [], lessons: [], paths: [], projects: [], questions: [] };
 const byId = { lesson: new Map(), category: new Map(), path: new Map(), project: new Map(), question: new Map() };
 
-export const ROLES = [['beginner', 'AI Beginner'], ['developer', 'AI Developer'], ['engineer', 'AI Engineer'], ['manager', 'AI Product / Project Manager']];
+export const ROLES = [['beginner', 'AI Beginner'], ['developer', 'AI Developer'], ['engineer', 'AI Engineer'], ['manager', 'AI Product / Project Manager'], ['qa', 'AI QA / Test Engineer']];
 export const LEVELS = ['Beginner', 'Intermediate', 'Advanced'];
 export const QUESTION_TYPES = ['Conceptual', 'Practical', 'Scenario-based', 'Interview'];
 

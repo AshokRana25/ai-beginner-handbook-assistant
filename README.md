@@ -8,7 +8,7 @@ Built with **Python · Streamlit · Ollama · Chroma**, with a Windows 11 x64 se
 
 ## AI Learning Hub tutorial website
 
-The repository also includes an independent AI Learning Hub website in `tutorial-site/` ([open the live site](https://ashokrana25.github.io/ai-beginner-handbook-assistant/) · [read its README](tutorial-site/README.md)): **58 tutorials, 290 questions, 16 topic categories, four learning paths, and four practice projects**. All previously planned tutorials are published, with quizzes, bookmarks, browser-local progress, and light/dark themes.
+The repository also includes an independent AI Learning Hub website in `tutorial-site/` ([open the live site](https://ashokrana25.github.io/ai-beginner-handbook-assistant/) · [read its README](tutorial-site/README.md)): **66 tutorials, 330 questions, 17 topic categories, five learning paths (including AI QA / Test Engineer), and five practice projects**. All previously planned tutorials are published, with quizzes, bookmarks, browser-local progress, and light/dark themes.
 
 To run it, install Node.js 24, then run `cd tutorial-site`, `npm ci`, and `npm run dev`. It is a static website and does not require Ollama, Python assistant credentials, or model API keys. Its own README explains tests, optional tutorial integrations, and publication. The `Tutorial site` GitHub Actions workflow verifies and packages changes; optional GitHub Pages deployment is available through its manual run after Pages is configured.
 

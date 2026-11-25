@@ -1,0 +1,88 @@
+{
+  "id": "qa-oracles-assertions",
+  "category": "ai-testing-qa",
+  "order": 3,
+  "title": "Test oracles and assertions for non-deterministic output",
+  "level": "Intermediate",
+  "description": "Combine deterministic checks, rubrics, and calibrated model judges to decide pass or fail.",
+  "prerequisites": "Designing test cases and golden datasets, and structured outputs.",
+  "minutes": 15,
+  "objectives": [
+    "Order oracles from cheap and deterministic to expensive and subjective",
+    "Write property assertions for structured and free-text output",
+    "Calibrate an LLM-as-judge against human labels before trusting it"
+  ],
+  "explanation": [
+    "An oracle decides whether an output is acceptable. For AI features, use several oracles in layers. First run cheap deterministic checks: valid JSON, required fields, allowed values, length limits, no personal data patterns, required citations present, forbidden phrases absent. These catch many defects, never flake, and explain exactly what failed.",
+    "Next, compare against references where they exist. Classification and extraction usually have one correct label or value, so exact or normalized matching works. For numbers allow a tolerance. For free text, check that required facts appear, and use semantic similarity only as a hint, because two sentences can be similar in wording yet opposite in meaning.",
+    "For qualities such as helpfulness, tone, or completeness, write a rubric with clear, observable criteria and a small scale, for example pass or fail per criterion. Humans can apply it, or a separate model can act as a judge. A model judge is itself a model under test: it can prefer longer answers, its own style, or the first option shown. Before relying on it, label 50 to 100 cases by hand and measure how often the judge agrees. Re-check that agreement whenever the judge prompt or model changes.",
+    "Keep humans in the loop for high-risk areas and for disagreements. Track false failures as well as missed defects, because a noisy oracle trains the team to ignore red builds."
+  ],
+  "terms": [
+    { "term": "Property assertion", "definition": "A check that an output satisfies a rule, such as 'priority is one of low, medium, high', without fixing the exact text." },
+    { "term": "Rubric", "definition": "A written list of observable criteria used to grade an output consistently." },
+    { "term": "LLM-as-judge", "definition": "Using a language model with a rubric prompt to grade another model's output." },
+    { "term": "Judge agreement", "definition": "How often an automated judge gives the same verdict as trusted human labels." }
+  ],
+  "example": "A ticket triage model returns JSON. Deterministic checks verify the schema, the allowed category and priority values, the reply length, and that no email address or refund amount appears. Only outputs that pass go to a model judge, which scores empathy and correctness with a three-criterion rubric. That judge agreed with human reviewers on 92 of 100 labeled cases.",
+  "code": [
+    {
+      "title": "Layered deterministic checks on model output",
+      "language": "python",
+      "file": "qa_assertions.py",
+      "run": "python",
+      "expectedOutput": "PASS valid JSON\nPASS required keys\nPASS allowed category\nPASS allowed priority\nPASS reply length 10-300\nPASS no email address leaked\nPASS no promise of a refund amount\n7/7 checks passed",
+      "note": "raw_output is a fixed sample. In a test it would be the model's response for one evaluation case."
+    }
+  ],
+  "mistakes": [
+    "Sending everything to an LLM judge when a simple schema check would catch the failure.",
+    "Trusting a model judge without measuring its agreement with human labels.",
+    "Writing vague rubric items such as 'good answer' that different reviewers apply differently.",
+    "Using semantic similarity alone as proof of correctness."
+  ],
+  "exercise": "Take five outputs from any AI assistant. Write four deterministic checks and a three-item rubric. Grade the outputs yourself, then ask a different person to grade them with the same rubric, and note where you disagree and why.",
+  "questions": [
+    {
+      "id": "qa-oracles-assertions-1",
+      "type": "Conceptual",
+      "question": "Why run deterministic checks before a model-based judge?",
+      "answer": "They are cheap, stable, and precise, and they catch format and safety defects before slower, subjective grading.",
+      "distractor": "Because model judges cannot read JSON."
+    },
+    {
+      "id": "qa-oracles-assertions-2",
+      "type": "Practical",
+      "question": "What must you do before trusting an LLM-as-judge score?",
+      "answer": "Compare its verdicts with human labels on a sample and measure agreement, then re-check when the judge changes.",
+      "distractor": "Nothing. A larger model is always a correct judge."
+    },
+    {
+      "id": "qa-oracles-assertions-3",
+      "type": "Scenario-based",
+      "question": "The judge consistently rates longer answers higher, even when they are wrong. What is this?",
+      "answer": "A judge bias, which calibration against human labels and a stricter rubric should detect and reduce.",
+      "distractor": "Proof that longer answers are always more correct."
+    },
+    {
+      "id": "qa-oracles-assertions-4",
+      "type": "Interview",
+      "question": "How would you assert correctness for a free-text answer with no single right wording?",
+      "answer": "Check required facts and forbidden content with property assertions, and grade remaining qualities with a clear rubric.",
+      "distractor": "Require the exact text of a reference answer."
+    },
+    {
+      "id": "qa-oracles-assertions-5",
+      "type": "Practical",
+      "question": "What makes a rubric criterion useful for testing?",
+      "answer": "It describes something observable, such as 'states the 30-day limit', so different reviewers reach the same verdict.",
+      "distractor": "It is vague, such as 'the answer feels good', so reviewers can use their own taste."
+    }
+  ],
+  "sources": [
+    { "title": "Langfuse: LLM-as-a-judge", "url": "https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge" },
+    { "title": "Claude docs: define success criteria and build evaluations", "url": "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests" },
+    { "title": "JSON Schema: understanding JSON Schema", "url": "https://json-schema.org/understanding-json-schema" }
+  ],
+  "reviewed": "2026-11-25"
+}
